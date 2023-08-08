@@ -26,9 +26,10 @@ Route::get('/test', function () {
     abort(404);
   }
 
-  // Test away! "With great power, something, something, dark side."
+  // Test away! "With great power, something, something, dark side." - Unknown
 });
 
+// -TODO- Convert to Controller and load Content
 Route::get('/', function () {
-  return view('welcome');
+  return view('dashboard');
 });

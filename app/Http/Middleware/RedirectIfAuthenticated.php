@@ -8,7 +8,7 @@ use Illuminate\Support\Facades\Auth;
 use App\Providers\RouteServiceProvider;
 use Symfony\Component\HttpFoundation\Response;
 
-class RedirectIfAuthenticate {
+class RedirectIfAuthenticated {
   /**
   * Handle an incoming request.
   *
