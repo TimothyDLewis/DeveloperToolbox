@@ -1,6 +1,8 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\ProjectController;
+use App\Http\Controllers\EstimateController;
 
 /*
 |--------------------------------------------------------------------------
@@ -27,9 +29,20 @@ Route::get('/test', function () {
   }
 
   // Test away! "With great power, something, something, dark side." - Unknown
+  abort(404);
 });
 
 // -TODO- Convert to Controller and load Content
 Route::get('/', function () {
   return view('dashboard');
+});
+
+// -TODO- Convert to Controller
+Route::group(['prefix' => 'organization'], function () {
+  Route::get('/', function () {
+    return redirect()->route('projects.index');
+  });
+
+  Route::resource('estimates', EstimateController::class);
+  Route::resource('projects', ProjectController::class);
 });

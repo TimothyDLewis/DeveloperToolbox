@@ -8,9 +8,26 @@
     <link href="{{ asset('css/bootstrap.min.css') }}" rel="stylesheet" />
     @vite('resources/sass/app.scss')
   </head>
-  <body data-bs-theme="dark">
+  <body data-bs-theme="{{ config('app.color_theme') }}">
     @include('components.navigation.navbar')
+    @include('components.navigation.breadcrumbs')
+
+    @if(request()->is('organization/*'))
+      <div class="d-flex flex-nowrap">
+        @include('components.navigation.organization.sidebar')
+        <div class="container-fluid">
+          @yield('body')
+        </div>
+      </div>
+    @else
+      <div class="container-fluid mt-3">
+        @include('components.session-flash')
+        @yield('body')
+      </div>
+    @endif
 
     @vite('resources/js/app.js')
+
+    @yield('scripts')
   </body>
 </html>

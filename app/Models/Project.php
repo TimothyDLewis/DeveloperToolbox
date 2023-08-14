@@ -12,6 +12,41 @@ class Project extends Model {
   use HasFactory;
   use SoftDeletes;
 
+  public $formFields = [
+    'title' => [
+      'container' => [
+        'class' => 'col-12'
+      ],
+      'label' => 'Title',
+      'name' => 'title',
+      'type' => 'text'
+    ],
+    'code' => [
+      'container' => [
+        'class' => 'col-12 col-sm-6'
+      ],
+      'label' => 'Code',
+      'name' => 'code',
+      'type' => 'text'
+    ],
+    'source_code_management_url' => [
+      'container' => [
+        'class' => 'col-12 col-sm-6'
+      ],
+      'label' => 'Source Code Management (SCM) URL',
+      'name' => 'source_code_management_url',
+      'type' => 'text'
+    ],
+    'description' => [
+      'container' => [
+        'class' => 'col-12'
+      ],
+      'label' => 'Description',
+      'name' => 'description',
+      'type' => 'textarea'
+    ]
+  ];
+
   public function estimate(): BelongsTo {
     return $this->belongsTo(Estimate::class);
   }

@@ -12,6 +12,29 @@ class EstimateOption extends Model {
   use HasFactory;
   use SoftDeletes;
 
+  protected $guarded = [];
+
+  public $formFields = [
+    'id' => [
+      'type' => 'hidden'
+    ],
+    'label' => [
+      'container' => [
+        'class' => 'col-12'
+      ],
+      'derivative' => 'slug',
+      'label' => 'Label',
+      'type' => 'text'
+    ],
+    'value' => [
+      'container' => [
+        'class' => 'col-12'
+      ],
+      'label' => 'Value',
+      'type' => 'text'
+    ],
+  ];
+
   public function estimate(): BelongsTo {
     return $this->belongsTo(Estimate::class);
   }

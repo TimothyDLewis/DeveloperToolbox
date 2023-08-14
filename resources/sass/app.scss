@@ -4,3 +4,55 @@ $fa-font-path: '~fontawesome/webfonts';
 @import '~fontawesome/scss/fontawesome';
 @import '~fontawesome/scss/brands';
 @import '~fontawesome/scss/solid';
+
+// Application Styles
+
+#organization-sidebar {
+  width: 16rem;
+}
+
+#organization-sidebar-small {
+  width: 4.5rem;
+}
+
+button:disabled {
+  cursor: not-allowed;
+}
+
+.card-condensed {
+  padding: .375rem .75rem;
+  margin-bottom: 0;
+}
+
+.btn-link {
+  text-decoration: none;
+}
+
+.table-vertical-center {
+  thead,
+  tbody {
+    tr {
+      th,
+      td {
+        vertical-align: middle;
+      }
+    }
+  }
+}
+
+.th-min,
+.td-min {
+  min-width: 50px;
+  width: 1%;
+}
+
+.vertical-divider {
+  height: 3rem;
+  width: 100%;
+}
+
+.vertical-vr {
+  flex-shrink: 0;
+  min-height: calc(100vh - 96px);
+  width: 1px;
+}

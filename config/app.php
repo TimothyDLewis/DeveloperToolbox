@@ -46,6 +46,20 @@ return [
 
   /*
   |--------------------------------------------------------------------------
+  | Color Theme
+  |--------------------------------------------------------------------------
+  |
+  | Bootstrap 5.3 now supports automatic Light/Dark Mode configuration. This
+  | setting controls global mode, and allows targeting/application of specific
+  | classes/styles via `config('app.color_theme)`
+  |
+  | Available Color Themes: "light", "dark"
+  */
+
+  'color_theme' => env('APP_COLOR_THEME', 'dark'),
+
+  /*
+  |--------------------------------------------------------------------------
   | Application URL
   |--------------------------------------------------------------------------
   |

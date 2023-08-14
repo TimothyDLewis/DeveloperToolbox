@@ -13,6 +13,21 @@ class NavbarComposer {
         'label' => 'Dashboard',
         'href' => url('/'),
         'isActive' => request()->is('/')
+      ],
+      (object)[
+        'label' => 'Organization',
+        'href' => url('/organization'),
+        'isActive' => request()->is('organization/*')
+      ],
+      (object)[
+        'label' => 'Scheduler',
+        'href' => url('/scheduler'),
+        'isActive' => request()->is('scheduler')
+      ],
+      (object)[
+        'label' => 'Expenses',
+        'href' => url('/expenses'),
+        'isActive' => request()->is('expenses')
       ]
     ]);
   }
