@@ -17,13 +17,13 @@ const reindexEstimateOptions = () => {
   });
 };
 
-$('#estimateForm #addRow').on('click', function () {
+$('#estimateForm #addRow').on('click', function() {
   const element = $('.estimateOption').first();
   const clonedElement = element.clone();
 
   $(clonedElement).find('.invalid-feedback').remove();
 
-  $(clonedElement).find('input, select').each(function (_idx, formElement) {
+  $(clonedElement).find('input, select').each(function(_idx, formElement) {
     $(formElement).removeClass('is-invalid');
     $(formElement).val('');
   });
@@ -64,7 +64,7 @@ $('body').on('click', '#estimateForm .removeRow', function() {
   }
 });
 
-$('.delete-estimate').on('click', function () {
+$('.delete-estimate').on('click', function() {
   if (confirm('Are you sure you want to delete this Estimate?')) {
     return $(this).closest('form').trigger('submit');
   }

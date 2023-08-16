@@ -20,7 +20,7 @@
         </li>
         <li class="nav-item">
           <a class="nav-link" href="#">
-            <i class="fa-solid {{ $theme->themeClass('fa-sun', 'fa-moon') }} ms-2"></i>
+            <i class="fa-solid {{ $theme->themeVar('fa-sun', 'fa-moon') }} ms-2"></i>
           </a>
         </li>
       </ul>

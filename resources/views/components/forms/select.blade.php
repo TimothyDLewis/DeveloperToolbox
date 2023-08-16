@@ -2,7 +2,12 @@
   @if(!$repeatable)
     <label class="form-label">{{ $field['label'] }}</label>
   @endif
-  <input id="{{ $id }}" class="form-control {{ $errors->has($errorKey) || $errors->has($derivativeKey) ? 'is-invalid' : '' }}" type="text" name="{{ $name }}" value="{{ old($name, $model->{$fieldKey} ?? $default) }}" placeholder="{{ $placeholder }}" />
+  <select id="{{ $id }}" class="form-control {{ $errors->has($errorKey) || $errors->has($derivativeKey) ? 'is-invalid' : '' }}" name="{{ $name }}">
+    <option value="">None Selected</option>
+    @foreach($options ?? [] as $option)
+      <option value="{{ $option->id }}" @selected(old($name, $model->{$fieldKey} ?? $default) == $option->id)>{{ $option->label }}</option>
+    @endforeach
+  </select>
   @if($errors->has($errorKey) || $errors->has($derivativeKey))
     <div class="invalid-feedback">
       @if($errors->has($errorKey))

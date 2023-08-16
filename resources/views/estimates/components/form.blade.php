@@ -3,7 +3,7 @@
   {!! $forms->renderFormField('title') !!}
   {!! $forms->renderFormField('description') !!}
 </div>
-<table id="estimateOptions" class="table table-bordered {{ $theme->themeClass('table-dark', 'table-light') }} table-vertical-center">
+<table id="estimateOptions" class="table table-bordered {{ $theme->themeVar('table-dark', 'table-light') }} table-vertical-center">
   <thead>
     <tr>
       <th colspan="3">Estimate Options</th>

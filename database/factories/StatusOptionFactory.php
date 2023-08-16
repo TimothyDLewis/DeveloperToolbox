@@ -30,8 +30,15 @@ class StatusOptionFactory extends Factory {
       'slug' => Str::slug($label),
       'text_color' => fake()->hexColor(),
       'background_color' => fake()->hexColor(),
-      'sort_order' => $sortOrder
+      'sort_order' => $sortOrder,
+      'initial_status_option' => false
     ];
+  }
+
+  public function initial(): Factory {
+    return $this->state(function (array $_attributes) {
+      return ['initial_status_option' => true];
+    });
   }
 
   private function letter(): string {

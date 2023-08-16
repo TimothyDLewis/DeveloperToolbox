@@ -41,22 +41,6 @@ class EstimateController extends Controller {
     ));
   }
 
-  public function show(Estimate $estimate): View {
-    $estimate->load(['estimateOptions' => function ($query) {
-      return $query->orderBy('sort_order');
-    }, 'projects' => function ($query) {
-      return $query->with(['estimate', 'status']);
-    }]);
-
-    return view('estimates.show', $this->withBreadcrumbs(
-      path: 'show',
-      additional: ['estimate' => $estimate],
-      includes: [
-        'estimate' => $estimate
-      ]
-    ));
-  }
-
   public function store(StoreEstimateRequest $request): RedirectResponse {
     try {
       DB::transaction(function () use ($request) {
@@ -76,6 +60,22 @@ class EstimateController extends Controller {
 
       return redirect()->back()->withInput();
     }
+  }
+
+  public function show(Estimate $estimate): View {
+    $estimate->load(['estimateOptions' => function ($query) {
+      return $query->orderBy('sort_order');
+    }, 'projects' => function ($query) {
+      return $query->with(['estimate', 'status']);
+    }]);
+
+    return view('estimates.show', $this->withBreadcrumbs(
+      path: 'show',
+      additional: ['estimate' => $estimate],
+      includes: [
+        'estimate' => $estimate
+      ]
+    ));
   }
 
   public function edit(Estimate $estimate): View {

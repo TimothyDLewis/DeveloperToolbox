@@ -1,7 +1,6 @@
 <?php
 
 use App\Models\Status;
-use App\Models\StatusOption;
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
@@ -32,6 +31,7 @@ return new class extends Migration {
       $table->string('background_color');
       $table->text('description')->nullable();
       $table->integer('sort_order');
+      $table->boolean('initial_status_option')->default(0);
 
       $table->timestamps();
       $table->softDeletes();

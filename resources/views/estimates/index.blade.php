@@ -6,7 +6,7 @@
   <div class="card mb-3">
     <div class="card-header">All Estimates</div>
     <div class="card-body">
-      <table id="estimates" class="table table-bordered table-striped {{ $theme->themeClass('table-dark', 'table-light') }} table-vertical-center mb-0">
+      <table id="estimates" class="table table-bordered table-striped {{ $theme->themeVar('table-dark', 'table-light') }} table-vertical-center mb-0">
         <thead>
           <tr>
             <th class="th-min text-center">ID</th>

@@ -22,7 +22,6 @@ class Estimate extends Model {
       ],
       'derivative' => 'slug',
       'label' => 'Title',
-      'name' => 'title',
       'type' => 'text'
     ],
     'description' => [
@@ -30,7 +29,6 @@ class Estimate extends Model {
         'class' => 'col-12'
       ],
       'label' => 'Description',
-      'name' => 'description',
       'type' => 'textarea'
     ]
   ];

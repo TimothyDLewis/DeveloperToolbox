@@ -2,7 +2,7 @@
   <ol class="breadcrumb mb-0">
     @if($breadcrumbs ?? null)
       <li class="breadcrumb-item">
-        <a class="{{ $theme->themeClass('text-white', 'text-black') }}" href="{{ url('/') }}">Dashboard</a>
+        <a class="{{ $theme->themeVar('text-white', 'text-black') }}" href="{{ url('/') }}">Dashboard</a>
       </li>
       @foreach($breadcrumbs as $breadcrumb)
         @if($breadcrumb->active ?? false)
@@ -11,12 +11,12 @@
           </li>
         @else
           <li class="breadcrumb-item">
-            <a class="{{ $theme->themeClass('text-white', 'text-black') }}" href="{{ $breadcrumb->path }}">{{ $breadcrumb->label }}</a>
+            <a class="{{ $theme->themeVar('text-white', 'text-black') }}" href="{{ $breadcrumb->path }}">{{ $breadcrumb->label }}</a>
           </li>
         @endif
       @endforeach
     @else
-      <li class="breadcrumb-item active {{ $theme->themeClass('text-white', 'text-black') }}">Dashboard</li>
+      <li class="breadcrumb-item active {{ $theme->themeVar('text-white', 'text-black') }}">Dashboard</li>
     @endif
   </ol>
 </div>

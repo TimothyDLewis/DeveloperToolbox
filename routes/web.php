@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ProjectController;
 use App\Http\Controllers\EstimateController;
+use App\Http\Controllers\StatusController;
 
 /*
 |--------------------------------------------------------------------------
@@ -37,7 +38,6 @@ Route::get('/', function () {
   return view('dashboard');
 });
 
-// -TODO- Convert to Controller
 Route::group(['prefix' => 'organization'], function () {
   Route::get('/', function () {
     return redirect()->route('projects.index');
@@ -45,4 +45,5 @@ Route::group(['prefix' => 'organization'], function () {
 
   Route::resource('estimates', EstimateController::class);
   Route::resource('projects', ProjectController::class);
+  Route::resource('statuses', StatusController::class);
 });

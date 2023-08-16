@@ -15,7 +15,7 @@
         </div>
         <div class="col-12 mb-3">
           <label class="form-label">Description</label>
-          <p class="card card-body card-condensed">{!! nl2br($estimate->description ?? 'No Description provided...') !!}</p>
+          <p class="card card-body card-condensed">{!! nl2br($estimate->description ?? '<i class="text-secondary">No description provided...</i>') !!}</p>
         </div>
         <div class="col-12 col-sm-6 mb-3">
           <label class="form-label">Created At</label>
@@ -34,7 +34,7 @@
           </div>
           <div class="tab-content" id="nav-tabContent">
             <div class="tab-pane fade active show" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab">
-              <table id="estimateOptions" class="table table-bordered table-striped {{ $theme->themeClass('table-dark', 'table-light') }} table-vertical-center mb-0">
+              <table id="estimateOptions" class="table table-bordered table-striped {{ $theme->themeVar('table-dark', 'table-light') }} table-vertical-center mb-0">
                 <thead>
                   <tr>
                     <th class="th-min text-center">ID</th>
@@ -54,7 +54,7 @@
               </table>
             </div>
             <div class="tab-pane fade" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab">
-              <table id="projects" class="table table-bordered table-striped {{ $theme->themeClass('table-dark', 'table-light') }} table-vertical-center mb-0">
+              <table id="projects" class="table table-bordered table-striped {{ $theme->themeVar('table-dark', 'table-light') }} table-vertical-center mb-0">
                 <thead>
                   <tr>
                     <th class="th-min text-center">ID</th>

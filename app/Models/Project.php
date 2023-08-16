@@ -18,7 +18,6 @@ class Project extends Model {
         'class' => 'col-12'
       ],
       'label' => 'Title',
-      'name' => 'title',
       'type' => 'text'
     ],
     'code' => [
@@ -26,7 +25,6 @@ class Project extends Model {
         'class' => 'col-12 col-sm-6'
       ],
       'label' => 'Code',
-      'name' => 'code',
       'type' => 'text'
     ],
     'source_code_management_url' => [
@@ -34,7 +32,6 @@ class Project extends Model {
         'class' => 'col-12 col-sm-6'
       ],
       'label' => 'Source Code Management (SCM) URL',
-      'name' => 'source_code_management_url',
       'type' => 'text'
     ],
     'description' => [
@@ -42,7 +39,6 @@ class Project extends Model {
         'class' => 'col-12'
       ],
       'label' => 'Description',
-      'name' => 'description',
       'type' => 'textarea'
     ]
   ];

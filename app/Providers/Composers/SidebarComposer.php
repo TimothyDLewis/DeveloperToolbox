@@ -18,9 +18,9 @@ class SidebarComposer {
       ],
       (object)[
         'label' => 'Statuses',
-        'href' => '#',
+        'href' => route('statuses.index'),
         'icon' => '<i class="fa-regular fa-bars-progress me-2"></i>',
-        'isActive' => false
+        'isActive' => request()->is("{$this->sidebarPrefix}/statuses") || request()->is("{$this->sidebarPrefix}/statuses/*")
       ],
       (object)[
         'label' => 'Projects',
