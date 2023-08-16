@@ -16,6 +16,7 @@ class EstimateOption extends Model {
 
   public $formFields = [
     'id' => [
+      'label' => 'ID',
       'type' => 'hidden'
     ],
     'label' => [

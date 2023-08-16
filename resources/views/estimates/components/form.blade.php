@@ -3,10 +3,13 @@
   {!! $forms->renderFormField('title') !!}
   {!! $forms->renderFormField('description') !!}
 </div>
+@php $forms->setModel($estimateOptions->first()); @endphp
 <table id="estimateOptions" class="table table-bordered {{ $theme->themeVar('table-dark', 'table-light') }} table-vertical-center">
   <thead>
     <tr>
-      <th colspan="3">Estimate Options</th>
+      {!! $forms->renderRepeatableFormHeader('id') !!}
+      {!! $forms->renderRepeatableFormHeader('label') !!}
+      {!! $forms->renderRepeatableFormHeader('value') !!}
       <th class="th-min">
         <button id="addRow" type="button" class="btn btn-link" tabindex="-1">
           <i class="text-primary fa-regular fa-plus"></i>
