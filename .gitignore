@@ -2,6 +2,7 @@
 .env.backup
 .env.production
 .phpunit.result.cache
+**DS_STORE
 /.fleet
 /.idea
 /.phpunit.cache
