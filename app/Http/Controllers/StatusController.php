@@ -170,10 +170,13 @@ class StatusController extends Controller {
   private function constructBreadcrumbs(string $path = null, array $additional = []): Collection {
     $breadcrumbs = collect([(object)['label' => 'Statuses', 'path' => route('statuses.index')]]);
 
-    if ($path == 'create') {
+    if ($path === 'create') {
       $breadcrumbs->push((object)['label' => 'Create Status', 'path' => route('statuses.create')]);
-    } elseif ($path == 'edit') {
-      $breadcrumbs->push((object)['label' => 'Edit Status', 'path' => route('statuses.edit', $additional['status'])]);
+    } elseif ($path === 'show' || $path === 'edit') {
+      $breadcrumbs->push((object)['label' => 'View Status', 'path' => route('statuses.show', $additional['status'])]);
+      if ($path == 'edit') {
+        $breadcrumbs->push((object)['label' => 'Edit Status', 'path' => route('statuses.edit', $additional['status'])]);
+      }
     }
 
     $breadcrumbs->last()->active = true;

@@ -31,6 +31,7 @@ class FormHelper {
     $field = $this->getField($fieldKey);
 
     return $this->renderFormField($fieldKey, [
+      'containerClass' => $overrides['containerClass'] ?? $field['container-class'] ?? 'col-12',
       'default' => $overrides['default'] ?? '',
       'derivativeKey' => $overrides['derivativeKey'] ?? $field['derivative'] ?? null ? "{$prefix}.{$index}.{$field['derivative']}" : $fieldKey,
       'errorKey' => $overrides['errorKey'] ?? "{$prefix}.{$index}.{$fieldKey}",
@@ -46,6 +47,7 @@ class FormHelper {
     $field = $this->getField($fieldKey);
 
     $viewData = [
+      'containerClass' => $overrides['containerClass'] ?? $field['container-class'] ?? 'col-12',
       'default' => $overrides['default'] ?? $field['default'] ?? '',
       'derivativeKey' => $overrides['derivativeKey'] ?? $field['derivative'] ?? $fieldKey,
       'errorKey' => $overrides['errorKey'] ?? $fieldKey,

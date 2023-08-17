@@ -193,5 +193,11 @@ return [
   |
   */
 
-  'aliases' => Facade::defaultAliases()->merge([])->toArray()
+  'aliases' => Facade::defaultAliases()->merge([
+    'Estimate' => App\Models\Estimate::class,
+    'EstimateOption' => App\Models\EstimateOption::class,
+    'Project' => App\Models\Project::class,
+    'Status' => App\Models\Status::class,
+    'StatusOption' => App\Models\StatusOption::class
+  ])->toArray()
 ];

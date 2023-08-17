@@ -1,4 +1,4 @@
-<div class="{{ $field['container']['class'] ?? 'col-12' }} mb-3">
+<div class="{{ $containerClass }} mb-3">
   @if(!$repeatable)
     <label class="form-label">{{ $field['label'] }}</label>
   @endif

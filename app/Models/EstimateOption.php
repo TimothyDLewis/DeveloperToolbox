@@ -20,17 +20,13 @@ class EstimateOption extends Model {
       'type' => 'hidden'
     ],
     'label' => [
-      'container' => [
-        'class' => 'col-12'
-      ],
+      'container-class' => 'col-12',
       'derivative' => 'slug',
       'label' => 'Label',
       'type' => 'text'
     ],
     'value' => [
-      'container' => [
-        'class' => 'col-12'
-      ],
+      'container-class' => 'col-12',
       'label' => 'Value',
       'type' => 'text'
     ],

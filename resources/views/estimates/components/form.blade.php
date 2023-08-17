@@ -3,7 +3,7 @@
   {!! $forms->renderFormField('title') !!}
   {!! $forms->renderFormField('description') !!}
 </div>
-@php $forms->setModel($estimateOptions->first()); @endphp
+@php $forms->setModel(new EstimateOption()); @endphp
 <table id="estimateOptions" class="table table-bordered {{ $theme->themeVar('table-dark', 'table-light') }} table-vertical-center">
   <thead>
     <tr>

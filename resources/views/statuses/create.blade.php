@@ -13,7 +13,7 @@
           {!! $forms->renderFormField('title') !!}
           {!! $forms->renderFormField('description') !!}
         </div>
-        @php $forms->setModel($statusOptions->first()); @endphp
+        @php $forms->setModel(new StatusOption()); @endphp
         <table id="statusOptions" class="table table-bordered {{ $theme->themeVar('table-dark', 'table-light') }} table-vertical-center">
           <thead>
             <tr>

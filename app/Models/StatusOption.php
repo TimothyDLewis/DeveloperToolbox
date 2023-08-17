@@ -17,17 +17,13 @@ class StatusOption extends Model {
 
   public $formFields = [
     'background_color' => [
-      'container' => [
-        'class' => 'col-12'
-      ],
+      'container-class' => 'col-12',
       'custom_editor' => 'color-picker',
       'label' => 'Background Color',
       'type' => 'custom'
     ],
     'description' => [
-      'container' => [
-        'class' => 'col-12'
-      ],
+      'container-class' => 'col-12',
       'label' => 'Description',
       'type' => 'text'
     ],
@@ -35,47 +31,30 @@ class StatusOption extends Model {
       'label' => 'ID',
       'type' => 'hidden'
     ],
-    // -FEATURE- Maybe change to simple Boolean?
     'initial_status_option' => [
-      'container' => [
-        'class' => 'col-12'
-      ],
+      'container-class' => 'col-12',
       'custom_editor' => 'boolean',
       'label' => 'Initial',
       'type' => 'custom'
     ],
     'label' => [
-      'container' => [
-        'class' => 'col-12'
-      ],
+      'container-class' => 'col-12',
       'derivative' => 'slug',
       'label' => 'Label',
       'type' => 'text'
     ],
     'next_status' => [
-      'container' => [
-        'class' => 'col-12'
-      ],
+      'container-class' => 'col-12',
       'label' => 'Next',
-      'type' => 'select',
-      'options' => [
-        'model' => self::class
-      ]
+      'type' => 'select'
     ],
     'previous_status' => [
-      'container' => [
-        'class' => 'col-12'
-      ],
+      'container-class' => 'col-12',
       'label' => 'Previous',
-      'type' => 'select',
-      'options' => [
-        'model' => self::class
-      ]
+      'type' => 'select'
     ],
     'text_color' => [
-      'container' => [
-        'class' => 'col-12'
-      ],
+      'container-class' => 'col-12',
       'custom_editor' => 'color-picker',
       'label' => 'Text Color',
       'type' => 'custom'

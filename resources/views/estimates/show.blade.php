@@ -73,18 +73,12 @@
                         <a href="{{ route('projects.show', $project) }}">{{ $project->title }}</a>
                       </td>
                       <td>{{ $project->code }}</td>
-                      <td>
-                        @if($project->scm_url)
-                          <a href="{{ $project->scm_url }}" target="_blank">{{ $project->scm_url }}</a>
-                        @else
-                          No Source Code Management (SCM) URL provided...
-                        @endif
-                      </td>
+                      <td>{!! $project->scm_url_display !!}</td>
                       <td>
                         {{ $project->estimate->title }}
                       </td>
                       <td>
-                        <a href="{{ route('status.show', $project->status) }}">{{ $project->status->title }}</a>
+                        <a href="{{ route('statuses.show', $project->status) }}">{{ $project->status->title }}</a>
                       </td>
                       <td class="td-min">
                         <div class="btn-group">
