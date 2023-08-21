@@ -28,13 +28,9 @@
                 <a href="{{ route('projects.show', $project) }}">{{ $project->title }}</a>
               </td>
               <td class="td-min text-center">{{ $project->code }}</td>
-              <td>{!! $project->scm_url_display !!}</td>
-              <td>
-                <a href="{{ route('estimates.show', $project->estimate) }}">{{ $project->estimate->title }}</a>
-              </td>
-              <td>
-                <a href="{{ route('statuses.show', $project->status) }}">{{ $project->status->title }}</a>
-              </td>
+              <td class="td-url">{!! $project->source_code_management_url_display !!}</td>
+              <td>{!! $project->estimate_display !!}</td>
+              <td>{!! $project->status_display !!}</td>
               <td>{{ $project->issues_count }}</td>
               <td>{{ $project->resources_count }}</td>
               <td class="td-min">

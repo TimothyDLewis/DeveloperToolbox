@@ -30,9 +30,9 @@ class SidebarComposer {
       ],
       (object)[
         'label' => 'Resources',
-        'href' => '#',
+        'href' => route('resources.index'),
         'icon' => '<i class="fa-regular fa-bookmark me-2"></i>',
-        'isActive' => false
+        'isActive' => request()->is("{$this->sidebarPrefix}/resources") || request()->is("{$this->sidebarPrefix}/resources/*")
       ],
       (object)[
         'label' => 'Issues',

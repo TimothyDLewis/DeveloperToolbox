@@ -1,9 +1,10 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\StatusController;
 use App\Http\Controllers\ProjectController;
 use App\Http\Controllers\EstimateController;
-use App\Http\Controllers\StatusController;
+use App\Http\Controllers\ResourceController;
 
 /*
 |--------------------------------------------------------------------------
@@ -45,5 +46,6 @@ Route::group(['prefix' => 'organization'], function () {
 
   Route::resource('estimates', EstimateController::class);
   Route::resource('projects', ProjectController::class);
+  Route::resource('resources', ResourceController::class)->except('show');
   Route::resource('statuses', StatusController::class);
 });

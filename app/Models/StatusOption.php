@@ -2,7 +2,7 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Casts\Attribute;
+use App\Traits\Models\AttributeDisplay;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Database\Eloquent\Relations\HasMany;
@@ -10,6 +10,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class StatusOption extends Model {
+  use AttributeDisplay;
   use HasFactory;
   use SoftDeletes;
 
@@ -83,13 +84,5 @@ class StatusOption extends Model {
 
   public function status(): BelongsTo {
     return $this->belongsTo(Status::class);
-  }
-
-  public function badgeDisplay(): Attribute {
-    return Attribute::make(
-      get: function (): string {
-        return '<span class="badge ms-1" style="color: '. $this->text_color .'; background-color: ' . $this->background_color . ';">' . $this->label . '</span>';
-      }
-    );
   }
 }

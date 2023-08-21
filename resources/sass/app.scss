@@ -38,6 +38,10 @@ button:disabled {
   width: 100%;
 }
 
+.nav-flush {
+  margin-bottom: -9px;
+}
+
 .swatchButton {
   border-top-right-radius: 6px !important;
   border-bottom-right-radius: 6px !important;
@@ -65,6 +69,11 @@ button:disabled {
   width: 1%;
 }
 
+.td-color-display {
+  min-width: 200px;
+  width: 1%;
+}
+
 .th-min,
 .td-min {
   min-width: 50px;
@@ -74,6 +83,15 @@ button:disabled {
 .td-select {
   min-width: 200px;
   width: 1%;
+}
+
+.td-url {
+  min-width: 350px;
+  width: 1%;
+}
+
+.toggle-bookmarked {
+  cursor: pointer;
 }
 
 .vertical-divider {

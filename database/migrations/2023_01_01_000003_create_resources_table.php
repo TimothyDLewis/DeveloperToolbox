@@ -12,7 +12,7 @@ return new class extends Migration {
   public function up(): void {
     Schema::create('resources', function (Blueprint $table) {
       $table->id();
-      $table->foreignIdFor(Project::class)->constrained()->nullable();
+      $table->foreignIdFor(Project::class)->nullable()->constrained();
 
       $table->string('title');
       $table->string('slug')->unique();
@@ -20,6 +20,7 @@ return new class extends Migration {
       $table->string('text_color')->default('white');
       $table->string('background_color');
       $table->string('url');
+      $table->boolean('bookmarked')->default(false);
       $table->text('description')->nullable();
 
       $table->timestamps();

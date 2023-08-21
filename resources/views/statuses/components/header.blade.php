@@ -2,11 +2,6 @@
   <p class="d-flex align-items-center mb-3 mb-md-0 me-md-auto">
     <i class="fa-regular fa-2xl fa-bars-progress me-3"></i>
     <span class="fs-4">Statuses</span>
-    <sup>
-      <button class="btn btn-link" data-bs-toggle="modal" data-bs-target="#statusInfoModal">
-        <i class="fa-solid fa-lightbulb text-primary"></i>
-      </button>
-    </sup>
   </p>
   <ul class="nav nav-pills">
     <li class="nav-item">
@@ -33,16 +28,3 @@
   </ul>
 </header>
 @include('components.session-flash')
-<div class="modal fade" id="statusInfoModal" tabindex="-1" aria-labelledby="statusInfoModalLabel" aria-hidden="true">
-  <div class="modal-dialog modal-dialog-centered modal-lg">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h1 class="modal-title fs-5" id="statusInfoModalLabel">Help Topic > Statuses and Status Options</h1>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-      </div>
-      <div class="modal-body mb-0">
-
-      </div>
-    </div>
-  </div>
-</div>
