@@ -17,14 +17,14 @@ class ResourceController extends Controller {
   use Breadcrumbs;
 
   public function index(): View {
-    return view('resources.index', $this->withBreadcrumbs(includes: ['resources' => Resource::with('project')->orderBy('slug')->paginate(10)]));
+    return view('resources.index', $this->withBreadcrumbs(includes: ['resources' => Resource::with('project')->orderBy('id')->paginate(10)]));
   }
 
   public function create(): View {
     return view('resources.create', $this->withBreadcrumbs(
       path: 'create',
       includes: [
-        'projects' => Project::orderBy('slug')->forSelect()->get(),
+        'projects' => Project::orderBy('id')->forSelect()->get(),
         'resource' => new Resource()
       ]
     ));
@@ -60,7 +60,7 @@ class ResourceController extends Controller {
       path: 'edit',
       additional: ['resource' => $resource],
       includes: [
-        'projects' => Project::orderBy('slug')->forSelect()->get(),
+        'projects' => Project::orderBy('id')->forSelect()->get(),
         'resource' => $resource
       ]
     ));

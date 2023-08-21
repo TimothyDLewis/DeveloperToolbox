@@ -49,7 +49,7 @@ trait AttributeDisplay {
   public function labelDisplay(): Attribute {
     return Attribute::make(
       get: function (): string {
-        return '<span class="badge ms-1" style="color: '. $this->text_color .'; background-color: ' . $this->background_color . ';">' . $this->label . '</span>';
+        return '<span class="badge ms-1" style="color: '. $this->text_color .'; background-color: ' . $this->background_color . ';">' . strtoupper($this->label) . '</span>';
       }
     );
   }

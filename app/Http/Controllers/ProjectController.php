@@ -18,16 +18,16 @@ class ProjectController extends Controller {
   use Breadcrumbs;
 
   public function index(): View {
-    return view('projects.index', $this->withBreadcrumbs(includes: ['projects' => Project::with(['estimate', 'status'])->withCount(['issues', 'resources'])->orderBy('slug')->paginate(10)]));
+    return view('projects.index', $this->withBreadcrumbs(includes: ['projects' => Project::with(['estimate', 'status'])->withCount(['issues', 'resources'])->orderBy('id')->paginate(10)]));
   }
 
   public function create(): View {
     return view('projects.create', $this->withBreadcrumbs(
       path: 'create',
       includes: [
-        'estimates' => Estimate::orderBy('slug')->forSelect()->get(),
+        'estimates' => Estimate::orderBy('id')->forSelect()->get(),
         'project' => new Project(),
-        'statuses' => Status::orderBy('slug')->forSelect()->get()
+        'statuses' => Status::orderBy('id')->forSelect()->get()
       ]
     ));
   }
@@ -62,9 +62,9 @@ class ProjectController extends Controller {
       path: 'edit',
       additional: ['project' => $project],
       includes: [
-        'estimates' => Estimate::orderBy('slug')->forSelect()->get(),
+        'estimates' => Estimate::orderBy('id')->forSelect()->get(),
         'project' => $project,
-        'statuses' => Status::orderBy('slug')->forSelect()->get()
+        'statuses' => Status::orderBy('id')->forSelect()->get()
       ]
     ));
   }

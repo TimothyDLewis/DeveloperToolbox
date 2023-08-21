@@ -3,8 +3,8 @@
     <div class="card">
       <div class="card-header">
         <div class="nav nav-tabs nav-flush" role="tablist">
-          <button class="nav-link active" id="nav-estimate-estimate-options-tab" data-bs-toggle="tab" data-bs-target="#nav-estimate-estimate-options" type="button" tabindex="-1">Estimate Options</button>
-          <button class="nav-link" id="nav-estimate-projects-tab" data-bs-toggle="tab" data-bs-target="#nav-estimate-projects" type="button" tabindex="-1">Projects</button>
+          <button class="nav-link active" id="nav-estimate-estimate-options-tab" data-bs-toggle="tab" data-bs-target="#nav-estimate-estimate-options" type="button" tabindex="-1">Estimate Options ({{ $estimate->estimateOptions->count() }})</button>
+          <button class="nav-link" id="nav-estimate-projects-tab" data-bs-toggle="tab" data-bs-target="#nav-estimate-projects" type="button" tabindex="-1">Projects ({{ $estimate->projects->count() }})</button>
         </div>
       </div>
       <div class="card-body mb-0">

@@ -3,8 +3,8 @@
     <div class="card">
       <div class="card-header">
         <div class="nav nav-tabs nav-flush" role="tablist">
-          <button class="nav-link active" id="nav-status-status-options-tab" data-bs-toggle="tab" data-bs-target="#nav-status-status-options" type="button" tabindex="-1">Status Options</button>
-          <button class="nav-link" id="nav-status-projects-tab" data-bs-toggle="tab" data-bs-target="#nav-status-projects" type="button" tabindex="-1">Projects</button>
+          <button class="nav-link active" id="nav-status-status-options-tab" data-bs-toggle="tab" data-bs-target="#nav-status-status-options" type="button" tabindex="-1">Status Options ({{ $status->statusOptions->count() }})</button>
+          <button class="nav-link" id="nav-status-projects-tab" data-bs-toggle="tab" data-bs-target="#nav-status-projects" type="button" tabindex="-1">Projects ({{ $status->projects->count() }})</button>
         </div>
       </div>
       <div class="card-body mb-0">
