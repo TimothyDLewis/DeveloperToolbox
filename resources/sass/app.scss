@@ -33,7 +33,8 @@ $fa-font-path: '~fontawesome/webfonts';
     width: 1%;
   }
 
-  .td-status-option {
+  .td-status-option,
+  .th-status-option {
     min-width: 150px;
     width: 1%;
   }
@@ -42,8 +43,14 @@ $fa-font-path: '~fontawesome/webfonts';
 #projects,
 #nav-estimate-projects-table,
 #nav-status-projects-table {
-  .td-url {
+  .td-source-code-management-url {
     min-width: 465px;
+    width: 1%;
+  }
+
+  .th-source-code-management-url {
+    min-width: 315px;
+    width: 1%;
   }
 }
 
@@ -51,6 +58,7 @@ $fa-font-path: '~fontawesome/webfonts';
 #nav-project-resources-table {
   .td-url {
     min-width: 250px;
+    width: 1%;
   }
 }
 
