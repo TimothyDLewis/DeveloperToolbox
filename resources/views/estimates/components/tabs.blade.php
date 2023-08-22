@@ -14,7 +14,7 @@
               <thead>
                 <tr>
                   <th class="th-min text-center">ID</th>
-                  <th>Label</th>
+                  <th class="th-min text-center">Label</th>
                   <th>Value</th>
                 </tr>
               </thead>
@@ -22,7 +22,9 @@
                 @foreach($estimate->estimateOptions as $estimateOption)
                   <tr>
                     <td class="td-min text-center">{{ $estimateOption->id }}</td>
-                    <td>{{ $estimateOption->label }}</td>
+                    <td class="td-min text-center">
+                      <h6 class="mb-0">{!! $estimateOption->label_display_alt !!}</h6>
+                    </td>
                     <td>{{ $estimateOption->value }}</td>
                   </tr>
                 @endforeach
@@ -35,10 +37,11 @@
                 <tr>
                   <th class="th-min text-center">ID</th>
                   <th>Title</th>
-                  <th>Code</th>
-                  <th>Source Code Management (SCM) URL
+                  <th class="th-min text-center">Code</th>
+                  <th class="th-source-code-management-url">Source Code Management (SCM) URL</th>
                   <th>Estimate</th>
                   <th>Status</th>
+                  <th class="th-min text-center">Actions</th>
                 </tr>
               </thead>
               <tbody>
@@ -49,7 +52,7 @@
                       <a href="{{ route('projects.show', $project) }}">{{ $project->title }}</a>
                     </td>
                     <td>{{ $project->code }}</td>
-                    <td>{!! $project->source_code_management_url_display !!}</td>
+                    <td class="td-source-code-management-url">{!! $project->source_code_management_url_display !!}</td>
                     <td>{{ $project->estimate->title }}</td>
                     <td>{!! $project->status_display !!}</td>
                     <td class="td-min">
@@ -65,7 +68,9 @@
                   </tr>
                 @empty
                   <tr>
-                    <td colspan="6">No Connected Projects...</td>
+                    <td colspan="7">
+                      <i class="text-secondary">No Connected Projects...</i>
+                    </td>
                   </tr>
                 @endforelse
               </tbody>

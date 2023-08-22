@@ -46,10 +46,26 @@ trait AttributeDisplay {
     );
   }
 
+  public function externalUrlDisplay(): Attribute {
+    return Attribute::make(
+      get: function(): string {
+        return $this->urlComponentDisplay($this, 'external_url', 'external_url');
+      }
+    );
+  }
+
   public function labelDisplay(): Attribute {
     return Attribute::make(
       get: function (): string {
         return '<span class="badge ms-1" style="color: '. $this->text_color .'; background-color: ' . $this->background_color . ';">' . strtoupper($this->label) . '</span>';
+      }
+    );
+  }
+
+  public function labelDisplayAlt(): Attribute {
+    return Attribute::make(
+      get: function (): string {
+        return '<span class="badge rounded-pill text-bg-primary ms-1">' . strtoupper($this->label) . '</span>';
       }
     );
   }

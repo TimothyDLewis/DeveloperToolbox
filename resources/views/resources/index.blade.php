@@ -50,7 +50,9 @@
             </tr>
           @empty
             <tr>
-              <td colspan="9">No Resources...</td>
+              <td colspan="9">
+                <i class="text-secondary">No Resources...</i>
+              </td>
             </tr>
           @endforelse
         </tbody>

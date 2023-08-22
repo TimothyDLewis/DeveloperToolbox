@@ -156,6 +156,12 @@ class EstimateController extends Controller {
     }
   }
 
+  // Additional Non-Resource Routes
+
+  public function getEstimateOptions(Estimate $estimate) {
+    return response()->json(['estimateOptions' => $estimate->estimateOptions()->orderBy('id')->forSelect('label')->get()], 200);
+  }
+
   private function constructBreadcrumbs(string $path = null, array $additional = []): Collection {
     $breadcrumbs = collect([(object)['label' => 'Estimates', 'path' => route('estimates.index')]]);
 

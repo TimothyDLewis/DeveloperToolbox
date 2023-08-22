@@ -21,7 +21,7 @@ return new class extends Migration {
       $table->string('title');
       $table->string('slug')->unique();
       $table->string('code');
-      $table->string('url')->nullable();
+      $table->string('external_url')->nullable();
       $table->text('description')->nullable();
 
       $table->timestamps();

@@ -5,14 +5,14 @@
   @include('projects.components.header')
   <div class="card mb-3">
     <div class="card-header">All Projects</div>
-    <div class="card-body">
+    <div class="card-body table-responsive">
       <table id="projects" class="table table-bordered table-striped {{ $theme->themeVar('table-dark', 'table-light') }} table-vertical-center mb-0">
         <thead>
           <tr>
             <th class="th-min text-center">ID</th>
             <th>Title</th>
             <th class="th-min text-center">Code</th>
-            <th>Source Code Management (SCM) URL</th>
+            <th class="th-source-code-management-url">Source Code Management (SCM) URL</th>
             <th>Estimate</th>
             <th>Status</th>
             <th>Issues</th>
@@ -28,7 +28,7 @@
                 <a href="{{ route('projects.show', $project) }}">{{ $project->title }}</a>
               </td>
               <td class="td-min text-center">{{ $project->code }}</td>
-              <td class="td-url">{!! $project->source_code_management_url_display !!}</td>
+              <td class="td-source-code-management-url">{!! $project->source_code_management_url_display !!}</td>
               <td>{!! $project->estimate_display !!}</td>
               <td>{!! $project->status_display !!}</td>
               <td>{{ $project->issues_count }}</td>
@@ -48,7 +48,9 @@
             </tr>
           @empty
             <tr>
-              <td colspan="9">No Projects...</td>
+              <td colspan="9">
+                <i class="text-secondary">No Projects...</i>
+              </td>
             </tr>
           @endforelse
         </tbody>

@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\IssueController;
 use App\Http\Controllers\StatusController;
 use App\Http\Controllers\ProjectController;
 use App\Http\Controllers\EstimateController;
@@ -45,7 +46,15 @@ Route::group(['prefix' => 'organization'], function () {
   });
 
   Route::resource('estimates', EstimateController::class);
+  Route::get('/estimates/{estimate}/estimate-options', [EstimateController::class, 'getEstimateOptions'])->name('estimates.estimate-options');
+
   Route::resource('projects', ProjectController::class);
+  Route::get('/projects/{project}/select-options/{key?}', [ProjectController::class, 'getSelectOptions'])->name('projects.select-options');
+
   Route::resource('resources', ResourceController::class)->except('show');
+
   Route::resource('statuses', StatusController::class);
+  Route::get('/statuses/{status}/status-options', [StatusController::class, 'getStatusOptions'])->name('statuses.status-options');
+
+  Route::resource('issues', IssueController::class);
 });

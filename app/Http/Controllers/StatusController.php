@@ -167,6 +167,12 @@ class StatusController extends Controller {
     }
   }
 
+  // Additional Non-Resource Routes
+
+  public function getStatusOptions(Status $status) {
+    return response()->json(['statusOptions' => $status->statusOptions()->orderBy('id')->forSelect('label')->get()], 200);
+  }
+
   private function constructBreadcrumbs(string $path = null, array $additional = []): Collection {
     $breadcrumbs = collect([(object)['label' => 'Statuses', 'path' => route('statuses.index')]]);
 

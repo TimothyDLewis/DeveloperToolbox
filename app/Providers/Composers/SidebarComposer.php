@@ -36,9 +36,9 @@ class SidebarComposer {
       ],
       (object)[
         'label' => 'Issues',
-        'href' => '#',
+        'href' => route('issues.index'),
         'icon' => '<i class="fa-regular fa-cubes me-2"></i>',
-        'isActive' => false
+        'isActive' => request()->is("{$this->sidebarPrefix}/issues") || request()->is("{$this->sidebarPrefix}/issues/*")
       ],
       (object)[
         'label' => 'Events',

@@ -40,7 +40,9 @@
             </tr>
           @empty
             <tr>
-              <td colspan="5">No Estimates...</td>
+              <td colspan="5">
+                <i class="text-secondary">No Estimates...</i>
+              </td>
             </tr>
           @endforelse
         </tbody>

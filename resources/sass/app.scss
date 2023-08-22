@@ -15,6 +15,45 @@ $fa-font-path: '~fontawesome/webfonts';
   width: 4.5rem;
 }
 
+#issues,
+#nav-project-issues-table {
+  .td-estimate-option,
+  .th-estimate-option {
+    min-width: 150px;
+    width: 1%;
+  }
+
+  .td-external-url {
+    min-width: 585px;
+    width: 1%;
+  }
+
+  .th-external-url {
+    min-width: 120px;
+    width: 1%;
+  }
+
+  .td-status-option {
+    min-width: 150px;
+    width: 1%;
+  }
+}
+
+#projects,
+#nav-estimate-projects-table,
+#nav-status-projects-table {
+  .td-url {
+    min-width: 465px;
+  }
+}
+
+#resources,
+#nav-project-resources-table {
+  .td-url {
+    min-width: 250px;
+  }
+}
+
 button:disabled {
   cursor: not-allowed;
 }

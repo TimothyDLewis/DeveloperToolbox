@@ -61,42 +61,45 @@
                 <tr>
                   <th class="th-min text-center">ID</th>
                   <th>Title</th>
-                  <th>Code</th>
-                  <th>Source Code Management (SCM) URL</th>
+                  <th class="th-min text-center">Code</th>
+                  <th class="th-source-code-management-url">Source Code Management (SCM) URL</th>
                   <th>Estimate</th>
                   <th>Status</th>
+                  <th class="th-min text-center">Actions</th>
+                </tr>
+              </thead>
+              <tbody>
+                @forelse($status->projects as $project)
+                  <tr>
+                    <td class="td-min text-center">{{ $project->id }}</td>
+                    <td>
+                      <a href="{{ route('projects.show', $project) }}">{{ $project->title }}</a>
+                    </td>
+                    <td>{{ $project->code }}</td>
+                    <td class="td-source-code-management-url">{!! $project->source_code_management_url_display !!}</td>
+                    <td>{!! $project->estimate_display !!}</td>
+                    <td>
+                      {{ $project->status->title }}
+                    </td>
+                    <td class="td-min">
+                      <div class="btn-group">
+                        <a href="{{ route('projects.edit', $project) }}" class="btn btn-link">
+                          <i class="text-primary fa-regular fa-pen"></i>
+                        </a>
+                        <a href="#" class="btn btn-link">
+                          <i class="text-danger fa-regular fa-trash"></i>
+                        </a>
+                      </div>
+                    </td>
                   </tr>
-                </thead>
-                <tbody>
-                  @forelse($status->projects as $project)
-                    <tr>
-                      <td class="td-min text-center">{{ $project->id }}</td>
-                      <td>
-                        <a href="{{ route('projects.show', $project) }}">{{ $project->title }}</a>
-                      </td>
-                      <td>{{ $project->code }}</td>
-                      <td>{!! $project->source_code_management_url_display !!}</td>
-                      <td>{!! $project->estimate_display !!}</td>
-                      <td>
-                        {{ $project->status->title }}
-                      </td>
-                      <td class="td-min">
-                        <div class="btn-group">
-                          <a href="{{ route('projects.edit', $project) }}" class="btn btn-link">
-                            <i class="text-primary fa-regular fa-pen"></i>
-                          </a>
-                          <a href="#" class="btn btn-link">
-                            <i class="text-danger fa-regular fa-trash"></i>
-                          </a>
-                        </div>
-                      </td>
-                    </tr>
-                  @empty
-                    <tr>
-                      <td colspan="6">No Connected Projects...</td>
-                    </tr>
-                  @endforelse
-                </tbody>
+                @empty
+                  <tr>
+                    <td colspan="7">
+                      <i class="text-secondary">No Connected Projects...</i>
+                    </td>
+                  </tr>
+                @endforelse
+              </tbody>
             </table>
           </div>
         </div>

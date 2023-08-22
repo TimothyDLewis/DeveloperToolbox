@@ -98,6 +98,39 @@ class ProjectController extends Controller {
     }
   }
 
+  // Additional Non-Resource Routes
+
+  public function getSelectOptions(Project $project, ?string $key = null) {
+    $project->load(['estimate' => function ($query) {
+      return $query->with(['estimateOptions' => function ($subQuery) {
+        return $subQuery->forSelect('label', 'estimate_id');
+      }])->forSelect();
+    }, 'status' => function ($query) {
+      return $query->with(['statusOptions' => function ($subQuery) {
+        return $subQuery->forSelect('label', 'status_id');
+      }])->forSelect();
+    }]);
+
+    $keys = [
+      'estimate' => $project->estimate,
+      'estimate-options' => $project->estimate->estimateOptions,
+      'status' => $project->status,
+      'status-options' => $project->status->statusOptions,
+    ];
+
+    try {
+      if ($key) {
+        return response()->json([$key => $keys[$key]], 200);
+      }
+
+      return response()->json($keys, 200);
+    } catch (Exception $ex) {
+      Log::error($ex);
+
+      return response()->json([$key => []], 200);
+    }
+  }
+
   private function constructBreadcrumbs(string $path = null, array $additional = []): Collection {
     $breadcrumbs = collect([(object)['label' => 'Projects', 'path' => route('projects.index')]]);
 

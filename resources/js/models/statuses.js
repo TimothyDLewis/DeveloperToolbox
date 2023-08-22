@@ -42,7 +42,7 @@ const reconstructRelatedStatusOptions = () => {
       const select = $(this);
       const selectedValue = select.val();
 
-      $(this).empty().append('<option value="">None Selected</option>');
+      select.empty().append('<option value="">None Selected</option>');
       localOptions.forEach(function (option) {
         select.append(`<option value="${option.id}">${option.label}</option>`);
       });

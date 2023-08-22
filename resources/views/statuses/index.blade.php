@@ -40,7 +40,9 @@
             </tr>
           @empty
             <tr>
-              <td colspan="5">No Statuses...</td>
+              <td colspan="5">
+                <i class="text-secondary">No Statuses...</i>
+              </td>
             </tr>
           @endforelse
         </tbody>
