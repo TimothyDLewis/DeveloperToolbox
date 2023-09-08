@@ -17,7 +17,7 @@ class ResourceController extends Controller {
   use Breadcrumbs;
 
   public function index(): View {
-    return view('resources.index', $this->withBreadcrumbs(includes: ['resources' => Resource::with('project')->orderBy('id')->paginate(10)]));
+    return view('resources.index', $this->withBreadcrumbs(includes: ['resources' => Resource::with('project')->orderBy('id')->paginate(30)]));
   }
 
   public function create(): View {

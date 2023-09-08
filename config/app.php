@@ -60,6 +60,20 @@ return [
 
   /*
   |--------------------------------------------------------------------------
+  | Work Day Duration
+  |--------------------------------------------------------------------------
+  |
+  | Minute value of a full work day. Used to calculate productivity against
+  | daily target.
+  |
+  | Default: 450 Minutes (7.5 Hours)
+  |
+  */
+
+  'work_day_duration' => (int)(env('WORK_DAY_DURATION', 450)),
+
+  /*
+  |--------------------------------------------------------------------------
   | Application URL
   |--------------------------------------------------------------------------
   |
@@ -194,9 +208,12 @@ return [
   */
 
   'aliases' => Facade::defaultAliases()->merge([
+    'Carbon' => Carbon\Carbon::class,
     'Estimate' => App\Models\Estimate::class,
     'EstimateOption' => App\Models\EstimateOption::class,
+    'EventRecurrence' => App\Enums\EventRecurrence::class,
     'Project' => App\Models\Project::class,
+    'ReflectionClass' => ReflectionClass::class,
     'Status' => App\Models\Status::class,
     'StatusOption' => App\Models\StatusOption::class
   ])->toArray()

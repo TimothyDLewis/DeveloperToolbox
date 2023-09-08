@@ -53,9 +53,13 @@ const reconstructRelatedStatusOptions = () => {
 
 $('body').on('change', '#statusForm .statusOption .initialStatusOption', function () {
   if ($(this).is(':checked')) {
-    $('#statusForm .statusOption .initialStatusOption').not($(this)).prop('checked', false);
+    $('#statusForm .statusOption .initialStatusOption').not($(this)).each(function () {
+      $(this).siblings('input[type=hidden]').val(0);
+      $(this).prop('checked', false);
+    });
   } else {
     $('#statusForm .statusOption .initialStatusOption').each(function (index) {
+      $(this).siblings('input[type=hidden]').val(index === 0 ? 1 : 0);
       $(this).prop('checked', index === 0);
     });
   }
@@ -80,6 +84,7 @@ $('#statusForm #addRow').on('click', function() {
   $(clonedElement).find('input, select').each(function(_idx, formElement) {
     $(formElement).removeClass('is-invalid');
     if ($(formElement).attr('type') === 'checkbox') {
+      $(formElement).siblings('input[type=hidden]').val(0);
       $(formElement).prop('checked', false);
     } else {
       $(formElement).val($(this).data('default-value') ?? '');
@@ -124,7 +129,10 @@ $('body').on('click', '#statusForm .removeRow', function() {
   }
 
   if ($('#statusForm .statusOption .initialStatusOption:checked').length === 0) {
-    $('#statusForm .statusOption .initialStatusOption').first().prop('checked', true);
+    const initialStatusOption = $('#statusForm .statusOption .initialStatusOption').first();
+
+    initialStatusOption.siblings('input[type=hidden]').val(1);
+    initialStatusOption.prop('checked', true);
   }
 });
 

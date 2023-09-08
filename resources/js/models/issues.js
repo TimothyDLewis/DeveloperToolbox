@@ -13,13 +13,21 @@ $('#issueForm #project_id').on('change', function() {
           result['estimate-options'].forEach(function (estimateOption) {
             select.append(`<option value="${estimateOption.id}">${estimateOption.label}</option>`);
           });
+
+          select.val(selectedValue);
         } else if (select.attr('id') === 'status_option_id') {
+          let initialStatus = '';
+
           result['status-options'].forEach(function (statusOption) {
             select.append(`<option value="${statusOption.id}">${statusOption.label}</option>`);
-          });
-        }
 
-        select.val(selectedValue);
+            if (statusOption.initial_status_option) {
+              initialStatus = statusOption.id;
+            }
+          });
+
+          select.val(selectedValue || initialStatus);
+        }
       });
     });
   } else {

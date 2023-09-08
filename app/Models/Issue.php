@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Traits\Models\ForSelect;
 use App\Traits\Models\AttributeDisplay;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
@@ -12,6 +13,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
 class Issue extends Model {
   use AttributeDisplay;
+  use ForSelect;
   use HasFactory;
   use SoftDeletes;
 

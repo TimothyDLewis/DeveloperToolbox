@@ -2,7 +2,8 @@
 
 namespace App\Traits\Models;
 
-use Illuminate\Contracts\View\View;
+use Carbon\Carbon;
+use App\Enums\EventRecurrence;
 use Illuminate\Database\Eloquent\Casts\Attribute;
 
 trait AttributeDisplay {
@@ -25,7 +26,7 @@ trait AttributeDisplay {
   public function createdAtDisplay(): Attribute {
     return Attribute::make(
       get: function (): string {
-        return $this->timestampComponentDisplay('created_at');
+        return $this->dateTimeComponentDisplay('created_at');
       }
     );
   }
@@ -38,6 +39,30 @@ trait AttributeDisplay {
     );
   }
 
+  public function durationDisplay(): Attribute {
+    return Attribute::make(
+      get: function (): string {
+        return '<span class="badge rounded-pill text-bg-primary ms-1">' . $this->duration . '</span>';
+      }
+    );
+  }
+
+  public function endDateDisplay(): Attribute {
+    return Attribute::make(
+      get: function (): string {
+        return $this->dateComponentDisplay('end_datetime');
+      }
+    );
+  }
+
+  public function endDateTimeDisplay(): Attribute {
+    return Attribute::make(
+      get: function (): string {
+        return $this->dateTimeComponentDisplay('end_datetime');
+      }
+    );
+  }
+
   public function estimateDisplay(): Attribute {
     return Attribute::make(
       get: function (): string {
@@ -46,10 +71,26 @@ trait AttributeDisplay {
     );
   }
 
+  public function eventDisplay(): Attribute {
+    return Attribute::make(
+      get: function (): string {
+        return $this->relatedModelDisplay('event', 'events.show', 'title');
+      }
+    );
+  }
+
   public function externalUrlDisplay(): Attribute {
     return Attribute::make(
       get: function(): string {
         return $this->urlComponentDisplay($this, 'external_url', 'external_url');
+      }
+    );
+  }
+
+  public function issueDisplay(): Attribute {
+    return Attribute::make(
+      get: function (): string {
+        return $this->relatedModelDisplay('issue', 'issues.show', 'title');
       }
     );
   }
@@ -70,6 +111,14 @@ trait AttributeDisplay {
     );
   }
 
+  public function labelTitleDisplay(): Attribute {
+    return Attribute::make(
+      get: function (): string {
+        return '<span class="badge ms-1" style="color: '. $this->text_color .'; background-color: ' . $this->background_color . ';">' . strtoupper($this->title) . '</span>';
+      }
+    );
+  }
+
   public function projectDisplay(): Attribute {
     return Attribute::make(
       get: function (): string {
@@ -78,10 +127,68 @@ trait AttributeDisplay {
     );
   }
 
+  public function recurrenceEndTimeDisplay(): Attribute {
+    return Attribute::make(
+      get: function (): string {
+        return $this->timeComponentDisplay('recurrence_end_time');
+      }
+    );
+  }
+
+  public function recurrenceDisplay(): Attribute {
+    return Attribute::make(
+      get: function(): string {
+        if ($this->yearly_eval_logic) {
+          return 'Yearly';
+        }
+
+        return ucwords(str_replace('_', ' ', EventRecurrence::from($this->recurrence)->value));
+      }
+    );
+  }
+
+  public function recurrenceDisplayClass(): Attribute {
+    return Attribute::make(
+      get: function(): string {
+        switch (is_string($this->recurrence) ? $this->recurrence : $this->recurrence->value) {
+          case EventRecurrence::NoRecurrence->value:
+          case EventRecurrence::SprintWeekly->value:
+            return $this->yearly_eval_logic ? 'col-12 col-sm-6' : 'col-12';
+          default:
+            return 'col-12 col-sm-6 col-md-4';
+        }
+      }
+    );
+  }
+
+  public function recurrenceStartTimeDisplay(): Attribute {
+    return Attribute::make(
+      get: function (): string {
+        return $this->timeComponentDisplay('recurrence_start_time');
+      }
+    );
+  }
+
   public function sourceCodeManagementUrlDisplay(): Attribute {
     return Attribute::make(
       get: function(): string {
         return $this->urlComponentDisplay($this, 'source_code_management_url', 'source_code_management_url');
+      }
+    );
+  }
+
+  public function startDateDisplay(): Attribute {
+    return Attribute::make(
+      get: function (): string {
+        return $this->dateComponentDisplay('start_datetime');
+      }
+    );
+  }
+
+  public function startDateTimeDisplay(): Attribute {
+    return Attribute::make(
+      get: function (): string {
+        return $this->dateTimeComponentDisplay('start_datetime');
       }
     );
   }
@@ -105,7 +212,7 @@ trait AttributeDisplay {
   public function updatedAtDisplay(): Attribute {
     return Attribute::make(
       get: function (): string {
-        return $this->timestampComponentDisplay('updated_at');
+        return $this->dateTimeComponentDisplay('updated_at');
       }
     );
   }
@@ -131,8 +238,17 @@ trait AttributeDisplay {
     return view('components.display.hexcode', ['model' => $this, 'field' => $field])->render();
   }
 
-  private function timestampComponentDisplay(string $field): string {
-    return '<i class="fa-solid fa-calendar me-2"></i><span class="me-2">' . $this->{$field}->format('F jS, Y') . '</span><i class="fa-solid fa-clock me-2"></i><span class="me-2">' . $this->{$field}->format('g:i A') . '</span>';
+  private function dateComponentDisplay(string $field): string {
+    return '<i class="fa-solid fa-calendar me-2"></i><span class="me-2">' . (is_string($this->{$field}) ? Carbon::parse($this->{$field}) : $this->{$field})->format('F jS, Y') . '</span>';
+  }
+
+  private function timeComponentDisplay(string $field): string {
+    $includePrefix = strlen($this->{$field}) !== 19;
+    return '<i class="fa-solid fa-clock me-2"></i><span class="me-2">' . (is_string($this->{$field}) ? Carbon::parse(($includePrefix ? '2000-01-01 ' : '') . $this->{$field}) : $this->{$field})->format('g:i A') . '</span>';
+  }
+
+  private function dateTimeComponentDisplay(string $field): string {
+    return $this->dateComponentDisplay($field) . $this->timeComponentDisplay($field);
   }
 
   private function urlComponentDisplay(string $field, string $urlField, string $displayField): string {

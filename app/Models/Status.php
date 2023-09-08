@@ -6,6 +6,7 @@ use App\Traits\Models\ForSelect;
 use App\Traits\Models\AttributeDisplay;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
@@ -33,6 +34,10 @@ class Status extends Model {
 
   public function projects(): HasMany {
     return $this->hasMany(Project::class);
+  }
+
+  public function initialStatusOption(): HasOne {
+    return $this->hasOne(StatusOption::class)->where('initial_status_option', true);
   }
 
   public function statusOptions(): HasMany {

@@ -28,6 +28,35 @@ const popoverTriggerList = document.querySelectorAll('[data-bs-toggle="popover"]
 const tooltipTriggerList = document.querySelectorAll('[data-bs-toggle="tooltip"]');
 [...tooltipTriggerList].map(tooltipTriggerEl => new bootstrap.Tooltip(tooltipTriggerEl));
 
+const errorToggle = $('#errorContainer #toggleErrors');
+
+errorToggle.on('click', function () {
+  const errorList = $('#errorContainer #errorList');
+
+  if(errorList.hasClass('hidden')) {
+    errorToggle.html('<i class="fa-solid fa-eye-slash me-1"></i> Hide Errors');
+    errorList.removeClass('hidden');
+  } else {
+    errorToggle.html('<i class="fa-solid fa-eye me-1"></i> Show Errors');
+    errorList.addClass('hidden');
+  }
+});
+
+$('.toggle-dropdown').on('click', function () {
+  // -TODO- Convert to event listener to prevent icon disconnect
+  $(this).find('.toggle-icon').toggleClass('fa-angle-down', 'fa-angle-right');
+});
+
+$('body').on('change', 'input[type=checkbox]', function () {
+  $(this).siblings('input[type=hidden]').val($(this).is(':checked') ? 1 : 0);
+});
+
+$('.external-link').on('mouseenter', function () {
+  $(this).find('.external-link-a').removeClass('hidden');
+}).on('mouseleave', function () {
+  $(this).find('.external-link-a').addClass('hidden');
+});
+
 /**
 * Echo exposes an expressive API for subscribing to channels and listening
 * for events that are broadcast by Laravel. Echo and event broadcasting

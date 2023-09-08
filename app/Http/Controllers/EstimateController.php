@@ -18,7 +18,7 @@ class EstimateController extends Controller {
   use Breadcrumbs;
 
   public function index(): View {
-    return view('estimates.index', $this->withBreadcrumbs(includes: ['estimates' => Estimate::withCount(['estimateOptions', 'projects'])->orderBy('id')->paginate(10)]));
+    return view('estimates.index', $this->withBreadcrumbs(includes: ['estimates' => Estimate::withCount(['estimateOptions', 'projects'])->orderBy('id')->paginate(30)]));
   }
 
   public function create(): View {

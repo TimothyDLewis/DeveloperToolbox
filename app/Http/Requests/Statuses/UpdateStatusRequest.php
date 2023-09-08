@@ -19,7 +19,7 @@ class UpdateStatusRequest extends FormRequest {
     foreach ($this->status_options as $index => $statusOption) {
       $statusOption['slug'] = Str::slug("{$statusOption['label']}-{$this->title}");
       $statusOption['sort_order'] = $index + 1;
-      $statusOption['initial_status_option'] = isset($statusOption['initial_status_option']) ? $statusOption['initial_status_option'] : '0';
+      $statusOption['initial_status_option'] = isset($statusOption['initial_status_option']) ? $statusOption['initial_status_option'] : 0;
 
       $statusOptions[] = $statusOption;
     }

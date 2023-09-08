@@ -15,6 +15,69 @@ $fa-font-path: '~fontawesome/webfonts';
   width: 4.5rem;
 }
 
+#events,
+#eventTypes,
+#occurences,
+#tasks,
+#nav-event-type-events-table,
+#nav-event-occurences-table,
+#nav-issue-tasks-table {
+  .td-affects-productivity,
+  .th-affects-productivity {
+    min-width: 190px;
+    width: 1%;
+  }
+
+  .td-all-day,
+  .th-all-day {
+    min-width: 100px;
+    width: 1%;
+  }
+
+  .td-all-day-datetime {
+    min-width: 220px;
+    width: 1%;
+  }
+
+  .th-duration {
+    min-width: 150px;
+    width: 1%;
+  }
+
+  .td-duration {
+    min-width: 90px;
+    width: 1%;
+  }
+
+  .td-event-type,
+  .th-event-type {
+    min-width: 105px;
+    width: 1%;
+  }
+
+  .td-logged {
+    min-width: 50px;
+    width: 1%;
+  }
+
+  .th-logged {
+    min-width: 150px;
+    width: 1%;
+  }
+
+  .th-start-datetime,
+  .th-end-datetime {
+    min-width: 150px;
+    width: 1%;
+  }
+
+  .td-start-datetime,
+  .td-end-datetime {
+    min-width: 320px;
+    width: 1%;
+  }
+}
+
 #issues,
 #nav-project-issues-table {
   .td-estimate-option,
@@ -54,6 +117,10 @@ $fa-font-path: '~fontawesome/webfonts';
   }
 }
 
+#toggleErrors {
+  cursor: pointer;
+}
+
 #resources,
 #nav-project-resources-table {
   .td-url {
@@ -71,8 +138,17 @@ button:disabled {
   margin-bottom: 0;
 }
 
+.code-text {
+  padding: 0.075rem 0rem;
+}
+
 .btn-link {
   text-decoration: none;
+}
+
+.external-link {
+  text-decoration: underline;
+  cursor: pointer;
 }
 
 .form-check-input-custom {
@@ -83,6 +159,18 @@ button:disabled {
 
 .full-width {
   width: 100%;
+}
+
+.hidden {
+  display: none;
+}
+
+.id-link {
+  text-decoration: none !important;
+}
+
+.is-invalid .invalid-feedback {
+  display: block;
 }
 
 .nav-flush {

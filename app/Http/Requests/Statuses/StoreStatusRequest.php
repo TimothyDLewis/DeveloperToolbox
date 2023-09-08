@@ -34,7 +34,7 @@ class StoreStatusRequest extends FormRequest {
       'status_options.*.label' => ['required', 'distinct'],
       'status_options.*.slug' => ['required', 'unique:status_options,slug'],
       'status_options.*.description' => ['nullable', 'string', 'in:on'],
-      'status_options.*.initial_status_option' => ['nullable'],
+      'status_options.*.initial_status_option' => ['required'],
       'status_options.*.text_color' => ['required'],
       'status_options.*.background_color' => ['required'],
       'status_options.*.sort_order' => ['nullable']

@@ -2,14 +2,15 @@
 
 namespace App\Helpers;
 
+use stdClass;
 use Exception;
 use Illuminate\Contracts\View\View;
 use Illuminate\Database\Eloquent\Model;
 
 class FormHelper {
-  protected Model $model;
+  protected Model|stdClass $model;
 
-  public function setModel(Model $model) {
+  public function setModel(Model|stdClass $model) {
     $this->model = $model;
   }
 
@@ -27,19 +28,23 @@ class FormHelper {
     return "<th class=\"{$class}\">{$field['label']}</th>";
   }
 
-  public function renderRepeatableFormField(string $fieldKey, string $prefix, int $index, array $overrides = []): View {
+  public function renderRepeatableFormField(string $fieldKey, string $prefix, int|string $index, array $overrides = []): View {
     $field = $this->getField($fieldKey);
 
     return $this->renderFormField($fieldKey, [
       'containerClass' => $overrides['containerClass'] ?? $field['container-class'] ?? 'col-12',
       'default' => $overrides['default'] ?? '',
-      'derivativeKey' => $overrides['derivativeKey'] ?? $field['derivative'] ?? null ? "{$prefix}.{$index}.{$field['derivative']}" : $fieldKey,
+      'derivativeKey' => $overrides['derivativeKey'] ?? ($field['derivative'] ?? null ? "{$prefix}.{$index}." . ($field['derivative'] ?? '') : ''),
       'errorKey' => $overrides['errorKey'] ?? "{$prefix}.{$index}.{$fieldKey}",
       'id' => $overrides['id'] ?? "{$fieldKey}_{$index}",
+      'inputClass' => $overrides['inputClass'] ?? '',
       'name' => $overrides['name'] ?? "{$prefix}[{$index}][$fieldKey]",
       'options' => $overrides['options'] ?? [],
       'placeholder' => $overrides['placeholder'] ?? '',
-      'repeatable' => true
+      'readonly' => $overrides['readonly'] ?? false,
+      'repeatable' => true,
+      'type' => $overrides['type'] ?? $field['type'],
+      'step' => $overrides['step'] ?? $field['step'] ?? 60,
     ]);
   }
 
@@ -49,25 +54,37 @@ class FormHelper {
     $viewData = [
       'containerClass' => $overrides['containerClass'] ?? $field['container-class'] ?? 'col-12',
       'default' => $overrides['default'] ?? $field['default'] ?? '',
-      'derivativeKey' => $overrides['derivativeKey'] ?? $field['derivative'] ?? $fieldKey,
+      'derivativeKey' => $overrides['derivativeKey'] ?? $field['derivative'] ?? '',
       'errorKey' => $overrides['errorKey'] ?? $fieldKey,
       'field' => $field,
       'fieldKey' => $fieldKey,
       'id' => $overrides['id'] ?? $fieldKey,
+      'inputClass' => $overrides['inputClass'] ?? '',
       'model' => $this->model,
       'name' => $overrides['name'] ?? $fieldKey,
       'options' => $overrides['options'] ?? [],
       'placeholder' => $overrides['placeholder'] ?? '',
-      'repeatable' => $overrides['repeatable'] ?? false
+      'readonly' => $overrides['readonly'] ?? false,
+      'repeatable' => $overrides['repeatable'] ?? false,
+      'type' => $overrides['type'] ?? $field['type'],
+      'step' => $overrides['step'] ?? $field['step'] ?? 60,
     ];
 
-    switch ($field['type']) {
+    switch ($viewData['type']) {
       case 'custom':
         return view("components.forms.custom.{$field['custom_editor']}", $viewData);
+      case 'date':
+        return view('components.forms.inputs.date', $viewData);
+      case 'datetime':
+        return view('components.forms.inputs.datetime', $viewData);
+      case 'enum-select':
+        return view('components.forms.selects.enum-select', $viewData);
       case 'hidden':
         return view('components.forms.hidden', $viewData);
       case 'select':
-        return view('components.forms.select', $viewData);
+        return view('components.forms.selects.select', $viewData);
+      case 'time':
+        return view('components.forms.inputs.time', $viewData);
       case 'text':
         return view('components.forms.inputs.text', $viewData);
       case 'textarea':

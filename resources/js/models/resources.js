@@ -3,7 +3,7 @@ $('body').on('click', '#resourceForm .colorSwatch', function () {
 });
 
 $('.toggle-bookmarked').on('click', function () {
-  $(this).toggleClass('text-warning', 'text-secondary');
+  $(this).toggleClass('text-warning text-secondary');
   // -TODO- Hookup back-end change and update Quick Links (once displayed)
 });
 

@@ -18,7 +18,7 @@ class ProjectController extends Controller {
   use Breadcrumbs;
 
   public function index(): View {
-    return view('projects.index', $this->withBreadcrumbs(includes: ['projects' => Project::with(['estimate', 'status'])->withCount(['issues', 'resources'])->orderBy('id')->paginate(10)]));
+    return view('projects.index', $this->withBreadcrumbs(includes: ['projects' => Project::with(['estimate', 'status'])->withCount(['issues', 'resources'])->orderBy('id')->paginate(30)]));
   }
 
   public function create(): View {
@@ -107,7 +107,7 @@ class ProjectController extends Controller {
       }])->forSelect();
     }, 'status' => function ($query) {
       return $query->with(['statusOptions' => function ($subQuery) {
-        return $subQuery->forSelect('label', 'status_id');
+        return $subQuery->forSelect('label', 'status_id', ['initial_status_option']);
       }])->forSelect();
     }]);
 

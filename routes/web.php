@@ -2,10 +2,14 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\IssueController;
+use App\Http\Controllers\EventController;
 use App\Http\Controllers\StatusController;
 use App\Http\Controllers\ProjectController;
 use App\Http\Controllers\EstimateController;
 use App\Http\Controllers\ResourceController;
+use App\Http\Controllers\EventTypeController;
+use App\Http\Controllers\OccurenceController;
+use App\Http\Controllers\TaskController;
 
 /*
 |--------------------------------------------------------------------------
@@ -45,8 +49,13 @@ Route::group(['prefix' => 'organization'], function () {
     return redirect()->route('projects.index');
   });
 
-  Route::resource('estimates', EstimateController::class);
   Route::get('/estimates/{estimate}/estimate-options', [EstimateController::class, 'getEstimateOptions'])->name('estimates.estimate-options');
+  Route::resource('estimates', EstimateController::class);
+
+  Route::resource('event-types', EventTypeController::class);
+  Route::resource('events', EventController::class);
+  Route::resource('issues', IssueController::class);
+  Route::resource('occurences', OccurenceController::class);
 
   Route::resource('projects', ProjectController::class);
   Route::get('/projects/{project}/select-options/{key?}', [ProjectController::class, 'getSelectOptions'])->name('projects.select-options');
@@ -56,5 +65,5 @@ Route::group(['prefix' => 'organization'], function () {
   Route::resource('statuses', StatusController::class);
   Route::get('/statuses/{status}/status-options', [StatusController::class, 'getStatusOptions'])->name('statuses.status-options');
 
-  Route::resource('issues', IssueController::class);
+  Route::resource('tasks', TaskController::class);
 });

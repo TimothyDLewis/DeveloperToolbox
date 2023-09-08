@@ -27,7 +27,6 @@ class TaskFactory extends Factory {
       'start_datetime' => $dateRange->startDateTime,
       'end_datetime' => $dateRange->endDateTime,
       'logged' => false,
-      'logged_duration' => 0,
       'description' => fake()->text(),
     ];
   }

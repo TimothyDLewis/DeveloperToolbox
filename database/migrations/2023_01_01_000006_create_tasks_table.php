@@ -17,8 +17,7 @@ return new class extends Migration {
       $table->dateTime('start_datetime');
       $table->dateTime('end_datetime');
       $table->integer('duration')->storedAs('TIMESTAMPDIFF(MINUTE, start_datetime, end_datetime)')->nullable();
-      $table->boolean('logged')->default(0);
-      $table->integer('logged_duration')->default(0);
+      $table->boolean('logged')->default(false);
       $table->text('description')->nullable();
 
       $table->timestamps();

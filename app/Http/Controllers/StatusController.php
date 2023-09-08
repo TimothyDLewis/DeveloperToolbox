@@ -18,7 +18,7 @@ class StatusController extends Controller {
   use Breadcrumbs;
 
   public function index(): View {
-    return view('statuses.index', $this->withBreadcrumbs(includes: ['statuses' => Status::withCount(['statusOptions', 'projects'])->orderBy('id')->paginate(10)]));
+    return view('statuses.index', $this->withBreadcrumbs(includes: ['statuses' => Status::withCount(['statusOptions', 'projects'])->orderBy('id')->paginate(30)]));
   }
 
   public function create(): View {
@@ -29,7 +29,7 @@ class StatusController extends Controller {
     }
 
     if ($statusOptions->isEmpty()) {
-      $statusOptions->push(new StatusOption(['initial_status_option' => '1']));
+      $statusOptions->push(new StatusOption(['initial_status_option' => 1]));
     }
 
     return view('statuses.create', $this->withBreadcrumbs(

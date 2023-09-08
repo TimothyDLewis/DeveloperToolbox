@@ -13,6 +13,8 @@ return new class extends Migration {
   * Run the migrations.
   */
   public function up(): void {
+    $workDayDuration = config('app.work_day_duration');
+
     Schema::create('event_types', function (Blueprint $table) {
       $table->id();
 
@@ -20,7 +22,7 @@ return new class extends Migration {
       $table->string('slug')->unique();
       $table->string('text_color');
       $table->string('background_color');
-      $table->boolean('affects_productivity');
+      $table->boolean('affects_productivity')->default(false);
       $table->text('description')->nullable();
 
       $table->softDeletes();
@@ -37,20 +39,23 @@ return new class extends Migration {
       $table->json('recurrence_days')->nullable();
       $table->time('recurrence_start_time')->nullable();
       $table->time('recurrence_end_time')->nullable();
+      $table->boolean('affects_productivity')->default(false);
       $table->text('description')->nullable();
+      $table->text('yearly_eval_logic')->nullable();
 
       $table->softDeletes();
       $table->timestamps();
     });
 
-    Schema::create('occurences', function (Blueprint $table) {
+    Schema::create('occurences', function (Blueprint $table) use ($workDayDuration) {
       $table->id();
       $table->foreignIdFor(Event::class)->constrained();
-      $table->foreignIdFor(Sprint::class)->constrained()->nullable();
+      $table->foreignIdFor(Sprint::class)->nullable()->constrained();
 
       $table->dateTime('start_datetime');
       $table->dateTime('end_datetime');
-      $table->integer('duration')->storedAs('TIMESTAMPDIFF(MINUTE, start_datetime, end_datetime)')->nullable();
+      $table->boolean('all_day')->default(false);
+      $table->integer('duration')->storedAs("CASE WHEN all_day THEN {$workDayDuration} ELSE TIMESTAMPDIFF(MINUTE, start_datetime, end_datetime) END")->nullable();
 
       $table->softDeletes();
       $table->timestamps();

@@ -31,7 +31,7 @@ return new class extends Migration {
       $table->string('background_color');
       $table->text('description')->nullable();
       $table->integer('sort_order');
-      $table->boolean('initial_status_option')->default(0);
+      $table->boolean('initial_status_option')->default(false);
 
       $table->timestamps();
       $table->softDeletes();

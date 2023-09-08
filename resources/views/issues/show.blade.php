@@ -26,11 +26,21 @@
           <p class="card card-body card-condensed">{!! $issue->project_display !!}</p>
         </div>
         <div class="col-12 col-sm-6 col-md-4 mb-3">
-          <label class="form-label d-block">Estimate Option</label>
+          <label class="form-label d-block">
+            Estimate Option
+            <a class="external-link ms-2" href="{{ route('estimates.show', $issue->project->estimate) }}">
+              <small>{{ $issue->project->estimate->title }}</small>
+            </a>
+          </label>
           <h6 class="mt-3 mb-0">{!! $issue->estimateOption->label_display_alt !!}</h6>
         </div>
         <div class="col-12 col-sm-6 col-md-4 mb-3">
-          <label class="form-label d-block">Status Option</label>
+          <label class="form-label d-block">
+            Status Option
+            <a class="external-link ms-2" href="{{ route('statuses.show', $issue->project->status) }}">
+              <small>{{ $issue->project->status->title }}</small>
+            </a>
+          </label>
           <h6 class="mt-3 mb-0">{!! $issue->statusOption->label_display !!}</h6>
         </div>
         <div class="col-12 mb-3">

@@ -6,7 +6,7 @@
   <div class="card mb-3">
     <div class="card-header">All Resources</div>
     <div class="card-body table-responsive">
-      <table id="resources" class="table table-bordered table-striped {{ $theme->themeVar('table-dark', 'table-light') }} table-vertical-center mb-0">
+      <table id="resources" class="table table-bordered table-striped {{ $theme->themeVar('table-dark', 'table-light') }} table-vertical-center {{ $resources->hasPages() ? 'mb-3' : 'mb-0' }}">
         <thead>
           <tr>
             <th class="th-min text-center"></th>

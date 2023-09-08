@@ -13,22 +13,41 @@
               <thead>
                 <tr>
                   <th class="th-min text-center">ID</th>
+                  <th class="th-start-datetime text-center">Start</th>
+                  <th class="th-end-datetime text-center">End</th>
+                  <th class="th-logged text-center">Logged</th>
+                  <th class="th-duration text-center">Duration</th>
                   <th class="th-min text-center">Actions</th>
                 </tr>
               </thead>
               <tbody>
                 @forelse($issue->tasks as $task)
                   <tr>
-                    <td class="td-min text-center">{{ $task->id }}</td>
                     <td class="td-min text-center">
-                      <a href="{{ route('tasks.edit', $task) }}" class="btn btn-link">
-                        <i class="text-primary fa-regular fa-pen"></i>
-                      </a>
+                      <a class="id-link" href="{{ route('tasks.show', $task) }}">{{ $task->id }}</a>
+                    </td>
+                    <td class="td-start-datetime">{!! $task->start_date_time_display !!}</td>
+                    <td class="td-end-datetime">{!! $task->end_date_time_display !!}</td>
+                    <td class="td-logged text-center">
+                      <i class="fa-solid fa-{{ $task->logged ? 'circle-check' : 'circle-xmark text-secondary' }}"></i>
+                    </td>
+                    <td class="td-duration text-center">{!! $task->duration_display !!}</td>
+                    <td class="td-min text-center">
+                      <div class="btn-group">
+                        <a href="{{ route('tasks.edit', $task) }}" class="btn btn-link">
+                          <i class="text-primary fa-regular fa-pen"></i>
+                        </a>
+                        <form action="{{ route('tasks.destroy', $task) }}" method="POST">
+                          @method('DELETE')
+                          @csrf
+                          <button type="button" class="btn btn-link text-danger delete-task"><i class="text-danger fa-regular fa-trash"></i></button>
+                        </form>
+                      </div>
                     </td>
                   </tr>
                 @empty
                   <tr>
-                    <td colspan="2">
+                    <td colspan="6">
                       <i class="text-secondary">No connected Tasks...</i>
                     </td>
                   </tr>

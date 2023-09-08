@@ -17,7 +17,7 @@ class IssueController extends Controller {
   use Breadcrumbs;
 
   public function index(): View {
-    return view('issues.index', $this->withBreadcrumbs(includes: ['issues' => Issue::with(['estimateOption', 'project', 'statusOption'])->withCount(['tasks', 'sprints'])->orderBy('id')->paginate(10)]));
+    return view('issues.index', $this->withBreadcrumbs(includes: ['issues' => Issue::with(['estimateOption', 'project', 'statusOption'])->withCount(['tasks', 'sprints'])->orderBy('id')->paginate(30)]));
   }
 
   public function create(): View {

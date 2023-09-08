@@ -11,52 +11,85 @@ class SidebarComposer {
   public function __construct() {
     $this->sidebarLinks = collect([
       (object)[
-        'label' => 'Estimates',
         'href' => route('estimates.index'),
         'icon' => '<i class="fa-regular fa-list-check me-2"></i>',
-        'isActive' => request()->is("{$this->sidebarPrefix}/estimates") || request()->is("{$this->sidebarPrefix}/estimates/*")
+        'isActive' => request()->is("{$this->sidebarPrefix}/estimates") || request()->is("{$this->sidebarPrefix}/estimates/*"),
+        'isDropdown' => false,
+        'label' => 'Estimates',
       ],
       (object)[
-        'label' => 'Statuses',
         'href' => route('statuses.index'),
         'icon' => '<i class="fa-regular fa-bars-progress me-2"></i>',
-        'isActive' => request()->is("{$this->sidebarPrefix}/statuses") || request()->is("{$this->sidebarPrefix}/statuses/*")
+        'isActive' => request()->is("{$this->sidebarPrefix}/statuses") || request()->is("{$this->sidebarPrefix}/statuses/*"),
+        'isDropdown' => false,
+        'label' => 'Statuses',
       ],
       (object)[
-        'label' => 'Projects',
         'href' => route('projects.index'),
         'icon' => '<i class="fa-regular fa-clipboard-list me-2"></i>',
-        'isActive' => request()->is("{$this->sidebarPrefix}/projects") || request()->is("{$this->sidebarPrefix}/projects/*")
+        'isActive' => request()->is("{$this->sidebarPrefix}/projects") || request()->is("{$this->sidebarPrefix}/projects/*"),
+        'isDropdown' => false,
+        'label' => 'Projects',
       ],
       (object)[
-        'label' => 'Resources',
         'href' => route('resources.index'),
         'icon' => '<i class="fa-regular fa-bookmark me-2"></i>',
-        'isActive' => request()->is("{$this->sidebarPrefix}/resources") || request()->is("{$this->sidebarPrefix}/resources/*")
+        'isActive' => request()->is("{$this->sidebarPrefix}/resources") || request()->is("{$this->sidebarPrefix}/resources/*"),
+        'isDropdown' => false,
+        'label' => 'Resources',
       ],
       (object)[
-        'label' => 'Issues',
         'href' => route('issues.index'),
         'icon' => '<i class="fa-regular fa-cubes me-2"></i>',
-        'isActive' => request()->is("{$this->sidebarPrefix}/issues") || request()->is("{$this->sidebarPrefix}/issues/*")
+        'isActive' => request()->is("{$this->sidebarPrefix}/issues") || request()->is("{$this->sidebarPrefix}/issues/*"),
+        'isDropdown' => false,
+        'label' => 'Issues',
       ],
       (object)[
-        'label' => 'Events',
-        'href' => '#',
-        'icon' => '<i class="fa-regular fa-calendar-plus me-2"></i>',
-        'isActive' => false
+        'children' => [
+          (object)[
+            'href' => route('event-types.index'),
+            'icon' => '<i class="fa-regular fa-book me-2"></i>',
+            'isActive' => $isEventTypesActive = request()->is("{$this->sidebarPrefix}/event-types") || request()->is("{$this->sidebarPrefix}/event-types/*"),
+            'label' => 'Event Types',
+          ],
+          (object)[
+            'href' => route('events.index'),
+            'icon' => '<i class="fa-regular fa-calendar-plus me-2"></i>',
+            'isActive' => $isEventsActive = request()->is("{$this->sidebarPrefix}/events") || request()->is("{$this->sidebarPrefix}/events/*"),
+            'label' => 'Events',
+          ],
+          (object)[
+            'href' => route('occurences.index'),
+            'icon' => '<i class="fa-regular fa-calendar-days me-2"></i>',
+            'isActive' => $isOccurencesActive = request()->is("{$this->sidebarPrefix}/occurences") || request()->is("{$this->sidebarPrefix}/occurences/*"),
+            'label' => 'Occurences',
+          ],
+          (object)[
+            'href' => route('tasks.index'),
+            'icon' => '<i class="fa-regular fa-layer-group me-2"></i>',
+            'isActive' => $isTasksActive = request()->is("{$this->sidebarPrefix}/tasks") || request()->is("{$this->sidebarPrefix}/tasks/*"),
+            'label' => 'Tasks',
+          ]
+        ],
+        'dropdownId' => 'sidebar-events-dropdown',
+        'isDropdown' => true,
+        'isOpen' => $isEventTypesActive || $isEventsActive || $isOccurencesActive || $isTasksActive,
+        'label' => 'Scheduler',
       ],
       (object)[
-        'label' => 'Sprints',
         'href' => '#',
         'icon' => '<i class="fa-regular fa-arrows-split-up-and-left fa-rotate-180 me-2"></i>',
-        'isActive' => false
+        'isActive' => false,
+        'isDropdown' => false,
+        'label' => 'Sprints',
       ],
       (object)[
-        'label' => 'Reports',
         'href' => '#',
         'icon' => '<i class="fa-regular fa-file-lines me-2"></i>',
-        'isActive' => false
+        'isActive' => false,
+        'isDropdown' => false,
+        'label' => 'Reports',
       ],
     ]);
   }
