@@ -3,7 +3,7 @@
     <div class="card">
       <div class="card-header">
         <div class="nav nav-tabs nav-flush" role="tablist">
-          <button class="nav-link active" id="nav-event-type-estimate-events-tab" data-bs-toggle="tab" data-bs-target="#nav-event-type-estimate-events" type="button" tabindex="-1">Events ({{ $eventType->events->count() }})</button>
+          <button class="nav-link active" id="nav-event-type-estimate-events-tab" data-bs-toggle="tab" data-bs-target="#nav-event-type-estimate-events" type="button" tabindex="-1">Events {!! $eventType->events_count_display !!}</button>
         </div>
       </div>
       <div class="card-body mb-0">

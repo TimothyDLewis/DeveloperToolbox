@@ -78,9 +78,9 @@ class SidebarComposer {
         'label' => 'Scheduler',
       ],
       (object)[
-        'href' => '#',
+        'href' => route('sprints.index'),
         'icon' => '<i class="fa-regular fa-arrows-split-up-and-left fa-rotate-180 me-2"></i>',
-        'isActive' => false,
+        'isActive' => request()->is("{$this->sidebarPrefix}/sprints") || request()->is("{$this->sidebarPrefix}/sprints/*"),
         'isDropdown' => false,
         'label' => 'Sprints',
       ],

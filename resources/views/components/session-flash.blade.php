@@ -11,7 +11,9 @@
         <i class="fa-solid fa-eye me-1"></i> Show Errors
       </span>
       <ul id="errorList" class="mt-3 mb-0 hidden">
-        @foreach($errors->all() as $error)
+        @foreach($errors->all() as $index => $error)
+          {{-- Enable to inclue error keys --}}
+          {{-- <li>{{ $errors->keys()[$index] . ': ' . $error }}</li> --}}
           <li>{{ $error }}</li>
         @endforeach
       </ul>

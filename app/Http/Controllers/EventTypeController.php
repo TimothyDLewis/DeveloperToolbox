@@ -46,7 +46,7 @@ class EventTypeController extends Controller {
   }
 
   public function show(Request $request, EventType $eventType): JsonResponse | View {
-    $eventType->load(['events']);
+    $eventType->load(['events'])->loadCount(['events']);
 
     if ($request->ajax()) {
       return response()->json(['eventType' => $eventType], 200);

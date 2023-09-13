@@ -23,7 +23,7 @@
         </div>
         <div class="col-12 {{ $occurence->all_day ? 'col-sm-10' : 'col-sm-5' }} mb-3">
           <label class="form-label">Start</label>
-          <p class="card card-body card-condensed d-block">{!! $occurence->all_day ? $occurence->start_date_display : $occurence->start_datetime_display !!}</p>
+          <p class="card card-body card-condensed d-block">{!! $occurence->all_day ? $occurence->start_date_time_as_date_display : $occurence->start_datetime_display !!}</p>
         </div>
         @if(!$occurence->all_day)
           <div class="col-12 col-sm-5 mb-3">
@@ -31,7 +31,6 @@
             <p class="card card-body card-condensed d-block">{!! $occurence->end_datetime_display !!}</p>
           </div>
         @endif
-
         <div class="col-12 col-sm-6 mb-0">
           <label class="form-label">Created At</label>
           <p class="card card-body card-condensed d-block">{!! $occurence->created_at_display !!}</p>

@@ -2,7 +2,7 @@
 
 namespace App\Http\Requests\Occurences;
 
-use App\Rules\CarbonTimes;
+use App\Rules\CarbonChecks;
 use App\Traits\SessionFlash;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Contracts\Validation\Validator;
@@ -22,8 +22,8 @@ class StoreOccurenceRequest extends FormRequest {
     $endTimeRules = ['required'];
 
     if (!$this->all_day) {
-      $startTimeRules[] = new CarbonTimes($this->start_datetime, $this->end_datetime, 'before', 'Start', 'End', true);
-      $endTimeRules[] = new CarbonTimes($this->end_datetime, $this->start_datetime, 'after', 'End', 'Start', true);
+      $startTimeRules[] = new CarbonChecks($this->start_datetime, $this->end_datetime, 'before', 'Start', 'End', true);
+      $endTimeRules[] = new CarbonChecks($this->end_datetime, $this->start_datetime, 'after', 'End', 'Start', true);
     }
 
     return [

@@ -67,7 +67,7 @@ class EstimateController extends Controller {
       return $query->orderBy('sort_order');
     }, 'projects' => function ($query) {
       return $query->with(['estimate', 'status']);
-    }]);
+    }])->loadCount(['estimateOptions', 'projects']);
 
     return view('estimates.show', $this->withBreadcrumbs(
       path: 'show',

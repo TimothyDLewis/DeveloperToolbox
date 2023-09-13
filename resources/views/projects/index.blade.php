@@ -15,8 +15,8 @@
             <th class="th-source-code-management-url">Source Code Management (SCM) URL</th>
             <th>Estimate</th>
             <th>Status</th>
-            <th>Issues</th>
-            <th>Resources</th>
+            <th class="th-min text-center">Issues</th>
+            <th class="th-min text-center">Resources</th>
             <th class="th-min text-center">Actions</th>
           </tr>
         </thead>
@@ -31,8 +31,8 @@
               <td class="td-source-code-management-url">{!! $project->source_code_management_url_display !!}</td>
               <td>{!! $project->estimate_display !!}</td>
               <td>{!! $project->status_display !!}</td>
-              <td>{{ $project->issues_count }}</td>
-              <td>{{ $project->resources_count }}</td>
+              <td class="td-min text-center">{!! $project->issues_count_display !!}</td>
+              <td class="td-min text-center">{!! $project->resources_count_display !!}</td>
               <td class="td-min">
                 <div class="btn-group">
                   <a href="{{ route('projects.edit', $project) }}" class="btn btn-link">

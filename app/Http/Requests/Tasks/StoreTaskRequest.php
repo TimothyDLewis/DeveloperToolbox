@@ -2,7 +2,7 @@
 
 namespace App\Http\Requests\Tasks;
 
-use App\Rules\CarbonTimes;
+use App\Rules\CarbonChecks;
 use App\Traits\SessionFlash;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Contracts\Validation\Validator;
@@ -14,10 +14,10 @@ class StoreTaskRequest extends FormRequest {
   public function rules(): array {
     return [
       'description' => ['nullable'],
-      'end_datetime' => ['required', new CarbonTimes($this->end_datetime, $this->start_datetime, 'after', 'End', 'Start', true)],
+      'end_datetime' => ['required', new CarbonChecks($this->end_datetime, $this->start_datetime, 'after', 'End', 'Start', true)],
       'issue_id' => ['required', 'exists:issues,id'],
       'logged' => ['required'],
-      'start_datetime' => ['required', new CarbonTimes($this->start_datetime, $this->end_datetime, 'before', 'Start', 'End', true)]
+      'start_datetime' => ['required', new CarbonChecks($this->start_datetime, $this->end_datetime, 'before', 'Start', 'End', true)]
     ];
   }
 

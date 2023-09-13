@@ -32,7 +32,7 @@
               <td  class="td-affects-productivity text-center">
                 <i class="fa-solid fa-{{ $eventType->affects_productivity ? 'circle-check' : 'circle-xmark text-secondary' }}"></i>
               </td>
-              <td class="td-min text-center">{{ $eventType->events_count }}</td>
+              <td class="td-min text-center">{!! $eventType->events_count_display !!}</td>
               <td class="td-min">
                 <div class="btn-group">
                   <a href="{{ route('event-types.edit', $eventType) }}" class="btn btn-link">

@@ -2,7 +2,7 @@
 
 namespace App\Http\Requests\Events;
 
-use App\Rules\CarbonTimes;
+use App\Rules\CarbonChecks;
 use Illuminate\Support\Str;
 use App\Traits\SessionFlash;
 use Illuminate\Foundation\Http\FormRequest;
@@ -38,8 +38,8 @@ class StoreEventRequest extends FormRequest {
       'description' => ['nullable'],
       'event_type_id' => ['required', 'exists:event_types,id'],
       'recurrence' => ['required'],
-      'recurrence_end_time' => ['nullable', 'required_unless:recurrence,no_recurrence,sprint_weekly', new CarbonTimes($this->recurrence_end_time, $this->recurrence_start_time, 'after', 'Recurrence End', 'Recurrence Start')],
-      'recurrence_start_time' => ['nullable', 'required_unless:recurrence,no_recurrence,sprint_weekly', new CarbonTimes($this->recurrence_start_time, $this->recurrence_end_time, 'before', 'Recurrence Start', 'Recurrence End')],
+      'recurrence_end_time' => ['nullable', 'required_unless:recurrence,no_recurrence,sprint_weekly', new CarbonChecks($this->recurrence_end_time, $this->recurrence_start_time, 'after', 'Recurrence End', 'Recurrence Start')],
+      'recurrence_start_time' => ['nullable', 'required_unless:recurrence,no_recurrence,sprint_weekly', new CarbonChecks($this->recurrence_start_time, $this->recurrence_end_time, 'before', 'Recurrence Start', 'Recurrence End')],
       'recurrence_days' => ['required_if:recurrence,sprint_weekly', 'array'],
       'recurrence_days_enabled' => $this->recurrence === 'sprint_weekly' ? ['array', 'min:1'] : ['nullable'],
       'slug' => ['required', 'unique:events,slug'],
@@ -50,8 +50,8 @@ class StoreEventRequest extends FormRequest {
       $key = "recurrence_days.{$index}";
 
       $rules["{$key}.enabled"] = ['nullable'];
-      $rules["{$key}.recurrence_end_time"] = ['nullable', "required_if:{$key}.enabled,1", new CarbonTimes($recurrenceDay['recurrence_end_time'], $recurrenceDay['recurrence_start_time'], 'after', 'Recurrence End', 'Recurrence Start')];
-      $rules["{$key}.recurrence_start_time"] = ['nullable', "required_if:{$key}.enabled,1", new CarbonTimes($recurrenceDay['recurrence_start_time'], $recurrenceDay['recurrence_end_time'], 'before', 'Recurrence Start', 'Recurrence End')];
+      $rules["{$key}.recurrence_end_time"] = ['nullable', "required_if:{$key}.enabled,1", new CarbonChecks($recurrenceDay['recurrence_end_time'], $recurrenceDay['recurrence_start_time'], 'after', 'Recurrence End', 'Recurrence Start')];
+      $rules["{$key}.recurrence_start_time"] = ['nullable', "required_if:{$key}.enabled,1", new CarbonChecks($recurrenceDay['recurrence_start_time'], $recurrenceDay['recurrence_end_time'], 'before', 'Recurrence Start', 'Recurrence End')];
     }
 
     return $rules;

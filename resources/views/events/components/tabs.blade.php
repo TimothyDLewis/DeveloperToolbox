@@ -3,7 +3,7 @@
     <div class="card">
       <div class="card-header">
         <div class="nav nav-tabs nav-flush" role="tablist">
-          <button class="nav-link active" id="nav-event-estimate-occurences-tab" data-bs-toggle="tab" data-bs-target="#nav-event-estimate-occurences" type="button" tabindex="-1">Occurences ({{ $event->occurences->count() }})</button>
+          <button class="nav-link active" id="nav-event-estimate-occurences-tab" data-bs-toggle="tab" data-bs-target="#nav-event-estimate-occurences" type="button" tabindex="-1">Occurences {!! $event->occurences_count_display !!}</button>
         </div>
       </div>
       <div class="card-body mb-0">
@@ -30,7 +30,7 @@
                       <i class="fa-solid fa-{{ $occurence->all_day ? 'circle-check' : 'circle-xmark text-secondary' }}"></i>
                     </td>
                     @if($occurence->all_day)
-                      <td class="td-all-day-datetime" colspan="2">{!! $occurence->start_date_display !!}</td>
+                      <td class="td-all-day-datetime" colspan="2">{!! $occurence->start_date_time_as_date_display !!}</td>
                     @else
                       <td class="td-start-datetime">{!! $occurence->start_date_time_display !!}</td>
                       <td class="td-end-datetime">{!! $occurence->end_date_time_display !!}</td>
@@ -38,10 +38,10 @@
                     <td class="td-duration text-center">{!! $occurence->duration_display !!}</td>
                     <td class="td-min text-center">
                       <div class="btn-group">
-                        <a href="#" class="btn btn-link">
+                        <a href="{{ route('occurences.edit', $occurence) }}" class="btn btn-link">
                           <i class="text-primary fa-regular fa-pen"></i>
                         </a>
-                        <form action="#" method="POST">
+                        <form action="{{ route('occurences.destroy', $occurence) }}" method="POST">
                           @method('DELETE')
                           @csrf
                           <button type="button" class="btn btn-link text-danger delete-occurence"><i class="text-danger fa-regular fa-trash"></i></button>

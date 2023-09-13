@@ -11,8 +11,8 @@
           <tr>
             <th class="th-min text-center">ID</th>
             <th>Title</th>
-            <th>Status Options</th>
-            <th>Projects</th>
+            <th class="th-status-options text-center">Status Options</th>
+            <th class="th-min text-center">Projects</th>
             <th class="th-min text-center">Actions</th>
           </tr>
         </thead>
@@ -23,8 +23,8 @@
               <td>
                 <a href="{{ route('statuses.show', $status) }}">{{ $status->title }}</a>
               </td>
-              <td>{{ $status->status_options_count }}</td>
-              <td>{{ $status->projects_count }}</td>
+              <td class="td-status-options text-center">{!! $status->status_options_count_display !!}</td>
+              <td class="td-min text-center">{!! $status->projects_count_display !!}</td>
               <td class="td-min">
                 <div class="btn-group">
                   <a href="{{ route('statuses.edit', $status) }}" class="btn btn-link">

@@ -60,7 +60,7 @@ class IssueController extends Controller {
   public function show(Issue $issue): View {
     $issue->load(['project' => function ($query) {
       return $query->with(['estimate', 'status']);
-    }, 'estimateOption', 'statusOption']);
+    }, 'estimateOption', 'statusOption'])->loadCount(['tasks', 'sprints']);
 
     return view('issues.show', $this->withBreadcrumbs(
       path: 'show',

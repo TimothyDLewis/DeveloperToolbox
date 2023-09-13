@@ -11,8 +11,8 @@
           <tr>
             <th class="th-min text-center">ID</th>
             <th>Title</th>
-            <th>Estimate Options</th>
-            <th>Projects</th>
+            <th class="th-estimate-options text-center">Estimate Options</th>
+            <th class="th-min text-center">Projects</th>
             <th class="th-min text-center">Actions</th>
           </tr>
         </thead>
@@ -23,8 +23,8 @@
               <td>
                 <a href="{{ route('estimates.show', $estimate) }}">{{ $estimate->title }}</a>
               </td>
-              <td>{{ $estimate->estimate_options_count }}</td>
-              <td>{{ $estimate->projects_count }}</td>
+              <td class="td-estimate-options text-center">{!! $estimate->estimate_options_count_display !!}</td>
+              <td class="td-min text-center">{!! $estimate->projects_count_display !!}</td>
               <td class="td-min">
                 <div class="btn-group">
                   <a href="{{ route('estimates.edit', $estimate) }}" class="btn btn-link">

@@ -6,5 +6,6 @@ import './models/issues';
 import './models/occurences';
 import './models/projects';
 import './models/resources';
+import './models/sprints';
 import './models/statuses';
 import './models/tasks';

@@ -77,7 +77,7 @@ class StatusController extends Controller {
       return $query->with(['previousStatusOption', 'nextStatusOption'])->orderBy('sort_order');
     }, 'projects' => function ($query) {
       return $query->with(['status', 'status']);
-    }]);
+    }])->loadCount(['statusOptions', 'projects']);
 
     return view('statuses.show', $this->withBreadcrumbs(
       path: 'show',

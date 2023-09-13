@@ -1,15 +1,16 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\TaskController;
 use App\Http\Controllers\IssueController;
 use App\Http\Controllers\EventController;
 use App\Http\Controllers\StatusController;
+use App\Http\Controllers\SprintController;
 use App\Http\Controllers\ProjectController;
 use App\Http\Controllers\EstimateController;
 use App\Http\Controllers\ResourceController;
 use App\Http\Controllers\EventTypeController;
 use App\Http\Controllers\OccurenceController;
-use App\Http\Controllers\TaskController;
 
 /*
 |--------------------------------------------------------------------------
@@ -64,6 +65,8 @@ Route::group(['prefix' => 'organization'], function () {
 
   Route::resource('statuses', StatusController::class);
   Route::get('/statuses/{status}/status-options', [StatusController::class, 'getStatusOptions'])->name('statuses.status-options');
+
+  Route::resource('sprints', SprintController::class);
 
   Route::resource('tasks', TaskController::class);
 });

@@ -15,8 +15,9 @@
             <th class="th-external-url">External URL</th>
             <th>Project</th>
             <th class="th-estimate-option text-center">Estimate Option</th>
-            <th class="th-estimate-option text-center">Status Option</th>
-            <th>Tasks</th>
+            <th class="th-status-option text-center">Status Option</th>
+            <th class="th-min text-center">Tasks</th>
+            <th class="th-min text-center">Sprints</th>
             <th class="th-min text-center">Actions</th>
           </tr>
         </thead>
@@ -32,7 +33,8 @@
               <td>{!! $issue->project_display !!}</td>
               <td class="td-estimate-option text-center">{!! $issue->estimateOption->label_display_alt !!}</td>
               <td class="td-status-option text-center">{!! $issue->statusOption->label_display !!}</td>
-              <td>{{ $issue->tasks_count }}</td>
+              <td class="td-min text-center">{!! $issue->tasks_count_display !!}</td>
+              <td class="td-min text-center">{!! $issue->sprints_count_display !!}</td>
               <td class="td-min">
                 <div class="btn-group">
                   <a href="{{ route('issues.edit', $issue) }}" class="btn btn-link">

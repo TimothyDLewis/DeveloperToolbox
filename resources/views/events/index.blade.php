@@ -14,7 +14,7 @@
             <th class="th-event-type text-center">Event Type</th>
             <th>Recurrence</th>
             <th class="th-affects-productivity text-center">Affects Productivity</th>
-            <th>Occurences</th>
+            <th class="th-estimate-options text-center">Occurences</th>
             <th class="th-min text-center">Actions</th>
           </tr>
         </thead>
@@ -32,7 +32,7 @@
               <td  class="td-affects-productivity text-center">
                 <i class="fa-solid fa-{{ $event->affects_productivity ? 'circle-check' : 'circle-xmark text-secondary' }}"></i>
               </td>
-              <td>{{ $event->occurences_count }}</td>
+              <td class="td-min text-center">{!! $event->occurences_count_display !!}</td>
               <td class="td-min text-center">
                 <div class="btn-group">
                   @if($event->canEdit())

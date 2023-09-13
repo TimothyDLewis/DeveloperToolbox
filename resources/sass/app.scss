@@ -15,12 +15,22 @@ $fa-font-path: '~fontawesome/webfonts';
   width: 4.5rem;
 }
 
+#estimates {
+  .th-estimate-options,
+  .td-estimate-options {
+    min-width: 150px;
+    width: 1%;
+  }
+}
+
 #events,
 #eventTypes,
 #occurences,
+#sprints,
 #tasks,
 #nav-event-type-events-table,
 #nav-event-occurences-table,
+#nav-issue-sprints-table,
 #nav-issue-tasks-table {
   .td-affects-productivity,
   .th-affects-productivity {
@@ -66,23 +76,28 @@ $fa-font-path: '~fontawesome/webfonts';
   }
 
   .th-start-datetime,
-  .th-end-datetime {
+  .th-end-datetime,
+  .th-start-date,
+  .th-end-date {
     min-width: 150px;
     width: 1%;
   }
 
   .td-start-datetime,
-  .td-end-datetime {
+  .td-end-datetime,
+  .td-start-date,
+  .td-end-date {
     min-width: 320px;
     width: 1%;
   }
 }
 
 #issues,
-#nav-project-issues-table {
+#nav-project-issues-table,
+#nav-sprint-issues-table {
   .td-estimate-option,
   .th-estimate-option {
-    min-width: 150px;
+    min-width: 145px;
     width: 1%;
   }
 
@@ -98,7 +113,7 @@ $fa-font-path: '~fontawesome/webfonts';
 
   .td-status-option,
   .th-status-option {
-    min-width: 150px;
+    min-width: 125px;
     width: 1%;
   }
 }
@@ -125,6 +140,14 @@ $fa-font-path: '~fontawesome/webfonts';
 #nav-project-resources-table {
   .td-url {
     min-width: 250px;
+    width: 1%;
+  }
+}
+
+#statuses {
+  .th-status-options,
+  .td-status-options {
+    min-width: 140px;
     width: 1%;
   }
 }

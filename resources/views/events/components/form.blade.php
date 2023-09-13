@@ -6,7 +6,7 @@
 <div class="row">
   {!! $forms->renderFormField('title') !!}
   {!! $forms->renderFormField('event_type_id', ['options' => $eventTypes]) !!}
-  {!! $forms->renderFormField('affects_productivity') !!}
+  {!! $forms->renderFormField('affects_productivity', ['default' => 0]) !!}
   {!! $forms->renderFormField('recurrence', ['containerClass' => $timeShown ? 'col-12 col-sm-6 col-md-4' : 'col-12', 'options' => $eventRecurrences, 'derivativeKey' => 'recurrence_days_enabled']) !!}
   {!! $forms->renderFormField('recurrence_start_time', ['containerClass' => 'col-12 col-sm-6 col-md-4' . ($timeShown ? '' : ' hidden')]) !!}
   {!! $forms->renderFormField('recurrence_end_time', ['containerClass' => 'col-12 col-sm-6 col-md-4' . ($timeShown ? '' : ' hidden')]) !!}

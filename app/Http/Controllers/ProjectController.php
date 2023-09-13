@@ -48,7 +48,7 @@ class ProjectController extends Controller {
   }
 
   public function show(Project $project): View {
-    $project->load(['estimate', 'status']);
+    $project->load(['estimate', 'status'])->loadCount(['issues', 'resources']);
 
     return view('projects.show', $this->withBreadcrumbs(
       path: 'show',

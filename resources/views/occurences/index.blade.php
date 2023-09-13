@@ -39,7 +39,7 @@
                 <i class="fa-solid fa-{{ $occurence->all_day ? 'circle-check' : 'circle-xmark text-secondary' }}"></i>
               </td>
               @if($occurence->all_day)
-                <td class="td-all-day-datetime" colspan="2">{!! $occurence->start_date_display !!}</td>
+                <td class="td-all-day-datetime" colspan="2">{!! $occurence->start_date_time_as_date_display !!}</td>
               @else
                 <td class="td-start-datetime">{!! $occurence->start_date_time_display !!}</td>
                 <td class="td-end-datetime">{!! $occurence->end_date_time_display !!}</td>

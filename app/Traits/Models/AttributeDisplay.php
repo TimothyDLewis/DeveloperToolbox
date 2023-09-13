@@ -50,6 +50,14 @@ trait AttributeDisplay {
   public function endDateDisplay(): Attribute {
     return Attribute::make(
       get: function (): string {
+        return $this->dateComponentDisplay('end_date');
+      }
+    );
+  }
+
+  public function endDateAsDateTimeDisplay(): Attribute {
+    return Attribute::make(
+      get: function (): string {
         return $this->dateComponentDisplay('end_datetime');
       }
     );
@@ -67,6 +75,22 @@ trait AttributeDisplay {
     return Attribute::make(
       get: function (): string {
         return $this->relatedModelDisplay('estimate', 'estimates.show', 'title');
+      }
+    );
+  }
+
+  public function estimateOptionsCountDisplay(): Attribute {
+    return Attribute::make(
+      get: function (): string {
+        return $this->countDisplay('estimate_options_count');
+      }
+    );
+  }
+
+  public function eventsCountDisplay(): Attribute {
+    return Attribute::make(
+      get: function (): string {
+        return $this->countDisplay('events_count');
       }
     );
   }
@@ -95,6 +119,14 @@ trait AttributeDisplay {
     );
   }
 
+  public function issuesCountDisplay(): Attribute {
+    return Attribute::make(
+      get: function (): string {
+        return $this->countDisplay('issues_count');
+      }
+    );
+  }
+
   public function labelDisplay(): Attribute {
     return Attribute::make(
       get: function (): string {
@@ -115,6 +147,22 @@ trait AttributeDisplay {
     return Attribute::make(
       get: function (): string {
         return '<span class="badge ms-1" style="color: '. $this->text_color .'; background-color: ' . $this->background_color . ';">' . strtoupper($this->title) . '</span>';
+      }
+    );
+  }
+
+  public function occurencesCountDisplay(): Attribute {
+    return Attribute::make(
+      get: function (): string {
+        return $this->countDisplay('occurences_count');
+      }
+    );
+  }
+
+  public function projectsCountDisplay(): Attribute {
+    return Attribute::make(
+      get: function (): string {
+        return $this->countDisplay('projects_count');
       }
     );
   }
@@ -169,6 +217,14 @@ trait AttributeDisplay {
     );
   }
 
+  public function resourcesCountDisplay(): Attribute {
+    return Attribute::make(
+      get: function (): string {
+        return $this->countDisplay('resources_count');
+      }
+    );
+  }
+
   public function sourceCodeManagementUrlDisplay(): Attribute {
     return Attribute::make(
       get: function(): string {
@@ -177,10 +233,26 @@ trait AttributeDisplay {
     );
   }
 
-  public function startDateDisplay(): Attribute {
+  public function sprintsCountDisplay(): Attribute {
+    return Attribute::make(
+      get: function (): string {
+        return $this->countDisplay('sprints_count');
+      }
+    );
+  }
+
+  public function startDateTimeAsDateDisplay(): Attribute {
     return Attribute::make(
       get: function (): string {
         return $this->dateComponentDisplay('start_datetime');
+      }
+    );
+  }
+
+  public function startDateDisplay(): Attribute {
+    return Attribute::make(
+      get: function (): string {
+        return $this->dateComponentDisplay('start_date');
       }
     );
   }
@@ -197,6 +269,22 @@ trait AttributeDisplay {
     return Attribute::make(
       get: function (): string {
         return $this->relatedModelDisplay('status', 'statuses.show', 'title');
+      }
+    );
+  }
+
+  public function statusOptionsCountDisplay(): Attribute {
+    return Attribute::make(
+      get: function (): string {
+        return $this->countDisplay('status_options_count');
+      }
+    );
+  }
+
+  public function tasksCountDisplay(): Attribute {
+    return Attribute::make(
+      get: function (): string {
+        return $this->countDisplay('tasks_count');
       }
     );
   }
@@ -236,6 +324,10 @@ trait AttributeDisplay {
 
   private function hexComponentDisplay(string $field): string {
     return view('components.display.hexcode', ['model' => $this, 'field' => $field])->render();
+  }
+
+  private function countDisplay(string $field): string {
+    return '<span class="badge rounded-pill text-bg-secondary">' . $this->{$field} . '</span>';
   }
 
   private function dateComponentDisplay(string $field): string {

@@ -3,8 +3,8 @@
     <div class="card">
       <div class="card-header">
         <div class="nav nav-tabs nav-flush" role="tablist">
-          <button class="nav-link active" id="nav-status-status-options-tab" data-bs-toggle="tab" data-bs-target="#nav-status-status-options" type="button" tabindex="-1">Status Options ({{ $status->statusOptions->count() }})</button>
-          <button class="nav-link" id="nav-status-projects-tab" data-bs-toggle="tab" data-bs-target="#nav-status-projects" type="button" tabindex="-1">Projects ({{ $status->projects->count() }})</button>
+          <button class="nav-link active" id="nav-status-status-options-tab" data-bs-toggle="tab" data-bs-target="#nav-status-status-options" type="button" tabindex="-1">Status Options {!! $status->status_options_count_display !!}</button>
+          <button class="nav-link" id="nav-status-projects-tab" data-bs-toggle="tab" data-bs-target="#nav-status-projects" type="button" tabindex="-1">Projects {!! $status->projects_count_display !!}</button>
         </div>
       </div>
       <div class="card-body mb-0">
@@ -77,7 +77,7 @@
                     </td>
                     <td>{{ $project->code }}</td>
                     <td class="td-source-code-management-url">{!! $project->source_code_management_url_display !!}</td>
-                    <td>{!! $project->estimate_display !!}</td>
+                    <td>{!! $project->status_display !!}</td>
                     <td>
                       {{ $project->status->title }}
                     </td>
@@ -86,9 +86,11 @@
                         <a href="{{ route('projects.edit', $project) }}" class="btn btn-link">
                           <i class="text-primary fa-regular fa-pen"></i>
                         </a>
-                        <a href="#" class="btn btn-link">
-                          <i class="text-danger fa-regular fa-trash"></i>
-                        </a>
+                        <form action="{{ route('projects.destroy', $project) }}" method="POST">
+                          @method('DELETE')
+                          @csrf
+                          <button type="button" class="btn btn-link text-danger delete-project"><i class="text-danger fa-regular fa-trash"></i></button>
+                        </form>
                       </div>
                     </td>
                   </tr>
