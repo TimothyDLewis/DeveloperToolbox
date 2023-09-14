@@ -22,10 +22,10 @@ class FormHelper {
     return $this->model->formFields[$fieldKey];
   }
 
-  public function renderRepeatableFormHeader(string $fieldKey, string $class = '') {
+  public function renderRepeatableFormHeader(string $fieldKey, string $class = '', int $colspan = 1) {
     $field = $this->getField($fieldKey);
 
-    return "<th class=\"{$class}\">{$field['label']}</th>";
+    return "<th colspan=\"{$colspan}\" class=\"{$class}\">{$field['label']}</th>";
   }
 
   public function renderRepeatableFormField(string $fieldKey, string $prefix, int|string $index, array $overrides = []): View {
@@ -71,6 +71,8 @@ class FormHelper {
     ];
 
     switch ($viewData['type']) {
+      case 'association':
+        return view('components.forms.association', $viewData);
       case 'custom':
         return view("components.forms.custom.{$field['custom_editor']}", $viewData);
       case 'date':

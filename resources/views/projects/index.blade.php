@@ -27,7 +27,7 @@
               <td>
                 <a href="{{ route('projects.show', $project) }}">{{ $project->title }}</a>
               </td>
-              <td class="td-min text-center">{{ $project->code }}</td>
+              <td class="td-min text-center">{!! $project->code_display !!}</td>
               <td class="td-source-code-management-url">{!! $project->source_code_management_url_display !!}</td>
               <td>{!! $project->estimate_display !!}</td>
               <td>{!! $project->status_display !!}</td>

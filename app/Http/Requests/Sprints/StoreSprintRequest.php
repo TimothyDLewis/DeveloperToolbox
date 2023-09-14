@@ -21,6 +21,7 @@ class StoreSprintRequest extends FormRequest {
   public function rules(): array {
     return [
       'description' => ['nullable'],
+      'issues' => ['array'],
       'end_date' => ['required', new CarbonChecks($this->end_date, $this->start_date, 'after', 'End', 'Start', true), new DoesntOverlap(Sprint::class)],
       'slug' => ['required', 'unique:sprints,slug'],
       'start_date' => ['required', new CarbonChecks($this->start_date, $this->end_date, 'before', 'Start', 'End', true), new DoesntOverlap(Sprint::class)],
@@ -31,6 +32,7 @@ class StoreSprintRequest extends FormRequest {
   public function attributes(): array {
     return [
       'description' => 'Description',
+      'issues' => 'Issues',
       'end_date' => 'End',
       'slug' => 'Slug',
       'start_date' => 'Start',

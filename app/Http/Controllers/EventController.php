@@ -18,7 +18,7 @@ class EventController extends Controller {
   use Breadcrumbs;
 
   public function index(): View {
-    return view('events.index', $this->withBreadcrumbs(includes: ['events' => Event::with(['eventType'])->withCount(['occurences'])->orderBy('id', 'DESC')->paginate(30)]));
+    return view('events.index', $this->withBreadcrumbs(includes: ['events' => Event::with(['eventType'])->withCount(['occurrences'])->orderBy('id', 'DESC')->paginate(30)]));
   }
 
   public function create(): View {
@@ -51,7 +51,7 @@ class EventController extends Controller {
   }
 
   public function show(Event $event): View {
-    $event->load(['occurences'])->loadCount(['occurences']);
+    $event->load(['occurrences'])->loadCount(['occurrences']);
 
     return view('events.show', $this->withBreadcrumbs(
       path: 'show',

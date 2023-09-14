@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Requests\Occurences;
+namespace App\Http\Requests\Occurrences;
 
 use App\Rules\CarbonChecks;
 use App\Traits\SessionFlash;
@@ -8,7 +8,7 @@ use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Contracts\Validation\Validator;
 use Illuminate\Validation\ValidationException;
 
-class UpdateOccurenceRequest extends FormRequest {
+class UpdateOccurrenceRequest extends FormRequest {
   use SessionFlash;
 
   protected function prepareForValidation() {
@@ -44,7 +44,7 @@ class UpdateOccurenceRequest extends FormRequest {
   }
 
   protected function failedValidation(Validator $validator): void {
-    $this->sessionDanger('<strong>Unable to Update Occurence</strong><br/><br/>Please check the errors below.');
+    $this->sessionDanger('<strong>Unable to Update Occurrence</strong><br/><br/>Please check the errors below.');
 
     $this->merge(['all_day' => isset($this->all_day) ? (int)$this->all_day : 0]);
 

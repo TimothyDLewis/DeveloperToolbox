@@ -10,6 +10,7 @@ use App\Traits\Models\ForSelect;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Log;
 use App\Traits\Models\AttributeDisplay;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Database\Eloquent\Relations\HasMany;
@@ -81,7 +82,7 @@ class Event extends Model {
     });
   }
 
-  public function generateYearlyOccurence(?int $year = null, ?Sprint $sprint = null, bool $save = false): ?Occurence {
+  public function generateYearlyOccurrence(?int $year = null, ?Sprint $sprint = null, bool $save = false): ?Occurrence {
     if (!$this->yearly_eval_logic) {
       return null;
     }
@@ -91,42 +92,42 @@ class Event extends Model {
         $year = (int)date('Y');
       }
 
-      $occurence = Carbon::parse(eval($this->yearly_eval_logic));
+      $occurrence = Carbon::parse(eval($this->yearly_eval_logic));
 
-      if ($occurence->isSaturday()) {
-        $occurence = $occurence->subDays(1);
-      } elseif ($occurence->isSunday()) {
-        $occurence = $occurence->addDays(1);
+      if ($occurrence->isSaturday()) {
+        $occurrence = $occurrence->subDays(1);
+      } elseif ($occurrence->isSunday()) {
+        $occurrence = $occurrence->addDays(1);
       }
 
       // Shift Boxing Day if Christmas is on Friday (move to Monday) or Sunday (move to Tuesday)
       if ($this->slug == 'boxing-day') {
         $christmas = Carbon::parse(eval(Event::where('slug', 'christmas')->first()->yearly_eval_logic));
         if ($christmas->isFriday()) {
-          $occurence = $occurence->addDays(3);
+          $occurrence = $occurrence->addDays(3);
         } elseif ($christmas->isSunday()) {
-          $occurence = $occurence->addDays(1);
+          $occurrence = $occurrence->addDays(1);
         }
       }
 
-      $occurenceDateTime = $occurence->startOfDay();
+      $occurrenceDateTime = $occurrence->startOfDay();
 
-      $occurenceData = [
+      $occurrenceData = [
         'all_day' => true,
-        'end_datetime' => $occurenceDateTime,
+        'end_datetime' => $occurrenceDateTime,
         'event_id' => $this->id,
-        'start_datetime' => $occurenceDateTime
+        'start_datetime' => $occurrenceDateTime
       ];
 
       if ($sprint) {
-        $occurenceData['sprint_id'] = $sprint->id;
+        $occurrenceData['sprint_id'] = $sprint->id;
       }
 
       if ($save) {
-        return Occurence::create($occurenceData);
+        return Occurrence::create($occurrenceData);
       }
 
-      return new Occurence($occurenceData);
+      return new Occurrence($occurrenceData);
     } catch (Exception $ex) {
       Log::error($ex);
 
@@ -138,11 +139,15 @@ class Event extends Model {
     return (bool)!$this->yearly_eval_logic;
   }
 
+  public function scopeRecurs(Builder $query): Builder {
+    return $query->where('recurrence', '!=', EventRecurrence::NoRecurrence->value);
+  }
+
   public function eventType(): BelongsTo {
     return $this->belongsTo(EventType::class);
   }
 
-  public function occurences(): HasMany {
-    return $this->hasMany(Occurence::class);
+  public function occurrences(): HasMany {
+    return $this->hasMany(Occurrence::class);
   }
 }

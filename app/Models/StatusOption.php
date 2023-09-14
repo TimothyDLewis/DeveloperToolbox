@@ -25,6 +25,12 @@ class StatusOption extends Model {
       'label' => 'Background Color',
       'type' => 'custom'
     ],
+    'completed_status_option' => [
+      'container-class' => 'col-12',
+      'custom_editor' => 'boolean',
+      'label' => 'Completed',
+      'type' => 'custom'
+    ],
     'description' => [
       'container-class' => 'col-12',
       'label' => 'Description',

@@ -1,4 +1,4 @@
-<div class="input-group">
+<div class="input-group flex-nowrap">
   <p class="card card-body card-condensed d-inline-block">
     <code class="{{ $theme->themeVar('text-light', 'text-dark') }}">{{ strtoupper($model->{$field}) }};</code>
   </p>

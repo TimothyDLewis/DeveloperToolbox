@@ -82,7 +82,7 @@ class DefaultSeeder extends Seeder {
         'affects_productivity' => $holiday->affects_productivity,
         'event_type_id' => $holiday->id,
         'recurrence' => EventRecurrence::NoRecurrence->value
-      ], $eventData))->generateYearlyOccurence(save: true);
+      ], $eventData))->generateYearlyOccurrence(save: true);
     }
   }
 }

@@ -32,6 +32,7 @@ return new class extends Migration {
       $table->text('description')->nullable();
       $table->integer('sort_order');
       $table->boolean('initial_status_option')->default(false);
+      $table->boolean('completed_status_option')->default(false);
 
       $table->timestamps();
       $table->softDeletes();

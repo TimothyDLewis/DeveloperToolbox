@@ -10,10 +10,10 @@
         <thead>
           <tr>
             <th class="th-min text-center">ID</th>
-            <th>Title</th>
             <th class="th-min text-center">Code</th>
-            <th class="th-external-url">External URL</th>
+            <th>Title</th>
             <th>Project</th>
+            <th class="th-external-url">External URL</th>
             <th class="th-estimate-option text-center">Estimate Option</th>
             <th class="th-status-option text-center">Status Option</th>
             <th class="th-min text-center">Tasks</th>
@@ -25,12 +25,12 @@
           @forelse($issues as $issue)
             <tr>
               <td class="td-min text-center">{{ $issue->id }}</td>
+              <td class="td-min text-center">{!! $issue->code_display !!}</td>
               <td>
                 <a href="{{ route('issues.show', $issue) }}">{{ $issue->title }}</a>
               </td>
-              <td class="td-min text-center">{{ $issue->code }}</td>
-              <td class="td-external-url">{!! $issue->external_url_display !!}</td>
               <td>{!! $issue->project_display !!}</td>
+              <td class="td-external-url">{!! $issue->external_url_display !!}</td>
               <td class="td-estimate-option text-center">{!! $issue->estimateOption->label_display_alt !!}</td>
               <td class="td-status-option text-center">{!! $issue->statusOption->label_display !!}</td>
               <td class="td-min text-center">{!! $issue->tasks_count_display !!}</td>

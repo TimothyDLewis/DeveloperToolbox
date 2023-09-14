@@ -3,9 +3,11 @@
 namespace App\Http\Controllers;
 
 use Exception;
+use App\Models\Issue;
 use App\Models\Sprint;
 use App\Models\Project;
 use Illuminate\Support\Collection;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\RedirectResponse;
@@ -17,7 +19,7 @@ class SprintController extends Controller {
   use Breadcrumbs;
 
   public function index(): View {
-    return view('sprints.index', $this->withBreadcrumbs(includes: ['sprints' => Sprint::withCount(['issues', 'occurences'])->orderBy('id')->paginate(30)]));
+    return view('sprints.index', $this->withBreadcrumbs(includes: ['sprints' => Sprint::withCount(['issues', 'occurrences'])->orderBy('id')->paginate(30)]));
   }
 
   public function create(): View {
@@ -35,6 +37,7 @@ class SprintController extends Controller {
       path: 'create',
       includes: [
         'estimateOptions' => $estimateOptions,
+        'issues' => Issue::orderBy('created_at', 'DESC')->get(),
         'projects' => Project::orderBy('id')->forSelect()->get(),
         'sprint' => new Sprint(),
         'statusOptions' => $statusOptions
@@ -44,7 +47,13 @@ class SprintController extends Controller {
 
   public function store(StoreSprintRequest $request): RedirectResponse {
     try {
-      Sprint::create($request->validated());
+      DB::transaction(function () use ($request) {
+        $sprint = Sprint::create(collect($request->validated())->except('issues')->toArray());
+
+        if ($request->has('issues')) {
+          $sprint->issues()->sync($request->validated()['issues']);
+        }
+      });
 
       $this->sessionSuccess('<strong>Sprint Created</strong>');
 
@@ -58,7 +67,7 @@ class SprintController extends Controller {
   }
 
   public function show(Sprint $sprint): View {
-    $sprint->load(['issues'])->loadCount(['issues']);
+    $sprint->load(['issues'])->loadCount(['issues', 'occurrences']);
 
     return view('sprints.show', $this->withBreadcrumbs(
       path: 'show',

@@ -25,13 +25,14 @@ $fa-font-path: '~fontawesome/webfonts';
 
 #events,
 #eventTypes,
-#occurences,
+#occurrences,
 #sprints,
 #tasks,
 #nav-event-type-events-table,
-#nav-event-occurences-table,
+#nav-event-occurrences-table,
 #nav-issue-sprints-table,
-#nav-issue-tasks-table {
+#nav-issue-tasks-table,
+#nav-sprint-occurrences-table {
   .td-affects-productivity,
   .th-affects-productivity {
     min-width: 190px;
@@ -94,7 +95,8 @@ $fa-font-path: '~fontawesome/webfonts';
 
 #issues,
 #nav-project-issues-table,
-#nav-sprint-issues-table {
+#nav-sprint-issues-table,
+#sprintIssues {
   .td-estimate-option,
   .th-estimate-option {
     min-width: 145px;
@@ -102,12 +104,12 @@ $fa-font-path: '~fontawesome/webfonts';
   }
 
   .td-external-url {
-    min-width: 585px;
+    min-width: 250px;
     width: 1%;
   }
 
   .th-external-url {
-    min-width: 120px;
+    min-width: 250px;
     width: 1%;
   }
 

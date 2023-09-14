@@ -14,7 +14,7 @@
               <thead>
                 <tr>
                   <th class="th-min text-center">ID</th>
-                  <th class="th-min text-center">Label</th>
+                  <th>Label</th>
                   <th>Value</th>
                 </tr>
               </thead>
@@ -22,10 +22,10 @@
                 @foreach($estimate->estimateOptions as $estimateOption)
                   <tr>
                     <td class="td-min text-center">{{ $estimateOption->id }}</td>
-                    <td class="td-min text-center">
+                    <td>
                       <h6 class="mb-0">{!! $estimateOption->label_display_alt !!}</h6>
                     </td>
-                    <td>{{ $estimateOption->value }}</td>
+                    <td>{!! $estimateOption->value_display !!}</td>
                   </tr>
                 @endforeach
               </tbody>
@@ -51,7 +51,7 @@
                     <td>
                       <a href="{{ route('projects.show', $project) }}">{{ $project->title }}</a>
                     </td>
-                    <td>{{ $project->code }}</td>
+                    <td class="td-min text-center">{!! $project->code_display !!}</td>
                     <td class="td-source-code-management-url">{!! $project->source_code_management_url_display !!}</td>
                     <td>{{ $project->estimate->title }}</td>
                     <td>{!! $project->status_display !!}</td>

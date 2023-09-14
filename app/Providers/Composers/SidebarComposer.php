@@ -60,10 +60,10 @@ class SidebarComposer {
             'label' => 'Events',
           ],
           (object)[
-            'href' => route('occurences.index'),
+            'href' => route('occurrences.index'),
             'icon' => '<i class="fa-regular fa-calendar-days me-2"></i>',
-            'isActive' => $isOccurencesActive = request()->is("{$this->sidebarPrefix}/occurences") || request()->is("{$this->sidebarPrefix}/occurences/*"),
-            'label' => 'Occurences',
+            'isActive' => $isOccurrencesActive = request()->is("{$this->sidebarPrefix}/occurrences") || request()->is("{$this->sidebarPrefix}/occurrences/*"),
+            'label' => 'Occurrences',
           ],
           (object)[
             'href' => route('tasks.index'),
@@ -74,7 +74,7 @@ class SidebarComposer {
         ],
         'dropdownId' => 'sidebar-events-dropdown',
         'isDropdown' => true,
-        'isOpen' => $isEventTypesActive || $isEventsActive || $isOccurencesActive || $isTasksActive,
+        'isOpen' => $isEventTypesActive || $isEventsActive || $isOccurrencesActive || $isTasksActive,
         'label' => 'Scheduler',
       ],
       (object)[

@@ -18,7 +18,8 @@
                   <th>Description</th>
                   <th>Text Color</th>
                   <th>Background Color</th>
-                  <th>Initial</th>
+                  <th class="th-min text-center">Initial</th>
+                  <th class="th-min text-center">Completed</th>
                   <th class="th-min text-center">Previous</th>
                   <th class="th-min text-center">Next</th>
                 </tr>
@@ -35,6 +36,9 @@
                     <td class="td-color-display">{!! $statusOption->background_color_display !!}</td>
                     <td  class="td-min text-center">
                       <i class="fa-solid fa-{{ $statusOption->initial_status_option ? 'circle-check' : 'circle-xmark text-secondary' }}"></i>
+                    </td>
+                    <td  class="td-min text-center">
+                      <i class="fa-solid fa-{{ $statusOption->completed_status_option ? 'circle-check' : 'circle-xmark text-secondary' }}"></i>
                     </td>
                     <td class="td-min text-center">
                       @if($statusOption->previousStatusOption)
@@ -75,7 +79,7 @@
                     <td>
                       <a href="{{ route('projects.show', $project) }}">{{ $project->title }}</a>
                     </td>
-                    <td>{{ $project->code }}</td>
+                    <td class="td-min text-center">{!! $project->code_display !!}</td>
                     <td class="td-source-code-management-url">{!! $project->source_code_management_url_display !!}</td>
                     <td>{!! $project->status_display !!}</td>
                     <td>

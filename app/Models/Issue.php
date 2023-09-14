@@ -5,6 +5,7 @@ namespace App\Models;
 use App\Traits\Models\ForSelect;
 use App\Traits\Models\AttributeDisplay;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
@@ -57,6 +58,18 @@ class Issue extends Model {
       'type' => 'text'
     ]
   ];
+
+  public function scopeComplete(Builder $query): Builder {
+    return $query->whereHas('statusOption', function (Builder $subQuery): Builder {
+      return $subQuery->where('completed_status_option', true);
+    });
+  }
+
+  public function scopeIncomplete(Builder $query): Builder {
+    return $query->whereHas('statusOption', function (Builder $subQuery): Builder {
+      return $subQuery->where('completed_status_option', false);
+    });
+  }
 
   public function estimateOption(): BelongsTo {
     return $this->belongsTo(EstimateOption::class);

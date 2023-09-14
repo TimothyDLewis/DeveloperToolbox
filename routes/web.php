@@ -10,7 +10,7 @@ use App\Http\Controllers\ProjectController;
 use App\Http\Controllers\EstimateController;
 use App\Http\Controllers\ResourceController;
 use App\Http\Controllers\EventTypeController;
-use App\Http\Controllers\OccurenceController;
+use App\Http\Controllers\OccurrenceController;
 
 /*
 |--------------------------------------------------------------------------
@@ -56,7 +56,7 @@ Route::group(['prefix' => 'organization'], function () {
   Route::resource('event-types', EventTypeController::class);
   Route::resource('events', EventController::class);
   Route::resource('issues', IssueController::class);
-  Route::resource('occurences', OccurenceController::class);
+  Route::resource('occurrences', OccurrenceController::class);
 
   Route::resource('projects', ProjectController::class);
   Route::get('/projects/{project}/select-options/{key?}', [ProjectController::class, 'getSelectOptions'])->name('projects.select-options');

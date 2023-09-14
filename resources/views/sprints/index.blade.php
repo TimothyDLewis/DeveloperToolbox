@@ -14,6 +14,7 @@
             <th class="th-start-date text-center">Start</th>
             <th class="th-end-date text-center">End</th>
             <th class="th-min text-center">Issues</th>
+            <th class="th-min text-center">Occurrences</th>
             <th class="th-min text-center">Actions</th>
           </tr>
         </thead>
@@ -27,6 +28,7 @@
               <td class="td-start-date">{!! $sprint->start_date_display !!}</td>
               <td class="td-end-date">{!! $sprint->end_date_display !!}</td>
               <td class="td-min text-center">{!! $sprint->issues_count_display !!}</td>
+              <td class="td-min text-center">{!! $sprint->occurrences_count_display !!}</td>
               <td class="td-min">
                 <div class="btn-group">
                   <a href="{{ route('sprints.edit', $sprint) }}" class="btn btn-link">

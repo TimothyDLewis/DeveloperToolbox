@@ -14,8 +14,8 @@
           <p class="card card-body card-condensed">{{ $issue->title }}</p>
         </div>
         <div class="col-12 col-sm-6 mb-3">
-          <label class="form-label">Code</label>
-          <p class="card card-body card-condensed">{{ $issue->code }}</p>
+          <label class="form-label d-block">Code</label>
+          {!! $issue->code_display !!}
         </div>
         <div class="col-12 col-sm-6 mb-3">
           <label class="form-label">External URL</label>

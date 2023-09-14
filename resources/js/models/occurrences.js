@@ -1,10 +1,10 @@
-$('#occurenceForm #all_day').on('change', function () {
+$('#occurrenceForm #all_day').on('change', function () {
   const container = $(this).closest('.col-12');
 
-  const endInput = $('#occurenceForm #end_datetime');
+  const endInput = $('#occurrenceForm #end_datetime');
   const endContainer = endInput.closest('.col-12');
 
-  const startInput = $('#occurenceForm #start_datetime');
+  const startInput = $('#occurrenceForm #start_datetime');
   const startContainer = startInput.closest('.col-12');
   const startValue = startInput.val().substring(0, 10);
 
@@ -32,8 +32,8 @@ $('#occurenceForm #all_day').on('change', function () {
   }
 });
 
-$('.delete-occurence').on('click', function() {
-  if (confirm('Are you sure you want to delete this Occurence?')) {
+$('.delete-occurrence').on('click', function() {
+  if (confirm('Are you sure you want to delete this Occurrence?')) {
     return $(this).closest('form').trigger('submit');
   }
 });

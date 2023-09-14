@@ -47,7 +47,7 @@ return new class extends Migration {
       $table->timestamps();
     });
 
-    Schema::create('occurences', function (Blueprint $table) use ($workDayDuration) {
+    Schema::create('occurrences', function (Blueprint $table) use ($workDayDuration) {
       $table->id();
       $table->foreignIdFor(Event::class)->constrained();
       $table->foreignIdFor(Sprint::class)->nullable()->constrained();
@@ -66,7 +66,7 @@ return new class extends Migration {
   * Reverse the migrations.
   */
   public function down(): void {
-    Schema::dropIfExists('occurences');
+    Schema::dropIfExists('occurrences');
     Schema::dropIfExists('events');
     Schema::dropIfExists('event_types');
   }

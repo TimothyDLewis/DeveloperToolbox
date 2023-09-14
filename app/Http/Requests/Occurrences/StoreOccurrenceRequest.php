@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Requests\Occurences;
+namespace App\Http\Requests\Occurrences;
 
 use App\Rules\CarbonChecks;
 use App\Traits\SessionFlash;
@@ -8,7 +8,7 @@ use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Contracts\Validation\Validator;
 use Illuminate\Validation\ValidationException;
 
-class StoreOccurenceRequest extends FormRequest {
+class StoreOccurrenceRequest extends FormRequest {
   use SessionFlash;
 
   protected function prepareForValidation() {
@@ -44,7 +44,7 @@ class StoreOccurenceRequest extends FormRequest {
   }
 
   protected function failedValidation(Validator $validator): void {
-    $this->sessionDanger('<strong>Unable to Create Occurence</strong><br/><br/>Please check the errors below.');
+    $this->sessionDanger('<strong>Unable to Create Occurrence</strong><br/><br/>Please check the errors below.');
 
     throw (new ValidationException($validator))
     ->errorBag($this->errorBag)

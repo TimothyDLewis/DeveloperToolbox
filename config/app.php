@@ -212,6 +212,7 @@ return [
     'Estimate' => App\Models\Estimate::class,
     'EstimateOption' => App\Models\EstimateOption::class,
     'EventRecurrence' => App\Enums\EventRecurrence::class,
+    'Issue' => App\Models\Issue::class,
     'Project' => App\Models\Project::class,
     'ReflectionClass' => ReflectionClass::class,
     'Status' => App\Models\Status::class,

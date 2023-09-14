@@ -2,7 +2,7 @@
   @if(!$repeatable)
     <label class="form-label">{{ $field['label'] }}</label>
   @endif
-  <div class="input-group">
+  <div class="input-group flex-nowrap">
     <input id="{{ $id }}" class="colorInput form-control form-control-color full-width {{ $errors->has($errorKey) || $errors->has($derivativeKey) ? 'is-invalid' : '' }}" type="color" name="{{ $name }}" value="{{ old($name, $model->{$fieldKey} ?? $default) }}" data-default-value="{{ $default }}" />
     <button class="swatchButton btn {{ $theme->themeVar('btn-outline-light', 'btn-outline-dark') }}" type="button" data-bs-toggle="dropdown">
       <i class="fa-solid fa-swatchbook"></i>

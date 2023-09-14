@@ -23,6 +23,14 @@ trait AttributeDisplay {
     );
   }
 
+  public function codeDisplay(): Attribute {
+    return Attribute::make(
+      get: function (): string {
+        return '<span class="badge rounded-pill text-bg-primary">' . $this->code . '</span>';
+      }
+    );
+  }
+
   public function createdAtDisplay(): Attribute {
     return Attribute::make(
       get: function (): string {
@@ -42,7 +50,7 @@ trait AttributeDisplay {
   public function durationDisplay(): Attribute {
     return Attribute::make(
       get: function (): string {
-        return '<span class="badge rounded-pill text-bg-primary ms-1">' . $this->duration . '</span>';
+        return '<span class="badge rounded-pill text-bg-primary">' . $this->duration . '</span>';
       }
     );
   }
@@ -138,7 +146,7 @@ trait AttributeDisplay {
   public function labelDisplayAlt(): Attribute {
     return Attribute::make(
       get: function (): string {
-        return '<span class="badge rounded-pill text-bg-primary ms-1">' . strtoupper($this->label) . '</span>';
+        return '<span class="badge rounded-pill text-bg-primary">' . strtoupper($this->label) . '</span>';
       }
     );
   }
@@ -146,15 +154,15 @@ trait AttributeDisplay {
   public function labelTitleDisplay(): Attribute {
     return Attribute::make(
       get: function (): string {
-        return '<span class="badge ms-1" style="color: '. $this->text_color .'; background-color: ' . $this->background_color . ';">' . strtoupper($this->title) . '</span>';
+        return '<span class="badge" style="color: '. $this->text_color .'; background-color: ' . $this->background_color . ';">' . strtoupper($this->title) . '</span>';
       }
     );
   }
 
-  public function occurencesCountDisplay(): Attribute {
+  public function occurrencesCountDisplay(): Attribute {
     return Attribute::make(
       get: function (): string {
-        return $this->countDisplay('occurences_count');
+        return $this->countDisplay('occurrences_count');
       }
     );
   }
@@ -241,6 +249,14 @@ trait AttributeDisplay {
     );
   }
 
+  public function sprintDisplay(): Attribute {
+    return Attribute::make(
+      get: function (): string {
+        return $this->relatedModelDisplay('sprint', 'sprints.show', 'title');
+      }
+    );
+  }
+
   public function startDateTimeAsDateDisplay(): Attribute {
     return Attribute::make(
       get: function (): string {
@@ -309,6 +325,14 @@ trait AttributeDisplay {
     return Attribute::make(
       get: function(): string {
         return $this->urlComponentDisplay($this, 'url', 'title');
+      }
+    );
+  }
+
+  public function valueDisplay(): Attribute {
+    return Attribute::make(
+      get: function (): string {
+        return $this->countDisplay('value');
       }
     );
   }

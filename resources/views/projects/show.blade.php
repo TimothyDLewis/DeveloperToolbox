@@ -14,8 +14,8 @@
           <p class="card card-body card-condensed">{{ $project->title }}</p>
         </div>
         <div class="col-12 col-sm-6 mb-3">
-          <label class="form-label">Code</label>
-          <p class="card card-body card-condensed">{{ $project->code }}</p>
+          <label class="form-label d-block">Code</label>
+          {!! $project->code_display !!}
         </div>
         <div class="col-12 col-sm-6 mb-3">
           <label class="form-label">Source Code Management (SCM) URL</label>

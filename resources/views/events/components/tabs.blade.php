@@ -3,13 +3,13 @@
     <div class="card">
       <div class="card-header">
         <div class="nav nav-tabs nav-flush" role="tablist">
-          <button class="nav-link active" id="nav-event-estimate-occurences-tab" data-bs-toggle="tab" data-bs-target="#nav-event-estimate-occurences" type="button" tabindex="-1">Occurences {!! $event->occurences_count_display !!}</button>
+          <button class="nav-link active" id="nav-event-estimate-occurrences-tab" data-bs-toggle="tab" data-bs-target="#nav-event-estimate-occurrences" type="button" tabindex="-1">Occurrences {!! $event->occurrences_count_display !!}</button>
         </div>
       </div>
       <div class="card-body mb-0">
         <div class="tab-content" id="nav-tabContent">
-          <div class="tab-pane fade active show" id="nav-event-estimate-occurences" role="tabpanel" aria-labelledby="nav-event-estimate-occurences-tab">
-            <table id="nav-event-occurences-table" class="table table-bordered table-striped {{ $theme->themeVar('table-dark', 'table-light') }} table-vertical-center mb-0">
+          <div class="tab-pane fade active show" id="nav-event-estimate-occurrences" role="tabpanel" aria-labelledby="nav-event-estimate-occurrences-tab">
+            <table id="nav-event-occurrences-table" class="table table-bordered table-striped {{ $theme->themeVar('table-dark', 'table-light') }} table-vertical-center mb-0">
               <thead>
                 <tr>
                   <th class="th-min text-center">ID</th>
@@ -21,30 +21,30 @@
                 </tr>
               </thead>
               <tbody>
-                @forelse($event->occurences as $occurence)
+                @forelse($event->occurrences as $occurrence)
                   <tr>
                     <td class="td-min text-center">
-                      <a class="id-link" href="{{ route('occurences.show', $occurence) }}">{{ $occurence->id }}</a>
+                      <a class="id-link" href="{{ route('occurrences.show', $occurrence) }}">{{ $occurrence->id }}</a>
                     </td>
                     <td class="td-all-day text-center">
-                      <i class="fa-solid fa-{{ $occurence->all_day ? 'circle-check' : 'circle-xmark text-secondary' }}"></i>
+                      <i class="fa-solid fa-{{ $occurrence->all_day ? 'circle-check' : 'circle-xmark text-secondary' }}"></i>
                     </td>
-                    @if($occurence->all_day)
-                      <td class="td-all-day-datetime" colspan="2">{!! $occurence->start_date_time_as_date_display !!}</td>
+                    @if($occurrence->all_day)
+                      <td class="td-all-day-datetime" colspan="2">{!! $occurrence->start_date_time_as_date_display !!}</td>
                     @else
-                      <td class="td-start-datetime">{!! $occurence->start_date_time_display !!}</td>
-                      <td class="td-end-datetime">{!! $occurence->end_date_time_display !!}</td>
+                      <td class="td-start-datetime">{!! $occurrence->start_date_time_display !!}</td>
+                      <td class="td-end-datetime">{!! $occurrence->end_date_time_display !!}</td>
                     @endif
-                    <td class="td-duration text-center">{!! $occurence->duration_display !!}</td>
+                    <td class="td-duration text-center">{!! $occurrence->duration_display !!}</td>
                     <td class="td-min text-center">
                       <div class="btn-group">
-                        <a href="{{ route('occurences.edit', $occurence) }}" class="btn btn-link">
+                        <a href="{{ route('occurrences.edit', $occurrence) }}" class="btn btn-link">
                           <i class="text-primary fa-regular fa-pen"></i>
                         </a>
-                        <form action="{{ route('occurences.destroy', $occurence) }}" method="POST">
+                        <form action="{{ route('occurrences.destroy', $occurrence) }}" method="POST">
                           @method('DELETE')
                           @csrf
-                          <button type="button" class="btn btn-link text-danger delete-occurence"><i class="text-danger fa-regular fa-trash"></i></button>
+                          <button type="button" class="btn btn-link text-danger delete-occurrence"><i class="text-danger fa-regular fa-trash"></i></button>
                         </form>
                       </div>
                     </td>
@@ -52,7 +52,7 @@
                 @empty
                   <tr>
                     <td colspan="6">
-                      <i class="text-secondary">No Event Occurences...</i>
+                      <i class="text-secondary">No Event Occurrences...</i>
                     </td>
                   </tr>
                 @endforelse

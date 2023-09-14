@@ -8,9 +8,9 @@ use App\Classes\DateRange;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
-* @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Occurence>
+* @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Occurrence>
 */
-class OccurenceFactory extends Factory {
+class OccurrenceFactory extends Factory {
   protected ?Carbon $startDateTime = null;
   protected ?Carbon $endDateTime = null;
 

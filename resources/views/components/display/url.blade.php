@@ -1,5 +1,5 @@
 @if($model->{$urlField})
-  <div class="input-group">
+  <div class="input-group flex-nowrap">
     <p class="card card-body card-condensed">
       <a href="{{ $model->{$urlField} }}" target="_blank">{{ $model->{$displayField} }}</a>
     </p>
