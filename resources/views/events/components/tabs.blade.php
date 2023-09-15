@@ -13,6 +13,7 @@
               <thead>
                 <tr>
                   <th class="th-min text-center">ID</th>
+                  <th>Sprint</th>
                   <th class="th-all-day text-center">All Day</th>
                   <th class="th-start-datetime text-center">Start</th>
                   <th class="th-end-datetime text-center">End</th>
@@ -25,6 +26,13 @@
                   <tr>
                     <td class="td-min text-center">
                       <a class="id-link" href="{{ route('occurrences.show', $occurrence) }}">{{ $occurrence->id }}</a>
+                    </td>
+                    <td>
+                      @if($occurrence->sprint)
+                        <a href="{{ route('sprints.show', $occurrence->sprint) }}">{{ $occurrence->sprint->title }}</a>
+                      @else
+                        <i class="text-secondary">None</i>
+                      @endif
                     </td>
                     <td class="td-all-day text-center">
                       <i class="fa-solid fa-{{ $occurrence->all_day ? 'circle-check' : 'circle-xmark text-secondary' }}"></i>

@@ -51,7 +51,7 @@ class EventController extends Controller {
   }
 
   public function show(Event $event): View {
-    $event->load(['occurrences'])->loadCount(['occurrences']);
+    $event->load(['occurrences.sprint'])->loadCount(['occurrences']);
 
     return view('events.show', $this->withBreadcrumbs(
       path: 'show',

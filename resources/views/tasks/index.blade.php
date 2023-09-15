@@ -10,7 +10,7 @@
         <thead>
           <tr>
             <th class="th-min text-center">ID</th>
-            <th>Issue</th>
+            <th colspan="2">Issue</th>
             <th class="th-start-datetime text-center">Start</th>
             <th class="th-end-datetime text-center">End</th>
             <th class="th-logged text-center">Logged</th>
@@ -24,9 +24,8 @@
               <td class="td-min text-center">
                 <a class="id-link" href="{{ route('tasks.show', $task) }}">{{ $task->id }}</a>
               </td>
-              <td>
-                <a href="{{ route('issues.show', $task->issue) }}">{{ $task->issue->title }}</a>
-              </td>
+              <td class="td-min text-center">{!! $task->issue->code_display !!}</td>
+              <td>{!! $task->issue_display !!}</td>
               <td class="td-start-datetime">{!! $task->start_date_time_display !!}</td>
               <td class="td-end-datetime">{!! $task->end_date_time_display !!}</td>
               <td class="td-logged text-center">

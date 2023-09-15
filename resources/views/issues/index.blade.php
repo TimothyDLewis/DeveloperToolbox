@@ -12,7 +12,7 @@
             <th class="th-min text-center">ID</th>
             <th class="th-min text-center">Code</th>
             <th>Title</th>
-            <th>Project</th>
+            <th colspan="2">Project</th>
             <th class="th-external-url">External URL</th>
             <th class="th-estimate-option text-center">Estimate Option</th>
             <th class="th-status-option text-center">Status Option</th>
@@ -29,6 +29,7 @@
               <td>
                 <a href="{{ route('issues.show', $issue) }}">{{ $issue->title }}</a>
               </td>
+              <td class="td-min text-center">{!! $issue->project->code_display !!}</td>
               <td>{!! $issue->project_display !!}</td>
               <td class="td-external-url">{!! $issue->external_url_display !!}</td>
               <td class="td-estimate-option text-center">{!! $issue->estimateOption->label_display_alt !!}</td>

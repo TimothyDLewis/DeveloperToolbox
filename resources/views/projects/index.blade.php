@@ -10,8 +10,8 @@
         <thead>
           <tr>
             <th class="th-min text-center">ID</th>
-            <th>Title</th>
             <th class="th-min text-center">Code</th>
+            <th>Title</th>
             <th class="th-source-code-management-url">Source Code Management (SCM) URL</th>
             <th>Estimate</th>
             <th>Status</th>
@@ -24,10 +24,10 @@
           @forelse($projects as $project)
             <tr>
               <td class="td-min text-center">{{ $project->id }}</td>
+              <td class="td-min text-center">{!! $project->code_display !!}</td>
               <td>
                 <a href="{{ route('projects.show', $project) }}">{{ $project->title }}</a>
               </td>
-              <td class="td-min text-center">{!! $project->code_display !!}</td>
               <td class="td-source-code-management-url">{!! $project->source_code_management_url_display !!}</td>
               <td>{!! $project->estimate_display !!}</td>
               <td>{!! $project->status_display !!}</td>

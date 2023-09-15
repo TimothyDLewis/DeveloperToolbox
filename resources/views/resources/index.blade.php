@@ -16,7 +16,7 @@
             <th>Description</th>
             <th>Text Color</th>
             <th>Background Color</th>
-            <th>Project</th>
+            <th colspan="2">Project</th>
             <th class="th-min text-center">Actions</th>
           </tr>
         </thead>
@@ -32,7 +32,10 @@
               <td>{!! $resource->description_display !!}</td>
               <td class="td-color-display">{!! $resource->text_color_display !!}</td>
               <td class="td-color-display">{!! $resource->background_color_display !!}</td>
-              <td>{!! $resource->project_display !!}</td>
+              @if($resource->project)
+                <td class="td-min text-center">{!! $resource->project->code_display !!}</td>
+              @endif
+              <td colspan="{{ $resource->project ? 1 : 2 }}">{!! $resource->project_display !!}</td>
               <td class="td-min">
                 <div class="btn-group">
                   <a href="{{ route('resources.edit', $resource) }}" class="btn btn-link">

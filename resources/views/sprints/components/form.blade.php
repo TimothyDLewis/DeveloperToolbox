@@ -29,8 +29,8 @@
               <td class="td-min text-center">{!! $issue->code_display !!}</td>
               <td>{{ $issue->title }}</td>
               <td>{{ $issue->project->title }}</td>
-              <td class="td-estimate-option text-center">{!! $issue->estimateOption->label_display_alt !!}</td>
-              <td class="td-estimate-option text-center">{!! $issue->estimateOption->value_display !!}</td>
+              <td class="td-min text-center">{!! $issue->estimateOption->label_display_alt !!}</td>
+              <td class="td-min text-center">{!! $issue->estimateOption->value_display !!}</td>
               <td class="td-status-option text-center">{!! $issue->statusOption->label_display !!}</td>
             </tr>
           @empty

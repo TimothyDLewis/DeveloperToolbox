@@ -80,7 +80,7 @@ class Sprint extends Model {
         $recurrenceData = $weeklyEvent->recurrence_days[strtolower($iterationDate->format('l'))] ?? null;
 
         if ($recurrenceData && $recurrenceData['enabled']) {
-          $this->generateOccurrences($iterationDate, [$weeklyEvent], $recurrenceData['recurrence_start_time'], $recurrenceData['recurrence_end_time']);
+          $this->generateOccurrences($iterationDate, [$weeklyEvent], $recurrenceData['recurrence_end_time'], $recurrenceData['recurrence_start_time']);
         }
       }
 
@@ -90,12 +90,15 @@ class Sprint extends Model {
 
   protected function generateOccurrences(Carbon $date, mixed $events, $recurrenceStart = null, $recurrenceEnd = null): void {
     foreach ($events as $event) {
-      $startDate = $date->copy()->hour(Carbon::parse($recurrenceStart ?? $event->recurrence_start)->format('H'))
-      ->minute(Carbon::parse($recurrenceStart ?? $event->recurrence_start)->format('i'))
+      $startTime = Carbon::parse($recurrenceStart ?? $event->recurrence_start_time);
+      $endTime = Carbon::parse($recurrenceEnd ?? $event->recurrence_end_time);
+
+      $startDate = $date->copy()->hour($startTime->format('H'))
+      ->minute($startTime->format('i'))
       ->second(0);
 
-      $endDate = $date->copy()->hour(Carbon::parse($recurrenceEnd ?? $event->recurrence_end)->format('H'))
-      ->minute(Carbon::parse($recurrenceEnd ?? $event->recurrence_end)->format('i'))
+      $endDate = $date->copy()->hour($endTime->format('H'))
+      ->minute($endTime->format('i'))
       ->second(0);
 
       $event->occurrences()->create([

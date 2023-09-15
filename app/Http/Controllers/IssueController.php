@@ -35,7 +35,7 @@ class IssueController extends Controller {
       path: 'create',
       includes: [
         'estimateOptions' => $estimateOptions,
-        'projects' => Project::orderBy('id')->forSelect()->get(),
+        'projects' => Project::orderBy('id')->forSelect("CONCAT(code, ' - ', title)", raw: true)->get(),
         'issue' => new Issue(),
         'statusOptions' => $statusOptions
       ]
