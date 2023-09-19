@@ -34,6 +34,12 @@ class Event extends Model {
       'label' => 'Affects Productivity',
       'type' => 'custom'
     ],
+    'allows_weekends' => [
+      'container-class' => 'col-12 col-sm-6',
+      'custom_editor' => 'boolean',
+      'label' => 'Allow Weekends',
+      'type' => 'custom'
+    ],
     'description' => [
       'container-class' => 'col-12',
       'label' => 'Description',

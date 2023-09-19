@@ -9,13 +9,10 @@ use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\RedirectResponse;
-use App\Traits\Controllers\Breadcrumbs;
 use App\Http\Requests\Resources\StoreResourceRequest;
 use App\Http\Requests\Resources\UpdateResourceRequest;
 
 class ResourceController extends Controller {
-  use Breadcrumbs;
-
   public function index(): View {
     return view('resources.index', $this->withBreadcrumbs(includes: ['resources' => Resource::with('project')->orderBy('id')->paginate(30)]));
   }
@@ -95,7 +92,7 @@ class ResourceController extends Controller {
     }
   }
 
-  private function constructBreadcrumbs(string $path = null, array $additional = []): Collection {
+  protected function constructBreadcrumbs(string $path = null, array $additional = []): Collection {
     $breadcrumbs = collect([(object)['label' => 'Resources', 'path' => route('resources.index')]]);
 
     if ($path === 'create') {

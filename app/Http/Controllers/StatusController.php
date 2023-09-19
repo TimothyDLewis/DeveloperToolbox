@@ -10,15 +10,12 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Contracts\View\View;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Http\RedirectResponse;
-use App\Traits\Controllers\Breadcrumbs;
 use App\Http\Requests\Statuses\StoreStatusRequest;
 use App\Http\Requests\Statuses\UpdateStatusRequest;
 
 class StatusController extends Controller {
-  use Breadcrumbs;
-
   public function index(): View {
-    return view('statuses.index', $this->withBreadcrumbs(includes: ['statuses' => Status::withCount(['statusOptions', 'projects'])->orderBy('id')->paginate(30)]));
+    return view('statuses.index', $this->withBreadcrumbs(includes: ['statuses' => Status::withCount(['statusOptions', 'projects'])->orderBy('touched_at', 'DESC')->orderBy('title')->paginate(30)]));
   }
 
   public function create(): View {
@@ -73,6 +70,8 @@ class StatusController extends Controller {
   }
 
   public function show(Status $status): View {
+    $this->touchModel($status);
+
     $status->load(['statusOptions' => function ($query) {
       return $query->with(['previousStatusOption', 'nextStatusOption'])->orderBy('sort_order');
     }, 'projects' => function ($query) {
@@ -89,6 +88,8 @@ class StatusController extends Controller {
   }
 
   public function edit(Status $status): View {
+    $this->touchModel($status);
+
     $statusOptions = collect();
 
     foreach(old('status_options', []) as $statusOptionValues) {
@@ -173,7 +174,7 @@ class StatusController extends Controller {
     return response()->json(['statusOptions' => $status->statusOptions()->orderBy('id')->forSelect('label')->get()], 200);
   }
 
-  private function constructBreadcrumbs(string $path = null, array $additional = []): Collection {
+  protected function constructBreadcrumbs(string $path = null, array $additional = []): Collection {
     $breadcrumbs = collect([(object)['label' => 'Statuses', 'path' => route('statuses.index')]]);
 
     if ($path === 'create') {

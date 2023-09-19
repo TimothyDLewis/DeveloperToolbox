@@ -10,15 +10,12 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\RedirectResponse;
-use App\Traits\Controllers\Breadcrumbs;
 use App\Http\Requests\Estimates\StoreEstimateRequest;
 use App\Http\Requests\Estimates\UpdateEstimateRequest;
 
 class EstimateController extends Controller {
-  use Breadcrumbs;
-
   public function index(): View {
-    return view('estimates.index', $this->withBreadcrumbs(includes: ['estimates' => Estimate::withCount(['estimateOptions', 'projects'])->orderBy('id')->paginate(30)]));
+    return view('estimates.index', $this->withBreadcrumbs(includes: ['estimates' => Estimate::withCount(['estimateOptions', 'projects'])->orderBy('touched_at', 'DESC')->orderBy('title')->paginate(30)]));
   }
 
   public function create(): View {
@@ -63,6 +60,8 @@ class EstimateController extends Controller {
   }
 
   public function show(Estimate $estimate): View {
+    $this->touchModel($estimate);
+
     $estimate->load(['estimateOptions' => function ($query) {
       return $query->orderBy('sort_order');
     }, 'projects' => function ($query) {
@@ -79,6 +78,8 @@ class EstimateController extends Controller {
   }
 
   public function edit(Estimate $estimate): View {
+    $this->touchModel($estimate);
+
     $estimateOptions = collect();
 
     foreach(old('estimate_options', []) as $estimateOptionValues) {
@@ -162,7 +163,7 @@ class EstimateController extends Controller {
     return response()->json(['estimateOptions' => $estimate->estimateOptions()->orderBy('id')->forSelect('label')->get()], 200);
   }
 
-  private function constructBreadcrumbs(string $path = null, array $additional = []): Collection {
+  protected function constructBreadcrumbs(string $path = null, array $additional = []): Collection {
     $breadcrumbs = collect([(object)['label' => 'Estimates', 'path' => route('estimates.index')]]);
 
     if ($path === 'create') {

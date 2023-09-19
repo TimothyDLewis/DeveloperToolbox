@@ -11,13 +11,10 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\RedirectResponse;
-use App\Traits\Controllers\Breadcrumbs;
 use App\Http\Requests\Sprints\StoreSprintRequest;
 use App\Http\Requests\Sprints\UpdateSprintRequest;
 
 class SprintController extends Controller {
-  use Breadcrumbs;
-
   public function index(): View {
     return view('sprints.index', $this->withBreadcrumbs(includes: ['sprints' => Sprint::withCount(['issues', 'occurrences'])->orderBy('id')->paginate(30)]));
   }
@@ -67,7 +64,9 @@ class SprintController extends Controller {
   }
 
   public function show(Sprint $sprint): View {
-    $sprint->load(['issues'])->loadCount(['issues', 'occurrences']);
+    $sprint->load(['issues', 'occurrences' => function ($subQuery) {
+      return $subQuery->orderBy('start_datetime');
+    }])->loadCount(['issues', 'occurrences']);
 
     return view('sprints.show', $this->withBreadcrumbs(
       path: 'show',
@@ -113,7 +112,19 @@ class SprintController extends Controller {
     }
   }
 
-  private function constructBreadcrumbs(string $path = null, array $additional = []): Collection {
+  // Additional Non-Resource Routes
+
+  public function regenerate(Sprint $sprint): RedirectResponse {
+    DB::transaction(function () use ($sprint) {
+      $sprint->generateEventOccurences(true);
+    });
+
+    $this->sessionSuccess('<strong>Sprint Occurrences Regenerated</strong>');
+
+    return redirect()->route('sprints.show', $sprint);
+  }
+
+  protected function constructBreadcrumbs(string $path = null, array $additional = []): Collection {
     $breadcrumbs = collect([(object)['label' => 'Sprints', 'path' => route('sprints.index')]]);
 
     if ($path === 'create') {

@@ -159,6 +159,14 @@ trait AttributeDisplay {
     );
   }
 
+  public function labelTitleEventsCountDisplay(): Attribute {
+    return Attribute::make(
+      get: function (): string {
+        return '<span class="badge" style="color: '. $this->text_color .'; background-color: ' . $this->background_color . ';">' . strtoupper($this->title) . ' (' . $this->events_count . ')</span>';
+      }
+    );
+  }
+
   public function occurrencesCountDisplay(): Attribute {
     return Attribute::make(
       get: function (): string {
@@ -211,7 +219,7 @@ trait AttributeDisplay {
           case EventRecurrence::SprintWeekly->value:
             return $this->yearly_eval_logic ? 'col-12 col-sm-6' : 'col-12';
           default:
-            return 'col-12 col-sm-6 col-md-4';
+            return 'col-12';
         }
       }
     );
@@ -309,6 +317,14 @@ trait AttributeDisplay {
     return Attribute::make(
       get: function(): string {
         return $this->hexComponentDisplay('text_color');
+      }
+    );
+  }
+
+  public function touchedDisplay(): Attribute {
+    return Attribute::make(
+      get: function(): string {
+        return view('components.display.touched', ['model' => $this])->render();
       }
     );
   }

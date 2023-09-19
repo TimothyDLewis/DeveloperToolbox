@@ -53,7 +53,7 @@
             </tr>
           @empty
             <tr>
-              <td colspan="9">
+              <td colspan="10">
                 <i class="text-secondary">No Resources...</i>
               </td>
             </tr>

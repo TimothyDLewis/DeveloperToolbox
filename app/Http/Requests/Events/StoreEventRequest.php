@@ -35,6 +35,7 @@ class StoreEventRequest extends FormRequest {
   public function rules(): array {
     $rules = [
       'affects_productivity' => ['required'],
+      'allows_weekends' => ['required'],
       'description' => ['nullable'],
       'event_type_id' => ['required', 'exists:event_types,id'],
       'recurrence' => ['required'],
@@ -71,6 +72,7 @@ class StoreEventRequest extends FormRequest {
   public function attributes(): array {
     return [
       'affects_productivity' => 'Affects Productivity',
+      'allows_weekends' => 'Allow Weekends',
       'description' => 'Description',
       'event_type_id' => 'Event Type',
       'recurrence_days' => 'Recurrence Days',

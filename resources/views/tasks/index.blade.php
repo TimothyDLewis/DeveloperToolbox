@@ -40,14 +40,16 @@
                   <form action="{{ route('tasks.destroy', $task) }}" method="POST">
                     @method('DELETE')
                     @csrf
-                    <button type="button" class="btn btn-link text-danger delete-task"><i class="text-danger fa-regular fa-trash"></i></button>
+                    <button type="button" class="btn btn-link text-danger delete-task">
+                      <i class="text-danger fa-regular fa-trash"></i>
+                    </button>
                   </form>
                 </div>
               </td>
             </tr>
           @empty
             <tr>
-              <td colspan="7">
+              <td colspan="8">
                 <i class="text-secondary">No Tasks...</i>
               </td>
             </tr>

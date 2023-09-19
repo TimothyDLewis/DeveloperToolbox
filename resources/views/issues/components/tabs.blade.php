@@ -41,7 +41,9 @@
                         <form action="{{ route('tasks.destroy', $task) }}" method="POST">
                           @method('DELETE')
                           @csrf
-                          <button type="button" class="btn btn-link text-danger delete-task"><i class="text-danger fa-regular fa-trash"></i></button>
+                          <button type="button" class="btn btn-link text-danger delete-task">
+                            <i class="text-danger fa-regular fa-trash"></i>
+                          </button>
                         </form>
                       </div>
                     </td>
@@ -78,13 +80,18 @@
                     <td class="td-end-date">{!! $sprint->end_date_display !!}</td>
                     <td class="td-min">
                       <div class="btn-group">
+                        <a href="{{ route('scheduler.sprint', $sprint) }}" class="btn btn-link">
+                          <i class="text-success fa-regular fa-calendar"></i>
+                        </a>
                         <a href="{{ route('sprints.edit', $sprint) }}" class="btn btn-link">
                           <i class="text-primary fa-regular fa-pen"></i>
                         </a>
                         <form action="{{ route('sprints.destroy', $sprint) }}" method="POST">
                           @method('DELETE')
                           @csrf
-                          <button type="button" class="btn btn-link text-danger delete-sprint"><i class="text-danger fa-regular fa-trash"></i></button>
+                          <button type="button" class="btn btn-link text-danger delete-sprint">
+                            <i class="text-danger fa-regular fa-trash"></i>
+                          </button>
                         </form>
                       </div>
                     </td>

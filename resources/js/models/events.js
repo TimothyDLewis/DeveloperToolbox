@@ -1,11 +1,16 @@
 const toggleTimeInputs = (show) => {
   const timeInputs = $('#eventForm #recurrence_start_time, #eventForm #recurrence_end_time');
+  const boolenInput = $('#eventForm #allows_weekends');
 
   if (show) {
     timeInputs.parent().toggleClass('hidden', false);
+    boolenInput.closest('.col-12').toggleClass('hidden', false);
   } else {
     timeInputs.parent().toggleClass('hidden', true);
+    boolenInput.closest('.col-12').toggleClass('hidden', true);
+
     timeInputs.val('');
+    boolenInput.prop('checked', false).trigger('change');
   }
 }
 
@@ -49,8 +54,6 @@ $('#eventForm #recurrence').on('change', function () {
   const selectedRecurrence = $(this).val();
 
   if (selectedRecurrence === 'no_recurrence' || selectedRecurrence === 'sprint_weekly') {
-    container.toggleClass('col-sm-6', false).toggleClass('col-md-4', false);
-
     toggleTimeInputs(false);
 
     if (selectedRecurrence === 'sprint_weekly') {
@@ -59,8 +62,6 @@ $('#eventForm #recurrence').on('change', function () {
       toggleRecurrenceDays(false);
     }
   } else {
-    container.toggleClass('col-sm-6', true).toggleClass('col-md-4', true);
-
     toggleTimeInputs(true);
     toggleRecurrenceDays(false);
   }

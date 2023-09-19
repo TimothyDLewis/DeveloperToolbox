@@ -1,14 +1,14 @@
 <?php
 
 use App\Models\Project;
+use App\Traits\Migrations\Touched;
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
 return new class extends Migration {
-  /**
-  * Run the migrations.
-  */
+  use Touched;
+
   public function up(): void {
     Schema::create('resources', function (Blueprint $table) {
       $table->id();
@@ -24,13 +24,11 @@ return new class extends Migration {
       $table->text('description')->nullable();
 
       $table->timestamps();
+      $this->touched($table);
       $table->softDeletes();
     });
   }
 
-  /**
-  * Reverse the migrations.
-  */
   public function down(): void {
     Schema::dropIfExists('resources');
   }

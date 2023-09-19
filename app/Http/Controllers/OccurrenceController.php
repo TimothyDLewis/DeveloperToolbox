@@ -9,13 +9,10 @@ use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\RedirectResponse;
-use App\Traits\Controllers\Breadcrumbs;
 use App\Http\Requests\Occurrences\StoreOccurrenceRequest;
 use App\Http\Requests\Occurrences\UpdateOccurrenceRequest;
 
 class OccurrenceController extends Controller {
-  use Breadcrumbs;
-
   public function index(): View {
     return view('occurrences.index', $this->withBreadcrumbs(includes: ['occurrences' => Occurrence::orderBy('id', 'DESC')->paginate(30)]));
   }
@@ -97,7 +94,7 @@ class OccurrenceController extends Controller {
     }
   }
 
-  private function constructBreadcrumbs(string $path = null, array $additional = []): Collection {
+  protected function constructBreadcrumbs(string $path = null, array $additional = []): Collection {
     $breadcrumbs = collect([(object)['label' => 'Occurrences', 'path' => route('occurrences.index')]]);
 
     if ($path === 'create') {

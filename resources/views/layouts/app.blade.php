@@ -21,10 +21,7 @@
         </div>
       </div>
     @else
-      <div class="container-fluid mt-3">
-        @include('components.session-flash')
-        @yield('body')
-      </div>
+      @yield('body')
     @endif
 
     @vite('resources/js/app.js')

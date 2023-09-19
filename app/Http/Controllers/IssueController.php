@@ -9,13 +9,10 @@ use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\RedirectResponse;
-use App\Traits\Controllers\Breadcrumbs;
 use App\Http\Requests\Issues\StoreIssueRequest;
 use App\Http\Requests\Issues\UpdateIssueRequest;
 
 class IssueController extends Controller {
-  use Breadcrumbs;
-
   public function index(): View {
     return view('issues.index', $this->withBreadcrumbs(includes: ['issues' => Issue::with(['estimateOption', 'project', 'statusOption'])->withCount(['tasks', 'sprints'])->orderBy('id')->paginate(30)]));
   }
@@ -61,6 +58,7 @@ class IssueController extends Controller {
     $issue->load(['project' => function ($query) {
       return $query->with(['estimate', 'status']);
     }, 'estimateOption', 'statusOption'])->loadCount(['tasks', 'sprints']);
+    $this->touchModel($issue);
 
     return view('issues.show', $this->withBreadcrumbs(
       path: 'show',
@@ -73,6 +71,7 @@ class IssueController extends Controller {
     $issue->load(['project' => function ($query) {
       return $query->with(['status.statusOptions', 'estimate.estimateOptions']);
     }]);
+    $this->touchModel($issue);
 
     return view('issues.edit', $this->withBreadcrumbs(
       path: 'edit',
@@ -114,7 +113,7 @@ class IssueController extends Controller {
     }
   }
 
-  private function constructBreadcrumbs(string $path = null, array $additional = []): Collection {
+  protected function constructBreadcrumbs(string $path = null, array $additional = []): Collection {
     $breadcrumbs = collect([(object)['label' => 'Issues', 'path' => route('issues.index')]]);
 
     if ($path === 'create') {

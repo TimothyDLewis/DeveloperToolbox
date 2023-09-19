@@ -14,6 +14,9 @@
             <th class="th-estimate-options text-center">Estimate Options</th>
             <th class="th-min text-center">Projects</th>
             <th class="th-min text-center">Actions</th>
+            <th class="th-touched text-center text-secondary">
+              <i class="fa-solid fa-clock-rotate-left fa-flip-horizontal"></i>
+            </th>
           </tr>
         </thead>
         <tbody>
@@ -33,14 +36,19 @@
                   <form action="{{ route('estimates.destroy', $estimate) }}" method="POST">
                     @method('DELETE')
                     @csrf
-                    <button type="button" class="btn btn-link text-danger delete-estimate"><i class="text-danger fa-regular fa-trash"></i></button>
+                    <button type="button" class="btn btn-link text-danger delete-estimate">
+                      <i class="text-danger fa-regular fa-trash"></i>
+                    </button>
                   </form>
                 </div>
+              </td>
+              <td class="td-touched text-center">
+                {!! $estimate->touched_display !!}
               </td>
             </tr>
           @empty
             <tr>
-              <td colspan="5">
+              <td colspan="6">
                 <i class="text-secondary">No Estimates...</i>
               </td>
             </tr>

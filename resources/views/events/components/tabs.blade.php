@@ -52,14 +52,16 @@
                         <form action="{{ route('occurrences.destroy', $occurrence) }}" method="POST">
                           @method('DELETE')
                           @csrf
-                          <button type="button" class="btn btn-link text-danger delete-occurrence"><i class="text-danger fa-regular fa-trash"></i></button>
+                          <button type="button" class="btn btn-link text-danger delete-occurrence">
+                            <i class="text-danger fa-regular fa-trash"></i>
+                          </button>
                         </form>
                       </div>
                     </td>
                   </tr>
                 @empty
                   <tr>
-                    <td colspan="6">
+                    <td colspan="7">
                       <i class="text-secondary">No Event Occurrences...</i>
                     </td>
                   </tr>

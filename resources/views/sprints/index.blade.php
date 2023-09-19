@@ -31,20 +31,25 @@
               <td class="td-min text-center">{!! $sprint->occurrences_count_display !!}</td>
               <td class="td-min">
                 <div class="btn-group">
+                  <a href="{{ route('scheduler.sprint', $sprint) }}" class="btn btn-link">
+                    <i class="text-success fa-regular fa-calendar"></i>
+                  </a>
                   <a href="{{ route('sprints.edit', $sprint) }}" class="btn btn-link">
                     <i class="text-primary fa-regular fa-pen"></i>
                   </a>
                   <form action="{{ route('sprints.destroy', $sprint) }}" method="POST">
                     @method('DELETE')
                     @csrf
-                    <button type="button" class="btn btn-link text-danger delete-sprint"><i class="text-danger fa-regular fa-trash"></i></button>
+                    <button type="button" class="btn btn-link text-danger delete-sprint">
+                      <i class="text-danger fa-regular fa-trash"></i>
+                    </button>
                   </form>
                 </div>
               </td>
             </tr>
           @empty
             <tr>
-              <td colspan="9">
+              <td colspan="7">
                 <i class="text-secondary">No Sprints...</i>
               </td>
             </tr>

@@ -5,14 +5,17 @@ $fa-font-path: '~fontawesome/webfonts';
 @import '~fontawesome/scss/brands';
 @import '~fontawesome/scss/solid';
 
-// Application Styles
+// Root SCSS Variables
 
-#organization-sidebar {
-  width: 16rem;
+:root {
+  --fc-border-color: #7e7e7e;
+  --fc-today-bg-color: rgba(0, 89, 255, 0.1);
 }
 
-#organization-sidebar-small {
-  width: 4.5rem;
+// Application Styles
+
+#schedulerContainer {
+  max-height: 1180px;
 }
 
 #estimates {
@@ -120,6 +123,14 @@ $fa-font-path: '~fontawesome/webfonts';
   }
 }
 
+#organization-sidebar {
+  width: 16rem;
+}
+
+#organization-sidebar-small {
+  width: 4.5rem;
+}
+
 #projects,
 #nav-estimate-projects-table,
 #nav-status-projects-table {
@@ -132,6 +143,14 @@ $fa-font-path: '~fontawesome/webfonts';
     min-width: 315px;
     width: 1%;
   }
+}
+
+#scheduler-sidebar {
+  width: 20rem;
+}
+
+#scheduler-sidebar-small {
+  width: 10rem;
 }
 
 #toggleErrors {
@@ -174,6 +193,20 @@ button:disabled {
 .external-link {
   text-decoration: underline;
   cursor: pointer;
+}
+
+.fc .fc-timegrid-axis-frame {
+  justify-content: center !important;
+}
+
+.fc .fc-col-header-cell-cushion,
+.fc .fc-daygrid-day-number {
+  color: initial;
+  text-decoration: none;
+}
+
+.fc-sprint-highlight {
+  background-color: rgba(2, 145, 239, 0.05);
 }
 
 .form-check-input-custom {
@@ -245,12 +278,23 @@ button:disabled {
   width: 1%;
 }
 
+.th-touched,
+.td-touched {
+  min-width: 95px;
+  width: 1%;
+
+  .touched {
+    font-size: 0.7rem;
+  }
+}
+
 .td-url {
   min-width: 500px;
   width: 1%;
 }
 
-.toggle-bookmarked {
+.toggle-bookmarked,
+.toggle-dropdown {
   cursor: pointer;
 }
 

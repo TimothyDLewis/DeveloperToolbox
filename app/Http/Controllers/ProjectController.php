@@ -10,15 +10,12 @@ use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\RedirectResponse;
-use App\Traits\Controllers\Breadcrumbs;
 use App\Http\Requests\Projects\StoreProjectRequest;
 use App\Http\Requests\Projects\UpdateProjectRequest;
 
 class ProjectController extends Controller {
-  use Breadcrumbs;
-
   public function index(): View {
-    return view('projects.index', $this->withBreadcrumbs(includes: ['projects' => Project::with(['estimate', 'status'])->withCount(['issues', 'resources'])->orderBy('id')->paginate(30)]));
+    return view('projects.index', $this->withBreadcrumbs(includes: ['projects' => Project::with(['estimate', 'status'])->withCount(['issues', 'resources'])->orderBy('touched_at', 'DESC')->orderBy('title')->paginate(30)]));
   }
 
   public function create(): View {
@@ -49,6 +46,7 @@ class ProjectController extends Controller {
 
   public function show(Project $project): View {
     $project->load(['estimate', 'status'])->loadCount(['issues', 'resources']);
+    $this->touchModel($project);
 
     return view('projects.show', $this->withBreadcrumbs(
       path: 'show',
@@ -58,6 +56,8 @@ class ProjectController extends Controller {
   }
 
   public function edit(Project $project): View {
+    $this->touchModel($project);
+
     return view('projects.edit', $this->withBreadcrumbs(
       path: 'edit',
       additional: ['project' => $project],
@@ -131,7 +131,7 @@ class ProjectController extends Controller {
     }
   }
 
-  private function constructBreadcrumbs(string $path = null, array $additional = []): Collection {
+  protected function constructBreadcrumbs(string $path = null, array $additional = []): Collection {
     $breadcrumbs = collect([(object)['label' => 'Projects', 'path' => route('projects.index')]]);
 
     if ($path === 'create') {

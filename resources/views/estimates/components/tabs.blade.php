@@ -63,7 +63,9 @@
                         <form action="{{ route('projects.destroy', $project) }}" method="POST">
                           @method('DELETE')
                           @csrf
-                          <button type="button" class="btn btn-link text-danger delete-project"><i class="text-danger fa-regular fa-trash"></i></button>
+                          <button type="button" class="btn btn-link text-danger delete-project">
+                            <i class="text-danger fa-regular fa-trash"></i>
+                          </button>
                         </form>
                       </div>
                     </td>

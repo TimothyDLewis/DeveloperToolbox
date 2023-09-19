@@ -48,7 +48,7 @@ Route::get('/', function () {
 Route::group(['prefix' => 'organization'], function () {
   Route::get('/', function () {
     return redirect()->route('projects.index');
-  });
+  })->name('organization');
 
   Route::get('/estimates/{estimate}/estimate-options', [EstimateController::class, 'getEstimateOptions'])->name('estimates.estimate-options');
   Route::resource('estimates', EstimateController::class);
@@ -67,6 +67,7 @@ Route::group(['prefix' => 'organization'], function () {
   Route::get('/statuses/{status}/status-options', [StatusController::class, 'getStatusOptions'])->name('statuses.status-options');
 
   Route::resource('sprints', SprintController::class);
+  Route::post('/sprints/{sprint}/regenerate', [SprintController::class, 'regenerate'])->name('sprints.regenerate');
 
   Route::resource('tasks', TaskController::class);
 });

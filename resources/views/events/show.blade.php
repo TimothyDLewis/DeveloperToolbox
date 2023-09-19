@@ -53,10 +53,12 @@
                     <tr>
                       <td class="td-min text-center">{{ ucfirst($day) }}</td>
                       <td>
-                        <i class="fa-solid fa-clock me-2"></i><span class="me-2">{{ Carbon::parse('2000-01-01' . $event->recurrence_days[$day]['recurrence_start_time'])->format('g:i A') }}
+                        <i class="fa-solid fa-clock me-2"></i>
+                        <span class="me-2">{{ Carbon::parse('2000-01-01' . $event->recurrence_days[$day]['recurrence_start_time'])->format('g:i A') }}</span>
                       </td>
                       <td>
-                        <i class="fa-solid fa-clock me-2"></i><span class="me-2">{{ Carbon::parse('2000-01-01' . $event->recurrence_days[$day]['recurrence_end_time'])->format('g:i A') }}
+                        <i class="fa-solid fa-clock me-2"></i>
+                        <span class="me-2">{{ Carbon::parse('2000-01-01' . $event->recurrence_days[$day]['recurrence_end_time'])->format('g:i A') }}</span>
                       </td>
                     </tr>
                   @endif
@@ -65,13 +67,17 @@
             </table>
           </div>
         @elseif($event->recurrence !== EventRecurrence::NoRecurrence->value)
-          <div class="{{ $event->recurrence_display_class }} mb-3">
+          <div class="col-12 col-sm-6 col-md-4 mb-3">
             <label class="form-label">Recurrence Start</label>
             <p class="card card-body card-condensed d-block">{!! $event->recurrence_start_time_display !!}</p>
           </div>
-          <div class="{{ $event->recurrence_display_class }} mb-3">
+          <div class="col-12 col-sm-6 col-md-4 mb-3">
             <label class="form-label">Recurrence End</label><br/>
             <p class="card card-body card-condensed d-block">{!! $event->recurrence_end_time_display !!}</p>
+          </div>
+          <div class="col-12 col-sm-6 col-md-4 mb-3">
+            <label class="form-label d-block">Allow Weekends</label>
+            <i class="fa-solid fa-{{ $event->allows_weekends ? 'circle-check' : 'circle-xmark text-secondary' }} mt-2"></i>
           </div>
         @endif
         <div class="col-12 mb-3">

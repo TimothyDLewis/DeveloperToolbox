@@ -18,6 +18,9 @@
             <th class="th-min text-center">Issues</th>
             <th class="th-min text-center">Resources</th>
             <th class="th-min text-center">Actions</th>
+            <th class="th-touched text-center text-secondary">
+              <i class="fa-solid fa-clock-rotate-left fa-flip-horizontal"></i>
+            </th>
           </tr>
         </thead>
         <tbody>
@@ -41,14 +44,19 @@
                   <form action="{{ route('projects.destroy', $project) }}" method="POST">
                     @method('DELETE')
                     @csrf
-                    <button type="button" class="btn btn-link text-danger delete-project"><i class="text-danger fa-regular fa-trash"></i></button>
+                    <button type="button" class="btn btn-link text-danger delete-project">
+                      <i class="text-danger fa-regular fa-trash"></i>
+                    </button>
                   </form>
                 </div>
+              </td>
+              <td class="td-touched text-center">
+                {!! $project->touched_display !!}
               </td>
             </tr>
           @empty
             <tr>
-              <td colspan="9">
+              <td colspan="10">
                 <i class="text-secondary">No Projects...</i>
               </td>
             </tr>

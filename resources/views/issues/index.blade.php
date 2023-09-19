@@ -19,6 +19,9 @@
             <th class="th-min text-center">Tasks</th>
             <th class="th-min text-center">Sprints</th>
             <th class="th-min text-center">Actions</th>
+            <th class="th-touched text-center text-secondary">
+              <i class="fa-solid fa-clock-rotate-left fa-flip-horizontal"></i>
+            </th>
           </tr>
         </thead>
         <tbody>
@@ -44,14 +47,19 @@
                   <form action="{{ route('issues.destroy', $issue) }}" method="POST">
                     @method('DELETE')
                     @csrf
-                    <button type="button" class="btn btn-link text-danger delete-issue"><i class="text-danger fa-regular fa-trash"></i></button>
+                    <button type="button" class="btn btn-link text-danger delete-issue">
+                      <i class="text-danger fa-regular fa-trash"></i>
+                    </button>
                   </form>
                 </div>
+              </td>
+              <td class="td-touched text-center">
+                {!! $issue->touched_display !!}
               </td>
             </tr>
           @empty
             <tr>
-              <td colspan="9">
+              <td colspan="12">
                 <i class="text-secondary">No Issues...</i>
               </td>
             </tr>

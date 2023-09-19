@@ -4,14 +4,14 @@ use App\Models\Event;
 use App\Models\Sprint;
 use App\Models\EventType;
 use App\Enums\EventRecurrence;
+use App\Traits\Migrations\Touched;
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
 return new class extends Migration {
-  /**
-  * Run the migrations.
-  */
+  use Touched;
+
   public function up(): void {
     $workDayDuration = config('app.work_day_duration');
 
@@ -25,8 +25,9 @@ return new class extends Migration {
       $table->boolean('affects_productivity')->default(false);
       $table->text('description')->nullable();
 
-      $table->softDeletes();
       $table->timestamps();
+      $this->touched($table);
+      $table->softDeletes();
     });
 
     Schema::create('events', function (Blueprint $table) {
@@ -39,12 +40,14 @@ return new class extends Migration {
       $table->json('recurrence_days')->nullable();
       $table->time('recurrence_start_time')->nullable();
       $table->time('recurrence_end_time')->nullable();
+      $table->boolean('allows_weekends')->default(false);
       $table->boolean('affects_productivity')->default(false);
       $table->text('description')->nullable();
       $table->text('yearly_eval_logic')->nullable();
 
-      $table->softDeletes();
       $table->timestamps();
+      $this->touched($table);
+      $table->softDeletes();
     });
 
     Schema::create('occurrences', function (Blueprint $table) use ($workDayDuration) {
@@ -57,14 +60,12 @@ return new class extends Migration {
       $table->boolean('all_day')->default(false);
       $table->integer('duration')->storedAs("CASE WHEN all_day THEN {$workDayDuration} ELSE TIMESTAMPDIFF(MINUTE, start_datetime, end_datetime) END")->nullable();
 
-      $table->softDeletes();
       $table->timestamps();
+      $this->touched($table);
+      $table->softDeletes();
     });
   }
 
-  /**
-  * Reverse the migrations.
-  */
   public function down(): void {
     Schema::dropIfExists('occurrences');
     Schema::dropIfExists('events');

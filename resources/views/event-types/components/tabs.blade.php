@@ -40,7 +40,9 @@
                         <form action="{{ route('events.destroy', $event) }}" method="POST">
                           @method('DELETE')
                           @csrf
-                          <button type="button" class="btn btn-link text-danger delete-event"><i class="text-danger fa-regular fa-trash"></i></button>
+                          <button type="button" class="btn btn-link text-danger delete-event">
+                            <i class="text-danger fa-regular fa-trash"></i>
+                          </button>
                         </form>
                       </div>
                     </td>

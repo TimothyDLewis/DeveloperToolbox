@@ -10,15 +10,12 @@ use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\RedirectResponse;
-use App\Traits\Controllers\Breadcrumbs;
 use App\Http\Requests\EventTypes\StoreEventTypeRequest;
 use App\Http\Requests\EventTypes\UpdateEventTypeRequest;
 
 class EventTypeController extends Controller {
-  use Breadcrumbs;
-
   public function index(): View {
-    return view('event-types.index', $this->withBreadcrumbs(includes: ['eventTypes' => EventType::withCount(['events'])->orderBy('id')->paginate(30)]));
+    return view('event-types.index', $this->withBreadcrumbs(includes: ['eventTypes' => EventType::withCount(['events'])->orderBy('title')->paginate(30)]));
   }
 
   public function create(): View {
@@ -96,7 +93,7 @@ class EventTypeController extends Controller {
     }
   }
 
-  private function constructBreadcrumbs(string $path = null, array $additional = []): Collection {
+  protected function constructBreadcrumbs(string $path = null, array $additional = []): Collection {
     $breadcrumbs = collect([(object)['label' => 'Event Types', 'path' => route('event-types.index')]]);
 
     if ($path === 'create') {

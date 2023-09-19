@@ -60,13 +60,20 @@
             </table>
           </div>
           <div class="tab-pane fade show" id="nav-sprint-occurrences" role="tabpanel" aria-labelledby="nav-sprint-occurrences-tab">
+            <div class="d-flex justify-content-start">
+              <form action="{{ route('sprints.regenerate', $sprint) }}" method="POST">
+                @csrf
+                <button type="button" class="btn btn-primary mb-3 regenerate-sprint">
+                  <i class="fa-solid fa-rotate"></i> Regenerate Sprint Occurrences
+                </button>
+              </form>
+            </div>
             <table id="nav-sprint-occurrences-table" class="table table-bordered table-striped {{ $theme->themeVar('table-dark', 'table-light') }} table-vertical-center mb-0">
               <thead>
                 <tr>
                   <th class="th-min text-center">ID</th>
                   <th>Event</th>
                   <th class="th-event-type text-center">Event Type</th>
-                  <th class="th-all-day text-center">All Day</th>
                   <th class="th-start-datetime text-center">Start</th>
                   <th class="th-end-datetime text-center">End</th>
                   <th class="th-duration text-center">Duration</th>
@@ -84,9 +91,6 @@
                     </td>
                     <td class="td-event-type text-center">
                       <a href="{{ route('event-types.show', $occurrence->event->eventType) }}">{!! $occurrence->event->eventType->label_title_display !!}</a>
-                    </td>
-                    <td class="td-all-day text-center">
-                      <i class="fa-solid fa-{{ $occurrence->all_day ? 'circle-check' : 'circle-xmark text-secondary' }}"></i>
                     </td>
                     @if($occurrence->all_day)
                       <td class="td-all-day-datetime" colspan="2">{!! $occurrence->start_date_time_as_date_display !!}</td>
@@ -110,7 +114,7 @@
                   </tr>
                 @empty
                   <tr>
-                    <td colspan="9">
+                    <td colspan="7">
                       <i class="text-secondary">No Connected Occurrences...</i>
                     </td>
                   </tr>
