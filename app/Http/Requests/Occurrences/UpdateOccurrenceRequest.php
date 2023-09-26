@@ -12,6 +12,10 @@ class UpdateOccurrenceRequest extends FormRequest {
   use SessionFlash;
 
   protected function prepareForValidation() {
+    if ($this->ajax()) {
+      $this->merge(['event_id' => $this->occurrence->event_id]);
+    }
+
     if ($this->all_day) {
       $this->merge(['end_datetime' => $this->start_datetime]);
     }

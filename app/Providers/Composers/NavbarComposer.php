@@ -16,13 +16,13 @@ class NavbarComposer {
       ],
       (object)[
         'label' => 'Organization',
-        'href' => url('/organization'),
+        'href' => route('organization'),
         'isActive' => request()->is('organization/*')
       ],
       (object)[
         'label' => 'Scheduler',
-        'href' => url('/scheduler'),
-        'isActive' => request()->is('scheduler')
+        'href' => route('scheduler'),
+        'isActive' => request()->is('scheduler') || request()->is('scheduler/*')
       ],
       (object)[
         'label' => 'Expenses',

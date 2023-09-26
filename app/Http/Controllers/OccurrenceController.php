@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use Exception;
 use App\Models\Event;
 use App\Models\Occurrence;
+use Illuminate\Http\Request;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Contracts\View\View;
@@ -27,15 +29,24 @@ class OccurrenceController extends Controller {
     ));
   }
 
-  public function store(StoreOccurrenceRequest $request): RedirectResponse {
+  public function store(StoreOccurrenceRequest $request): JsonResponse | RedirectResponse {
     try {
-      Occurrence::create($request->validated());
+      $occurrence = Occurrence::create($request->validated());
+
+      if ($request->ajax()) {
+        return response()->json(['message' => 'Occurrence Created', 'occurrence' => $occurrence], 200);
+      }
 
       $this->sessionSuccess('<strong>Occurrence Created</strong>');
 
       return redirect()->route('occurrences.index');
     } catch (Exception $ex) {
       Log::error($ex);
+
+      if ($request->ajax()) {
+        return response()->json(['message' => 'Unable to Create Occurrence', 'occurrence' => null], 500);
+      }
+
       $this->sessionDanger("<strong>Unable to Create Occurrence</strong><br/><br/>Check logs for complete details.");
 
       return redirect()->back()->withInput();
@@ -65,29 +76,48 @@ class OccurrenceController extends Controller {
     ));
   }
 
-  public function update(UpdateOccurrenceRequest $request, Occurrence $occurrence): RedirectResponse {
+  public function update(UpdateOccurrenceRequest $request, Occurrence $occurrence): JsonResponse | RedirectResponse {
     try {
       $occurrence->update($request->validated());
+
+      if ($request->ajax()) {
+        return response()->json(['message' => 'Occurrence Updated', 'occurrence' => $occurrence], 200);
+      }
+
       $this->sessionSuccess('<strong>Occurrence Updated</strong>');
 
       return redirect()->route('occurrences.show', $occurrence);
     } catch (Exception $ex) {
       Log::error($ex);
+
+      if ($request->ajax()) {
+        return response()->json(['message' => 'Unable to Update Occurrence', 'occurrence' => $occurrence], 500);
+      }
+
       $this->sessionDanger("<strong>Unable to Update Occurrence</strong><br/><br/>Check logs for complete details.");
 
       return redirect()->back()->withInput();
     }
   }
 
-  public function destroy(Occurrence $occurrence): RedirectResponse {
+  public function destroy(Request $request, Occurrence $occurrence): JsonResponse | RedirectResponse {
     try {
       $occurrence->delete();
+
+      if ($request->ajax()) {
+        return response()->json(['message' => 'Occurrence Deleted', 'occurrence' => $occurrence], 200);
+      }
 
       $this->sessionSuccess('<strong>Occurrence Deleted</strong>');
 
       return redirect()->route('occurrences.index');
     } catch (Exception $ex) {
       Log::error($ex);
+
+      if ($request->ajax()) {
+        return response()->json(['message' => 'Unable to Delete Occurrence', 'occurrence' => $occurrence], 500);
+      }
+
       $this->sessionDanger("<strong>Unable to Delete Occurrence</strong><br/><br/>Check logs for complete details.");
 
       return redirect()->back();

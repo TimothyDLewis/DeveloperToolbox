@@ -6,6 +6,7 @@ use Exception;
 use App\Models\Status;
 use App\Models\Project;
 use App\Models\Estimate;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Contracts\View\View;
@@ -100,7 +101,7 @@ class ProjectController extends Controller {
 
   // Additional Non-Resource Routes
 
-  public function getSelectOptions(Project $project, ?string $key = null) {
+  public function getSelectOptions(Project $project, ?string $key = null): JsonResponse {
     $project->load(['estimate' => function ($query) {
       return $query->with(['estimateOptions' => function ($subQuery) {
         return $subQuery->forSelect('label', 'estimate_id');

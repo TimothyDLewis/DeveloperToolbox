@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use Exception;
 use App\Models\Task;
 use App\Models\Issue;
+use Illuminate\Http\Request;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Contracts\View\View;
@@ -27,15 +29,24 @@ class TaskController extends Controller {
     ));
   }
 
-  public function store(StoreTaskRequest $request): RedirectResponse {
+  public function store(StoreTaskRequest $request): JsonResponse | RedirectResponse {
     try {
-      Task::create($request->validated());
+      $task = Task::create($request->validated());
+
+      if ($request->ajax()) {
+        return response()->json(['message' => 'Task Created', 'task' => $task], 200);
+      }
 
       $this->sessionSuccess('<strong>Task Created</strong>');
 
       return redirect()->route('tasks.index');
     } catch (Exception $ex) {
       Log::error($ex);
+
+      if ($request->ajax()) {
+        return response()->json(['message' => 'Unable to Create Task', 'task' => null], 500);
+      }
+
       $this->sessionDanger("<strong>Unable to Create Task</strong><br/><br/>Check logs for complete details.");
 
       return redirect()->back()->withInput();
@@ -65,33 +76,60 @@ class TaskController extends Controller {
     ));
   }
 
-  public function update(UpdateTaskRequest $request, Task $task): RedirectResponse {
+  public function update(UpdateTaskRequest $request, Task $task): JsonResponse | RedirectResponse {
     try {
       $task->update($request->validated());
+
+      if ($request->ajax()) {
+        return response()->json(['message' => 'Task Updated', 'task' => $task], 200);
+      }
+
       $this->sessionSuccess('<strong>Task Updated</strong>');
 
       return redirect()->route('tasks.show', $task);
     } catch (Exception $ex) {
       Log::error($ex);
+
+      if ($request->ajax()) {
+        return response()->json(['message' => 'Unable to Update Task', 'task' => $task], 500);
+      }
+
       $this->sessionDanger("<strong>Unable to Update Task</strong><br/><br/>Check logs for complete details.");
 
       return redirect()->back()->withInput();
     }
   }
 
-  public function destroy(Task $task): RedirectResponse {
+  public function destroy(Request $request, Task $task): JsonResponse | RedirectResponse {
     try {
       $task->delete();
+
+      if ($request->ajax()) {
+        return response()->json(['message' => 'Task Deleted', 'task' => $task], 200);
+      }
 
       $this->sessionSuccess('<strong>Task Deleted</strong>');
 
       return redirect()->route('tasks.index');
     } catch (Exception $ex) {
       Log::error($ex);
+
+      if ($request->ajax()) {
+        return response()->json(['message' => 'Unable to Delete Task', 'task' => $task], 500);
+      }
+
       $this->sessionDanger("<strong>Unable to Delete Task</strong><br/><br/>Check logs for complete details.");
 
       return redirect()->back();
     }
+  }
+
+  // Additional Non-Resource Routes
+
+  public function log(Task $task): JsonResponse {
+    $task->update(['logged' => 1]);
+
+    return response()->json(['message' => 'Task Logged', 'task' => $task], 200);
   }
 
   protected function constructBreadcrumbs(string $path = null, array $additional = []): Collection {

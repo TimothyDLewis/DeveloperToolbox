@@ -22,7 +22,7 @@ const toggleRecurrenceDays = (show) => {
   } else {
     recurrenceDays.toggleClass('hidden', true);
     recurrenceDays.find('input[type=time]').val('');
-    recurrenceDays.find('input[type=checkbox]').prop('checked', false);
+    recurrenceDays.find('input[type=checkbox]').prop('checked', false).trigger('change');
     recurrenceDays.find('input[type=hidden]').val(0);
   }
 }

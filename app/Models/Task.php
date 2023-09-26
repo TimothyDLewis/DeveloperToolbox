@@ -2,6 +2,9 @@
 
 namespace App\Models;
 
+use Carbon\Carbon;
+use App\Traits\Models\Presenter;
+use App\Traits\Models\DateFormats;
 use App\Traits\Models\AttributeDisplay;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
@@ -10,7 +13,9 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Task extends Model {
   use AttributeDisplay;
+  use DateFormats;
   use HasFactory;
+  use Presenter;
   use SoftDeletes;
 
   protected $guarded = [];
@@ -45,6 +50,25 @@ class Task extends Model {
       'type' => 'datetime'
     ]
   ];
+
+  public function presentForScheduler(Task $task) {
+    $backgroundColor = $task->issue->statusOption->background_color;
+
+    return array_merge($task->only(['id', 'logged']), [
+      'backgroundColor' => $backgroundColor,
+      'borderColor' => $backgroundColor, // Darken this?
+      'end' => Carbon::parse($task->end_datetime)->format('c'),
+      'start' => Carbon::parse($task->start_datetime)->format('c'),
+      'textColor' => $task->issue->statusOption->text_color,
+      'title' => $task->issue->title,
+      'type' => 'task',
+      'viewHtml' => [
+        'timeGrid' => view('components.scheduler.tasks.time-grid', ['task' => $task])->render(),
+        'dayGrid' => view('components.scheduler.tasks.day-grid', ['task' => $task])->render(),
+        'list' => view('components.scheduler.tasks.list', ['task' => $task])->render()
+      ]
+    ]);
+  }
 
   public function issue(): BelongsTo {
     return $this->belongsTo(Issue::class);

@@ -4,13 +4,13 @@ use App\Models\Event;
 use App\Models\Sprint;
 use App\Models\EventType;
 use App\Enums\EventRecurrence;
-use App\Traits\Migrations\Touched;
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
+use App\Traits\Migrations\AdditionalTimestamps;
 
 return new class extends Migration {
-  use Touched;
+  use AdditionalTimestamps;
 
   public function up(): void {
     $workDayDuration = config('app.work_day_duration');
@@ -26,7 +26,7 @@ return new class extends Migration {
       $table->text('description')->nullable();
 
       $table->timestamps();
-      $this->touched($table);
+      $this->additionalTimestamps($table);
       $table->softDeletes();
     });
 
@@ -46,7 +46,7 @@ return new class extends Migration {
       $table->text('yearly_eval_logic')->nullable();
 
       $table->timestamps();
-      $this->touched($table);
+      $this->additionalTimestamps($table);
       $table->softDeletes();
     });
 
@@ -61,7 +61,6 @@ return new class extends Migration {
       $table->integer('duration')->storedAs("CASE WHEN all_day THEN {$workDayDuration} ELSE TIMESTAMPDIFF(MINUTE, start_datetime, end_datetime) END")->nullable();
 
       $table->timestamps();
-      $this->touched($table);
       $table->softDeletes();
     });
   }

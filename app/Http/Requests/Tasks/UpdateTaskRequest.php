@@ -11,6 +11,12 @@ use Illuminate\Validation\ValidationException;
 class UpdateTaskRequest extends FormRequest {
   use SessionFlash;
 
+  protected function prepareForValidation() {
+    if ($this->ajax()) {
+      $this->merge(['issue_id' => $this->task->issue_id]);
+    }
+  }
+
   public function rules(): array {
     return [
       'description' => ['nullable'],

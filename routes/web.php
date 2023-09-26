@@ -10,6 +10,7 @@ use App\Http\Controllers\ProjectController;
 use App\Http\Controllers\EstimateController;
 use App\Http\Controllers\ResourceController;
 use App\Http\Controllers\EventTypeController;
+use App\Http\Controllers\SchedulerController;
 use App\Http\Controllers\OccurrenceController;
 
 /*
@@ -70,4 +71,11 @@ Route::group(['prefix' => 'organization'], function () {
   Route::post('/sprints/{sprint}/regenerate', [SprintController::class, 'regenerate'])->name('sprints.regenerate');
 
   Route::resource('tasks', TaskController::class);
+  Route::patch('/tasks/{task}/log', [TaskController::class, 'log'])->name('tasks.log');
+});
+
+Route::group(['prefix' => 'scheduler'], function () {
+  Route::get('/', [SchedulerController::class, 'index'])->name('scheduler');
+  Route::post('/events', [SchedulerController::class, 'events'])->name('scheduler.events');
+  Route::get('/sprints/{sprint}', [SchedulerController::class, 'sprint'])->name('scheduler.sprint');
 });

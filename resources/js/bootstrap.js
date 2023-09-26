@@ -19,6 +19,7 @@ import 'bootstrap';
 
 import $ from 'jquery';
 window.$ = $;
+window.jQuery = $;
 
 import * as bootstrap from 'bootstrap';
 
@@ -44,7 +45,7 @@ errorToggle.on('click', function () {
 
 $('.toggle-dropdown').on('click', function () {
   // -TODO- Convert to event listener to prevent icon disconnect
-  $(this).find('.toggle-icon').toggleClass('fa-angle-down', 'fa-angle-right');
+  $(this).find('.toggle-icon').toggleClass('fa-angle-down fa-angle-right');
 });
 
 $('body').on('change', 'input[type=checkbox]', function () {

@@ -4,8 +4,9 @@ namespace App\Traits\Migrations;
 
 use Illuminate\Database\Schema\Blueprint;
 
-trait Touched {
-  public function touched(Blueprint $table) {
+trait AdditionalTimestamps {
+  public function additionalTimestamps(Blueprint $table) {
+    $table->timestamp('archived_at')->nullable();
     $table->timestamp('touched_at')->nullable();
   }
 }

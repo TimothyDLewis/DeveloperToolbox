@@ -3,13 +3,13 @@
 use App\Models\Project;
 use App\Models\StatusOption;
 use App\Models\EstimateOption;
-use App\Traits\Migrations\Touched;
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
+use App\Traits\Migrations\AdditionalTimestamps;
 
 return new class extends Migration {
-  use Touched;
+  use AdditionalTimestamps;
 
   public function up(): void {
     Schema::create('issues', function (Blueprint $table) {
@@ -25,7 +25,7 @@ return new class extends Migration {
       $table->text('description')->nullable();
 
       $table->timestamps();
-      $this->touched($table);
+      $this->additionalTimestamps($table);
       $table->softDeletes();
     });
   }

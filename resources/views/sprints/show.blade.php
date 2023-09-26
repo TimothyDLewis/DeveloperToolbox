@@ -11,7 +11,9 @@
       <div class="row">
         <div class="col-12 mb-3">
           <label class="form-label">Title</label>
-          <p class="card card-body card-condensed">{{ $sprint->title }}</p>
+          <p class="card card-body card-condensed">
+            <a href="{{ route('scheduler.sprint', $sprint) }}">{{ $sprint->title }}</a>
+          </p>
         </div>
         <div class="col-12 col-sm-6 mb-3">
           <label class="form-label">Start</label>
