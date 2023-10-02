@@ -8,6 +8,7 @@ use App\Traits\Models\DateFormats;
 use App\Traits\Models\AttributeDisplay;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
@@ -58,6 +59,8 @@ class Task extends Model {
       'backgroundColor' => $backgroundColor,
       'borderColor' => $backgroundColor, // Darken this?
       'end' => Carbon::parse($task->end_datetime)->format('c'),
+      'left' => $task->left,
+      'right' => $task->right,
       'start' => Carbon::parse($task->start_datetime)->format('c'),
       'textColor' => $task->issue->statusOption->text_color,
       'title' => $task->issue->title,
@@ -68,6 +71,22 @@ class Task extends Model {
         'list' => view('components.scheduler.tasks.list', ['task' => $task])->render()
       ]
     ]);
+  }
+
+  public function left(): Attribute {
+    return Attribute::make(
+      get: function (): bool {
+        return (bool)$this->issue->statusOption->previousStatusOption;
+      }
+    );
+  }
+
+  public function right(): Attribute {
+    return Attribute::make(
+      get: function (): bool {
+        return (bool)$this->issue->statusOption->nextStatusOption;
+      }
+    );
   }
 
   public function issue(): BelongsTo {

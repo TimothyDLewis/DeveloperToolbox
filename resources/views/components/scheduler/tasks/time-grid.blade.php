@@ -21,13 +21,13 @@
     </div>
     <hr class="fc-divider my-2" />
     <div class="mt-1 text-center d-flex justify-content-between">
-      <span class="fc-status-left {{ !$task->issue->left ? 'fc-status-left-disabled' : '' }} ms-1" data-issue-id="{{ $task->issue_id }}">
+      <span class="fc-status-left {{ !$task->left ? 'fc-status-left-disabled' : '' }} ms-1" data-issue-id="{{ $task->issue_id }}">
         <i class="fa-solid fa-caret-left"></i>
       </span>
       <small>
         <a class="fc-status" href="{{ route('issues.edit', $task->issue) }}">{{ $task->issue->statusOption->label }}</a>
       </small>
-      <span class="fc-status-right {{ !$task->issue->right ? 'fc-status-right-disabled' : '' }} me-1" data-issue-id="{{ $task->issue_id }}">
+      <span class="fc-status-right {{ !$task->right ? 'fc-status-right-disabled' : '' }} me-1" data-issue-id="{{ $task->issue_id }}">
         <i class="fa-solid fa-caret-right"></i>
       </span>
     </div>

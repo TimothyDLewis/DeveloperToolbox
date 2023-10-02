@@ -64,8 +64,8 @@ class DefaultSeeder extends Seeder {
     $noStatus->initialStatusOption()->create([
       'label' => 'None',
       'slug' => "{$noStatus->slug}-none",
-      'text_color' => $colorMode === 'dark' ? '#f8f9fa' : '364a5e',
-      'background_color' => $colorMode === 'dark' ? '#364a5e' : 'f8f9fa',
+      'text_color' => $colorMode === 'dark' ? '#f8f9fa' : '#364a5e',
+      'background_color' => $colorMode === 'dark' ? '#364a5e' : '#f8f9fa',
       'description' => 'Issue or task has no associated status.',
       'initial_status_option' => true,
       'sort_order' => 1

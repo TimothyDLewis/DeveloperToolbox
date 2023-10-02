@@ -153,7 +153,7 @@ function constructCalendar() {
       center: 'title',
       right: 'timeGridDay,timeGridWeek,dayGridMonth,listWeek next'
     },
-    height: '1175px',
+    height: '87dvh',
     initialView: 'timeGridWeek',
     nowIndicator: true,
     plugins: [
@@ -223,7 +223,7 @@ function constructCalendar() {
 
 function constructDraggables(destroy = false) {
   if (destroy && draggable) {
-    $('#scheduler-sidebar .list-group-item').draggable('destroy');
+    $('#scheduler-sidebar .list-group-item .ui-draggable .ui-draggable-handle').draggable('destroy');
     draggable.destroy();
   }
 
@@ -289,6 +289,22 @@ function crudVars(type, action) {
     type === 'task' ? jsPaths[`tasks.${action}`] : jsPaths[`occurrences.${action}`],
     type.charAt(0).toUpperCase() + type.slice(1)
   ];
+}
+
+function moveIssue(direction, id) {
+  $.ajax({
+    type: 'PATCH',
+    url: jsPaths['issues.move'].replace(':direction', direction).replace(':issue', id),
+    data: { _token: TOKEN },
+    success: function (data) {
+      $(`.calendar-task[data-issue-id=${id}]`).replaceWith(data.html);
+      scheduler.refetchEvents();
+      constructDraggables(true);
+    },
+    error: function (response) {
+      alert(`Unable to move Issue: Error ${response.status}: ${response.responseText}`);
+    }
+  });
 }
 
 function storeTimeblock(type, postData) {
@@ -359,6 +375,18 @@ if ($('#schedulerWrapper').length) {
 
   $('body').on('click', '.fc-log', function () {
     logTimeblock($(this).data('task-id'));
+  });
+
+  $('body').on('click', '.fc-status-left', function () {
+    if (!$(this).hasClass('fc-status-left-disabled')) {
+      moveIssue('left', $(this).data('issue-id'));
+    }
+  });
+
+  $('body').on('click', '.fc-status-right', function () {
+    if (!$(this).hasClass('fc-status-right-disabled')) {
+      moveIssue('right', $(this).data('issue-id'));
+    }
   });
 
   $('body').on('click', '.fc-remove', function () {

@@ -22,16 +22,20 @@ class SchedulerController extends Controller {
   public array | Collection $jsPaths = [];
 
   public function __construct() {
+    $task = ['task' => ':task'];
+    $occurrence = ['occurrence' => ':occurrence'];
+
     $this->jsPaths = collect([
-      'sprints.show' => route('sprints.show', ['sprint' => ':sprint']),
+      'issues.move' => route('issues.move', ['issue' => ':issue', 'direction' => ':direction']),
+      'occurrences.destroy' => route('occurrences.destroy', $occurrence),
+      'occurrences.store' => route('occurrences.store'),
+      'occurrences.update' => route('occurrences.update', $occurrence),
       'scheduler.events' => route('scheduler.events'),
-      'tasks.store' => route('tasks.store'),
-      'tasks.update' => route('tasks.update', $task = ['task' => ':task']),
+      'sprints.show' => route('sprints.show', ['sprint' => ':sprint']),
       'tasks.destroy' => route('tasks.destroy', $task),
       'tasks.log' => route('tasks.log', $task),
-      'occurrences.store' => route('occurrences.store'),
-      'occurrences.update' => route('occurrences.update', $occurrence = ['occurrence' => ':occurrence']),
-      'occurrences.destroy' => route('occurrences.destroy', $occurrence)
+      'tasks.store' => route('tasks.store'),
+      'tasks.update' => route('tasks.update', $task)
     ]);
   }
 
@@ -60,7 +64,7 @@ class SchedulerController extends Controller {
       return $occurrence->present('forScheduler');
     });
 
-    $tasks = Task::with(['issue.estimateOption', 'issue.project', 'issue.statusOption'])->whereBetween('start_datetime', $dateRange)->get()->map(function (Task $task) {
+    $tasks = Task::with(['issue.estimateOption', 'issue.project', 'issue.statusOption.previousStatusOption', 'issue.statusOption.nextStatusOption'])->whereBetween('start_datetime', $dateRange)->get()->map(function (Task $task) {
       return $task->present('forScheduler');
     });
 

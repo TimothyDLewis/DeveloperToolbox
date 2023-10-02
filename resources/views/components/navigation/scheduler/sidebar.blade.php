@@ -21,13 +21,7 @@
             <div id="navSchedulerIssues" class="tab-pane fade active show">
               <ul class="list-group">
                 @forelse($issues as $issue)
-                  <li class="list-group-item calendar-task" data-title="{{ $issue->code . ' - ' . $issue->title }}" data-issue-id="{{ $issue->id }}" data-color="{{ $issue->statusOption->background_color }}" data-helper-class="task">
-                    <div class="d-flex justify-content-between mt-1 mb-2">
-                      {!! $issue->code_display !!}
-                      {!! $issue->statusOption->label_display !!}
-                    </div>
-                    <div class="fw-bold">{{ $issue->title }}</div>
-                  </li>
+                  @include('components.navigation.scheduler.issue', ['issue' => $issue])
                 @empty
                   <li class="list-group-item">
                     <h6 class="text-secondary mt-2">No Issues...</h6>

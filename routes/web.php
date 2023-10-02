@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Storage;
 use App\Http\Controllers\TaskController;
 use App\Http\Controllers\IssueController;
 use App\Http\Controllers\EventController;
@@ -23,6 +24,32 @@ use App\Http\Controllers\OccurrenceController;
 | be assigned to the "web" middleware group. Make something great!
 |
 */
+
+Route::get('/config', function ($key = null) {
+  if (app()->isProduction()) {
+    abort(404);
+  }
+
+  $config = [];
+  foreach(Storage::disk('config')->files() as $file) {
+    $key = explode('.', $file)[0];
+    $iterator = new RecursiveIteratorIterator(new RecursiveArrayIterator(config($key)));
+
+    $result = array();
+    foreach ($iterator as $value) {
+      $keys = array();
+      foreach (range(0, $iterator->getDepth()) as $depth) {
+        $keys[] = $iterator->getSubIterator($depth)->key();
+      }
+
+      $result[$key . '.' . implode('.', $keys)] = $value;
+    }
+
+    $config[$key] = $result;
+  }
+
+  return view('system.config', ['config' => $config]);
+});
 
 Route::get('/info', function () {
   if (app()->isProduction()) {
@@ -56,7 +83,10 @@ Route::group(['prefix' => 'organization'], function () {
 
   Route::resource('event-types', EventTypeController::class);
   Route::resource('events', EventController::class);
+
   Route::resource('issues', IssueController::class);
+  Route::patch('/issues/{issue}/move/{direction}', [IssueController::class, 'move'])->name('issues.move');
+
   Route::resource('occurrences', OccurrenceController::class);
 
   Route::resource('projects', ProjectController::class);

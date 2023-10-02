@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Exception;
 use App\Models\Issue;
 use App\Models\Project;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Contracts\View\View;
@@ -110,6 +111,24 @@ class IssueController extends Controller {
       $this->sessionDanger("<strong>Unable to Delete Issue</strong><br/><br/>Check logs for complete details.");
 
       return redirect()->back();
+    }
+  }
+
+  // Additional Non-Resource Routes
+
+  public function move(Issue $issue, string $direction): JsonResponse {
+    try {
+      if (!in_array($direction, ['left', 'right'])) {
+        throw new Exception("Invalid direction '{$direction}'; must be either 'left' or 'right'.");
+      }
+
+      $issue->update(['status_option_id' => $direction === 'left' ? $issue->statusOption->previousStatusOption->id : $issue->statusOption->nextStatusOption->id]);
+
+      return response()->json(['message' => 'Issue Moved', 'issue' => $issue, 'html' => view('components.navigation.scheduler.issue', ['issue' => $issue->fresh()])->render()], 200);
+    } catch (Exception $ex) {
+      Log::error($ex);
+
+      return response()->json(['message' => 'Unable to move Issue', 'issue' => $issue], 500);
     }
   }
 

@@ -24,7 +24,7 @@ $fa-font-path: '~fontawesome/webfonts';
 // Application Styles
 
 #schedulerContainer {
-  max-height: 100vh;
+  max-height: 100dvh;
   overflow: auto;
 }
 
@@ -395,6 +395,6 @@ button:disabled {
 
 .vertical-vr {
   flex-shrink: 0;
-  min-height: calc(100vh - 96px);
+  min-height: calc(100dvh - 96px);
   width: 1px;
 }
